@@ -14,4 +14,3 @@ const FindStays = () => {
 }
 
 export default FindStays
-// Hello
