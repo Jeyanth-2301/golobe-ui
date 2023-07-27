@@ -4,7 +4,6 @@ const Footer = () => {
     return (
         <>
         <div>Footer</div>
-        <kh1>Hello</kh1>
         </>
         
         
