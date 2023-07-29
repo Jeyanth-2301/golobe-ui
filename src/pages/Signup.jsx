@@ -130,20 +130,20 @@ export default function SignInSide() {
           >
             
               <img
-                src="image1.png"
+                src="src/assets/signup/image1.png"
                 alt="Slider 1"
                 
               />
             
             
               <img
-                src="image2.png"
+                src="src/assets/signup/image2.png"
                 alt="Slider 2"
               
               />
             
               <img
-                src="image3.png"
+                src="src/assets/signup/image3.png"
                 alt="Slider 3"
                
               />
@@ -291,7 +291,7 @@ export default function SignInSide() {
                }}
                >
                 <Box sx={{ display:'flex', alignItems:'center', height:'30px', width:'30px', overflow:'hidden' , marginLeft:'60px'}}>
-                <img src="google.png"
+                <img src="src/assets/signup/google.png"
                 alt="google"
                />
                 </Box>
@@ -313,7 +313,7 @@ export default function SignInSide() {
                }}
                >
 <Box sx={{ display:'flex', alignItems:'center', height:'30px', width:'30px', overflow:'hidden' , marginLeft:'10px'}}>
-                <img src="facebook.png"
+                <img src="src/assets/signup/facebook.png"
                 alt="facebook"
                 
                 />
