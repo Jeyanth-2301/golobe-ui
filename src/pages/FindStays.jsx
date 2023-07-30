@@ -8,14 +8,7 @@ const FindStays = () => {
         <div>
             <Navbar></Navbar>
             <Hero></Hero>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Footer>Hello</Footer>
-            <Function></Function>
+            <Footer></Footer>
         </div>
     )
 }

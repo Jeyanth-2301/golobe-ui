@@ -59,6 +59,27 @@ const themeTypography = {
     button: {
         textTransform: "none",
     },
+    subtitle:{
+        fontSize:'1.0rem',
+        fontWeight:300,
+    },
+    body3:{
+       
+            fontSize: "1.15rem",
+            fontWeight: 600,
+            lineHeight: 1.2,
+        },
+    h4n:{
+        fontSize: "1.75rem",
+        fontWeight: 700,
+        lineHeight: 1.2,
+    },
+    sideheading:{
+        fontSize: "1.35rem",
+        fontWeight: 600,
+        lineHeight: 1.2,
+    }
+    
 };
 
 export default themeTypography;
