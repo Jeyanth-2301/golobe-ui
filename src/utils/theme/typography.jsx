@@ -46,6 +46,42 @@ const themeTypography = {
         fontWeight: 700,
         lineHeight: 1.2,
     },
+    element1: {
+        fontSize: "1.50rem",
+        fontWeight: 700,
+        lineHeight: "1.57875rem",
+    },
+    element2: {
+        fontSize: "1rem",
+        fontWeight: 500,
+        lineHeight: "1.21875rem",
+    },
+    element3: {
+        fontSize: "2rem",
+        fontWeight: 700,
+        lineHeight: "2.52625rem",
+        marginRight:'25px' ,
+        height:'40px'
+    },
+    element4: {
+        fontSize: "0.9rem",
+        fontWeight: 700,
+       
+    },
+    element5: {
+        fontSize: "0.865rem",
+        fontWeight: 500,
+        
+    },
+    element6: {
+        fontSize: "1rem",
+        fontWeight: 500,
+        lineHeight: "1.21875rem",
+        marginLeft:'2rem',
+        textAlign:'center',
+    },
+    
+
     button: {
         textTransform: "none",
     },
