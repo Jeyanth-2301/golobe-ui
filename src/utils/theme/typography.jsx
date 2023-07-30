@@ -49,6 +49,17 @@ const themeTypography = {
     button: {
         textTransform: "none",
     },
+   luna:
+   {
+    fontSize:'1rem',
+    fontWeight:500
+   },
+   pico:
+   {
+    fontWeight:500,
+    fontSize:'1.05rem'
+   }
+
 };
 
 export default themeTypography;
