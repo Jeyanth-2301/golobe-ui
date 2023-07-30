@@ -103,11 +103,11 @@ const Navbar = () => {
                     {showIndicator && (
                         <div
                             style={{
-                                height: 5,
+                                height: 7,
                                 width: '9%',
                                 backgroundColor: '#8DD3BB',
                                 position: 'absolute',
-                                bottom: 0,
+                                bottom: -10,
                                 left: 28,
                                 transition: 'left 0.2s',
                             }}
