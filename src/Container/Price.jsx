@@ -94,7 +94,7 @@ export default function Price({ value,changePrice}){
               
 
                 <div  style ={{display: 'flex'}}>
-                    <Typography gutterBottom variant='val' sx={{marginLeft:-0.5, marginTop:1, marginBottom:1.5}} > ${value[0]} </Typography>
+                    <Typography gutterBottom variant='val'  sx={{marginLeft:-0.5, marginTop:1, marginBottom:1.5}} > ${value[0]} </Typography>
                     <Typography   variant='val'  sx={{marginLeft:27,marginTop:1, marginBottom:1.5}}> ${value[1]} </Typography>
                 </div>
               </div> )}

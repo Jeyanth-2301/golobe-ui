@@ -16,7 +16,7 @@ export default function Ament(){
       const { isExpanded, toggleDropdown } = useDropdown();
       const FormStyle = styled(FormControlLabel)({
             marginTop:-2,
-            '& .MuiFormControlLabel-label': { fontSize: '16px' , color: theme.palette.text.primary},
+            '& .MuiFormControlLabel-label': { color: theme.palette.text.primary},
             '& .MuiSvgIcon-root': { fontSize: 30 ,color: theme.palette.text.primary} , })
       const TextButton= styled(Button)(({theme}) =>({
             color: theme.palette.text.secondary,
@@ -24,12 +24,12 @@ export default function Ament(){
       }))
      return(
       <ThemeProvider theme={theme}>
-            <Box sx={{ my: 3, mx: 2 }}>
-                  <Grid container alignItems="center" >
-                         <Grid item xs={10} sx={{marginTop:2}}>
+            <Box sx={{ my: 4, mx: 2 }}>
+                  <Grid container alignItems="center"  sx={{marginTop:5}}>
+                         <Grid item xs={10} >
                               <Typography gutterBottom variant="h13" component="div" > Amenties </Typography>
                         </Grid>
-                        <Grid item ><img src ={expand}  alt=" " onClick={toggleDropdown} /></Grid>
+                        <Grid item  ><img src ={expand}  alt=" " onClick={toggleDropdown} /></Grid>
                         </Grid>
                         
                                 {isExpanded && (
