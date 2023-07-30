@@ -26,6 +26,11 @@ const themeTypography = {
         fontWeight: 400,
         lineHeight: 1.2,
     },
+    navbar: {
+        fontSize: '1.35rem',
+        fontWeight: 500,
+        lineHeight: 2.5,
+    },
     h4: {
         fontSize: "1.75rem",
         fontWeight: 500,
@@ -39,6 +44,11 @@ const themeTypography = {
     h2: {
         fontSize: "3rem",
         fontWeight: 500,
+        lineHeight: 1.2,
+    },
+    hero: {
+        fontSize: "3.2rem",
+        fontWeight: 550,
         lineHeight: 1.2,
     },
     h1: {
