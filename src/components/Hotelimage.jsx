@@ -1,21 +1,20 @@
 import React from 'react'
 import { Grid,Button } from '@mui/material'
-import img1 from '../assets/Rectangle 3.png'
-import img2 from '../assets/Rectangle 5.png'
-import img3 from '../assets/Rectangle 6.png'
-import img4 from '../assets/Rectangle 7.png'
-import img5 from '../assets/Rectangle 8.png'
+
 
 
 
 const Hotelimage = () => {
-  const mainImage = img1
-  const otherImages = [img2,img3,img4,img5]
+  const mainImage = "https://lh3.googleusercontent.com/p/AF1QipO3gdTB8VLgakEysQHz6PaSFEBrdCpggfmrUkSJ=w480-h360-n-k-rw-no-v1 "
+  const otherImages = ["https://cf.bstatic.com/xdata/images/hotel/max1024x768/329809708.jpg?k=a55763fe64b945742940ebe94bcd1981d3217dfec055c0239235cd5f1c6b12e7&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/329809711.jpg?k=fc7ce8701795a174ada031af2ebbbcd31e2b9dc552770a3d3067f843972c8f1d&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/329809726.jpg?k=d5aad9d59ec9012b9910af92672f770b1bdea2ccde23e5515c2f2fa1add64a85&o=&hp=1",
+    "https://cf.bstatic.com/xdata/images/hotel/max1024x768/329809727.jpg?k=d0aa4dc6969d68866e3daefb7d0fb7f6cbfd8ca45270f60fc5a504eb4408e510&o=&hp=1"]
   return (
  <div>
-    <Grid container spacing={1} sx={{height:'550px',width:'1245px',marginTop:'32px',marginLeft:'90px',marginRight:'104px'}}>
-       <Grid item xs={6} sx={{width:'615px',height:'546px'}}>
-         <img src={mainImage} alt="Main" style={{ width: '100%', height: '100%',borderRadius:'4px' }} />
+    <Grid container spacing={1} sx={{height:'550px',width:'1232px',marginTop:'32px',marginLeft:'104px',marginRight:'104px'}}>
+       <Grid item xs={6} sx={{width:'620px',height:'546px',marginLeft:'-8px',marginRight:'8px'}}>
+         <img src={mainImage} alt="Main" style={{ width: '100%', height: '100%' }} />
        </Grid>
        <Grid item xs={6}>
          <Grid container spacing={1} sx={{width:'612px',height:'550px'}}>
