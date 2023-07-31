@@ -46,8 +46,60 @@ const themeTypography = {
         fontWeight: 700,
         lineHeight: 1.2,
     },
+    h13:
+    {
+        fontSize:'0.9 rem',
+        fontWeight: 600,
+        lineHeight:1.2
+
+    },
+    h12: {
+        fontSize: "3.2rem",
+        fontWeight: 550,
+        lineHeight: 1.2,},
     button: {
         textTransform: "none",
+    },
+    bot:
+    {
+        fontSize: "0.9rem",
+        fontWeight:10,
+        
+    },
+    bot1:
+    {
+        fontSize: "0.9rem",
+        fontWeight:10,
+    },
+    fil:
+    {
+         
+            fontSize: "1.3rem",
+            fontWeight: 600,
+            lineHeight: 1.2,
+        
+    },
+    h14:
+    {
+        fontSize: "2.9rem",
+        fontWeight: 550,
+        
+        lineHeight: 1.2,
+    },
+    
+    check:
+    {
+        fontSize:'1.2 rem',
+        fontWeight: 500,
+        lineHeight:1.2
+
+    },
+    val:
+    {
+        fontSize:'1.2 rem',
+        fontWeight: 500,
+        lineHeight:1.2
+
     },
     heading: {
         fontFamily: 'TradeGothic LT Extended',
