@@ -31,22 +31,22 @@ function FullReview() {
   return (
     <>
     
-          <Container variant="outlined" style={{ maxWidth: 1232, maxHeight: 745, margin: "0 auto", padding: "20px" }}>
+          <Container variant="outlined" style={{ maxWidth: 1232, maxHeight: 800, border:"1px solid black", marginLeft:2, marginRight:2}}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Typography variant='h4' gutterBottom>
+              <Typography variant='review5' gutterBottom>
                 Reviews
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center'}}>
                 {/* Display the dynamic averageRating and corresponding rating message */}
-                <Typography variant='h2' component='span' style={{ fontWeight: 'bold' }}>
+                <Typography variant='review3' component='span' style={{ fontWeight: 'bold' }}>
                   {averageRating}
                 </Typography>
-                <Typography variant='h5' component='span' style={{ marginLeft: '4px', fontWeight: 'bold' }}>
+                <Typography variant='review4' component='span' style={{  fontWeight: 'bold' }}>
                   {ratingMessage}
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-                <Typography variant='h6' component='span'>{reviews.length} verified reviews</Typography>
+                <Typography variant='review1' component='span'>{reviews.length} verified reviews</Typography>
               </Box>
             </Box>
             {/* Create the styled rectangle */}
@@ -54,7 +54,6 @@ function FullReview() {
               component="div"
               sx={{
                 width: '100%',
-                maxWidth: 1232,
                 height: '0.5px',
                 backgroundColor: '#112211',
                 opacity: 0.25,

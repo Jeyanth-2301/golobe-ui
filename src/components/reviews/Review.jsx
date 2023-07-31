@@ -27,17 +27,17 @@ const Review = ({ user, image, guestRating, comment }) => {
         <Avatar alt={user} src={image} sx={{ width: 64, height: 64, mr: 2 }} />
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-            <Typography variant="h6">{user} | </Typography>
+            <Typography variant="review2">{user} | </Typography>
             {/* Display the formatted guestRating value */}
-            <Typography variant="body1" sx={{ ml: 1, fontWeight: 'bold', color: 'black' }}>
+            <Typography variant="review1" sx={{ ml: 1, fontWeight: 'bold', color: 'black' }}>
               {formattedGuestRating}
             </Typography>
             {/* Display the rating message */}
-            <Typography variant="body1" sx={{ ml: 1, color: 'black', fontWeight: 'bold' }}>
+            <Typography variant="review1" sx={{ ml: 1, color: 'black', fontWeight: 'bold' }}>
               {ratingMessage}
             </Typography>
           </Box>
-          <Typography align="left" variant="body1">
+          <Typography align="left" variant="review1">
             {comment}
           </Typography>
         </Box>

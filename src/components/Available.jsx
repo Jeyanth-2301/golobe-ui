@@ -36,7 +36,7 @@ const roomsData= [
     
    return (
       <div>
-        <Box sx={{ height: '346.5px', width: '1232px', marginLeft: '104px', marginRight: '104px' }}>
+        <Box sx={{ height: '346.5px', maxWidth: '1232px',marginLeft:0.25, marginRight:-0.25, border:"1px solid black"}}>
           <Typography style={{ fontFamily: 'TradeGothic-LT-Extended', fontSize: '20px', fontStyle: 'normal', fontWeight: 700, lineHeight: 'normal' }}>
             Available Rooms({totalRooms})
           </Typography> <br />

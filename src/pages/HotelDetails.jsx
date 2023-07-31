@@ -2,6 +2,7 @@
 //import Navbar from '../components/Navbar'
 //import Footer from '../components/Footer'
 //import Hero from '../components/Hero'
+import Rooms from '../components/Rooms'
 import FullReview from '../components/reviews/FullReview'
 
 const HotelDetails = () => {
@@ -9,6 +10,7 @@ const HotelDetails = () => {
         <div>
             {/*<Navbar></Navbar>
             <Footer></Footer>*/}
+            <Rooms/>
             <FullReview/>
         </div>
     )

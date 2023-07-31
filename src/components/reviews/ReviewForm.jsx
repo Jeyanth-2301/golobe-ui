@@ -23,10 +23,11 @@ const ReviewForm = ({ onReviewSubmit }) => {
 
   return (
     <Box sx={{ maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="review2" gutterBottom>
         Write a Review
       </Typography>
       <form onSubmit={handleSubmit}>
+        <Typography variant='review1'>
         <TextField
           label="Name"
           value={user}
@@ -65,6 +66,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
           multiline
           required
         />
+        </Typography>
         <Grid container justifyContent='center'>
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2, background:'#8DD3BB' }}>
           Submit Review
