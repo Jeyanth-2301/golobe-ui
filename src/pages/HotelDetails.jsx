@@ -15,4 +15,3 @@ const HotelDetails = () => {
 }
 
 export default HotelDetails
-// Hello
