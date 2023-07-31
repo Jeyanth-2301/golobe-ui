@@ -2,15 +2,14 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
-import Hoteldetail from '../components/Hoteldetail'
+import Overview from '../components/Overview'
 
 const FindStays = () => {
     return (
         <div>
-            {/* <Navbar></Navbar>
+            <Navbar></Navbar>
             <Hero></Hero>
-            <Footer></Footer> */}
-            <Hoteldetail />
+            <Footer></Footer>
         </div>
     )
 }
