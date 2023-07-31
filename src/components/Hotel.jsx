@@ -5,7 +5,7 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 const Overviewsection = () => {
   const review="Very Good";
   const totalreview="750"
- const components=['Near park','Near theatre','Near hospital'];
+ const components=['Near park','Near Nightlife','Near Hospital'];
   return (
     <div>
       
@@ -18,7 +18,7 @@ const Overviewsection = () => {
     <Grid container  style={{height:'145px',width:'1232px' }} >
            
               <Paper style={{ height: '145px',width:'166px',overflow: 'hidden', backgroundColor:'#8DD3BB' ,border: '0.5px  #000', borderRadius: '12px' }}>
-                 <Paper elevation={0} style={{ height: '113px',width:'190px',marginLeft:'16px',backgroundColor:'#8DD3BB',marginTop:'16px',marginBottom:'16px' }}>
+                 <Paper elevation={0} style={{ height: '113px',width:'96px',marginLeft:'16px',backgroundColor:'#8DD3BB',marginTop:'16px',marginBottom:'16px' }}>
                     <Typography variant='element3' >4.2</Typography><br/><br/>
                     <Typography variant='element4'  >{review}</Typography><br/>
                     <Typography variant='element5'>{totalreview} Reviews</Typography>
@@ -26,21 +26,13 @@ const Overviewsection = () => {
               </Paper>
       {components.map((feature, index) => (
         <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
-          {feature.length=== 0 ? (
-            <div>
-               <Paper style={{ height: '145px',width:'166px',overflow: 'hidden',border: '2px solid #8DD3BB',borderRadius: '12px'}} >
-                <AutoAwesomeIcon style={{ fontSize:40 ,marginLeft:'10px' ,marginTop:'10px'}}/><br/><br/><br/>
-                <Typography variant='element6' >Sorry no nearby locations</Typography>
-              </Paper>
-            </div>
-          ) : (
-            <div>
-              <Paper style={{ height: '145px',width:'166px',overflow: 'hidden',marginLeft:'40px',border: '2px solid #8DD3BB',borderRadius: '12px'}} >
+           <div>
+              <Paper style={{ height: '145px',width:'160px',overflow: 'hidden',marginLeft:'40px',border: '2px solid #8DD3BB',borderRadius: '12px'}} >
                 <AutoAwesomeIcon style={{ fontSize:40 ,marginLeft:'10px' ,marginTop:'10px'}}/><br/><br/><br/>
                 <Typography variant='element6' >{feature}</Typography>
               </Paper>
           </div>
-          )}
+          
         </Grid>
       ))}
     </Grid>
