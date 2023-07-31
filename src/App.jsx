@@ -1,16 +1,14 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from "./pages/Home"
-import Hotels from './components/Hotels';
-import Filter from './components/Filter';
+import  Stays from './pages/FindStays'
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/hotels' element={<Hotels />} />
-        <Route path='/filter' element={<Filter />} />
+        <Route path='/stays' element={<Stays />} />
       </Routes>
     </div>
   );

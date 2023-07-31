@@ -14,6 +14,7 @@ const FindStays = () => {
             <Filter ></Filter>
             <Hotels />
              */}
+             <Filter></Filter>
         </div>
     )
 }
