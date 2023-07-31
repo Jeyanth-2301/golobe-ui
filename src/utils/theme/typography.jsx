@@ -100,7 +100,7 @@ const themeTypography = {
         fontWeight: 500,
         lineHeight:1.2
 
-    }
+    },
     heading: {
         fontFamily: 'TradeGothic LT Extended',
         fontSize: '20px',

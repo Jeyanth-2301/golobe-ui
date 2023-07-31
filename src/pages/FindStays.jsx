@@ -8,10 +8,11 @@ import Hotels from '../components/Hotels'
 const FindStays = () => {
     return (
         <div>
-            {/* <Navbar></Navbar>
+            <Navbar></Navbar>
             <Hero></Hero>
-            <Footer></Footer> */}
-            <Filter></Filter>
+            <Footer></Footer>
+            <Filter ></Filter>
+            <Hotels />
             
         </div>
     )
