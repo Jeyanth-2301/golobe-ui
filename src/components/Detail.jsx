@@ -147,17 +147,18 @@ const handleShareClick = () => {
                  <Grid item>
                     <IconButton sx={commonIconButtonStyle} onClick={handleShareClick}><ShareIcon /></IconButton>
                     <div>
-     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+     <Dialog open={open} onClose={handleClose} maxWidth="sm">
         <DialogTitle>Share</DialogTitle>
         <DialogContent  >
           <TextField
             value={sharingMessage}
             onChange={(e) => setSharingMessage(e.target.value)}
+            style={{ fontSize: 14 }}
             fullWidth
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setSharingMessage('')}>
+                  <IconButton onClick={handleClose}>
                     <Close />
                   </IconButton>
                 </InputAdornment>
@@ -172,12 +173,12 @@ const handleShareClick = () => {
           
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}> 
-          <EmailIcon  onClick={() => handleShare('mail')}  style={{ cursor: 'pointer' }}/>
-          <WhatsappIcon onClick={() => handleShare('whatsapp')} style={{ cursor: 'pointer' }} />
-          <TelegramIcon onClick={() => handleShare('telegram')}  style={{ cursor: 'pointer' }}/>
-          <LinkedinIcon onClick={() => handleShare('linkedin')} style={{ cursor: 'pointer' }}/>
-          <TwitterIcon onClick={() => handleShare('twitter')} style={{ cursor: 'pointer' }}/>
-          <FacebookIcon onClick={() => handleShare('facebook')}style={{ cursor: 'pointer' }} />
+          <EmailIcon  onClick={() => handleShare('mail')}  style={{ width: 40, height: 40,cursor: 'pointer' }}/>
+          <WhatsappIcon onClick={() => handleShare('whatsapp')} style={{ width: 40, height: 40,cursor: 'pointer' }} />
+          <TelegramIcon onClick={() => handleShare('telegram')}  style={{ width: 40, height: 40,cursor: 'pointer' }}/>
+          <LinkedinIcon onClick={() => handleShare('linkedin')} style={{ width: 40, height: 40,cursor: 'pointer' }}/>
+          <TwitterIcon onClick={() => handleShare('twitter')} style={{ width: 40, height: 40,cursor: 'pointer' }}/>
+          <FacebookIcon onClick={() => handleShare('facebook')}style={{ width: 40, height: 40,cursor: 'pointer' }} />
         </DialogActions>
       </Dialog>
 </div>
