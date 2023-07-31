@@ -54,7 +54,7 @@ export default function Price({ value,changePrice}){
       document.removeEventListener('mouseup', handleMouseUp);
     };
      
-          
+       
     return(
       <ThemeProvider theme={theme}>
             <Box sx={{ my: 3, mx: 2 }}>

@@ -21,9 +21,7 @@ export default function Rate({value,selectRating}){
             margin :'0.3rem 0.9rem 1.25rem  0.0rem',
             color:theme.palette.text.primary
       }));
-      const handleBoxClick = (value) => {
-        console.log(`Box with value ${value} was clicked!`);
-      };
+     
       const handleBoxMouseEnter = (e) => {
         e.target.style.backgroundColor = '#d9d9d9';
         e.target.style.cursor = 'pointer';
@@ -47,27 +45,28 @@ return(
              
                   <div style ={{display:"flex"}}>
                       <ButtonStyle   value ={value} 
-                            onClick={() => handleBoxClick(value)}
+                           onClick= { (e) =>  selectRating(e.target.value)} 
+                        //     onChange =  { (e) =>  selectRating(e.target.value)} 
                             onMouseEnter={handleBoxMouseEnter}
                             onMouseLeave={handleBoxMouseLeave}  > <Typography variant ="val">0+</Typography> 
                       </ButtonStyle>
                       <ButtonStyle   value ={value}
-                            onClick={() => handleBoxClick(value)}
+                           onClick= { (e) =>  selectRating(e.target.value)} 
                             onMouseEnter={handleBoxMouseEnter}
                             onMouseLeave={handleBoxMouseLeave} ><Typography variant ="val">1+</Typography>
                       </ButtonStyle>
                       <ButtonStyle   value ={value} 
-                            onClick={() => handleBoxClick(value)}
+                           onClick= { (e) =>  selectRating(e.target.value)} 
                             onMouseEnter={handleBoxMouseEnter}
                             onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">2+</Typography>
                       </ButtonStyle>
                       <ButtonStyle  value ={value}
-                            onClick={() => handleBoxClick(value)}
+                          onClick= { (e) =>  selectRating(e.target.value)} 
                             onMouseEnter={handleBoxMouseEnter}
                             onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">3+</Typography>
                       </ButtonStyle>
                       <ButtonStyle value ={value}
-                            onClick={() => handleBoxClick(value)}
+                           onClick= { (e) =>  selectRating(e.target.value)} 
                             onMouseEnter={handleBoxMouseEnter}
                             onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">4+</Typography>
                       </ButtonStyle>
