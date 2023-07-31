@@ -3,6 +3,7 @@ import Price from '../Container/Price';
 import Rate from '../Container/Rate.jsx';
 import Box from '@mui/material/Box';
 import Ament from '../Container/Ament.jsx';
+import Hotels from '../components/Hotels.jsx';
 import Divider from '@mui/material/Divider';
 export default function Filter() 
 {
@@ -17,7 +18,7 @@ export default function Filter()
     }; 
 
 return (
-   
+   <div>
     <Box sx={{ width: 343,
       height: 785.5,
       top: 287,
@@ -32,6 +33,8 @@ return (
             selectRating={handleSelectRating} />
         <Divider variant="middle" />
         <Ament />
-     </Box>
 
+     </Box>
+     <Hotels />
+     </div>
       );}

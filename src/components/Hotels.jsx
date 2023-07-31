@@ -12,7 +12,7 @@ function Hotels(){
       ];
     return(
         <>
-            <Container sx = {{width:'899px', height: '1508px',marginTop: '100px'}}>
+            <Container sx = {{width:'899px', height: '1508px',marginTop: '-780px'}}>
                 <Box sx = {{height: '150px'}}>
                    <BasicButtons/>           
                 </Box>
