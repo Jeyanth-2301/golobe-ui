@@ -29,7 +29,7 @@ export default function BasicButtons() {
     <Typography sx = {{fontSize : '14px'}}>showing 4 of 257 places</Typography>
     </Grid>
     <Grid item sx ={{marginTop: -2.,marginLeft: '650px'}} >
-        <Typography sx = {{fontSize: '14px'}}>sort by Recommendeg
+        <Typography sx = {{fontSize: '14px'}}>sort by Recommended
           <img src ={ drop} />
         </Typography>
     </Grid>
