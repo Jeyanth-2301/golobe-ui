@@ -31,30 +31,29 @@ export default function Price({ value,changePrice}){
         
   },  })))
 
+  const [dragging, setDragging] = useState('');
 
-      const [dragging, setDragging] = useState('');
+  const handleMouseDown = (e, position) => {
+      e.preventDefault();
+      setDragging(position);
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    };
 
-      const handleMouseDown = (e, position) => {
-          e.preventDefault();
-          setDragging(position);
-          document.addEventListener('mousemove', handleMouseMove);
-          document.addEventListener('mouseup', handleMouseUp);
-        };
+  const handleMouseMove = (e) => {
+      if (!dragging) return;
+      const sliderRect = sliderRef.current.getBoundingClientRect();
+      const newPosition = (e.clientX - sliderRect.left) / sliderRect.width;
+      const newValue = position === 'left' ? Math.max(newPosition * 1150, 50) : Math.min(newPosition * 1150, 1200);
+      changePrice(position === 'left' ? [newValue, value[1]] : [value[0], newValue]);
+    };
 
-      const handleMouseMove = (e) => {
-          if (!dragging) return;
-          const sliderRect = sliderRef.current.getBoundingClientRect();
-          const newPosition = (e.clientX - sliderRect.left) / sliderRect.width;
-          const newValue = position === 'left' ? Math.max(newPosition * 1150, 50) : Math.min(newPosition * 1150, 1200);
-          changePrice(position === 'left' ? [newValue, value[1]] : [value[0], newValue]);
-        };
-
-      const handleMouseUp = () => {
-          setDragging('');
-          document.removeEventListener('mousemove', handleMouseMove);
-          document.removeEventListener('mouseup', handleMouseUp);
-        };
-      
+  const handleMouseUp = () => {
+      setDragging('');
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+     
           
     return(
       <ThemeProvider theme={theme}>
@@ -66,7 +65,7 @@ export default function Price({ value,changePrice}){
                     <Grid item xs={10} sx={{marginTop : 3}}>
                         <Typography  gutterBottom variant="h13" component="div" > Price </Typography>
                     </Grid>
-                    <Grid item sx={{marginTop : 3}} ><img src ={expand}  alt=" " onClick={toggleDropdown} /> </Grid>
+                    <Grid item sx={{marginTop : 3,}} ><img src ={expand}  alt=" " onClick={toggleDropdown} /> </Grid>
                 </Grid>
               <Typography variant="body2" sx={{width:270, marginLeft:0.5, marginTop:1.3 }}>
                   {isExpanded && (
@@ -77,22 +76,21 @@ export default function Price({ value,changePrice}){
                 onChange={changePrice}
                 defaultValue={50}  min={50} max={1200}  
                 ref={sliderRef}/>
-              
-            <div  style ={{display:'flex'}}>
+                <div  style ={{display:'flex'}}>
                     <div style ={{marginTop:-31,
                           position: 'absolute',
                           marginRight:-3,
                           marginLeft: (value[0] - 50) / 1150 * 278-9,
                           zIndex: dragging === 'left' ? 1 : 0,}}   >
-                          <img  src={round} onMouseDown={(e) => handleMouseDown(e, 'left')}  />  </div> 
+                          <img   src={round} onMouseDown={(e) => handleMouseDown(e, 'left')}  />  </div> 
                     <div style ={{marginTop:-31,
                           position: 'absolute',
+                          width:5,
+                          height:5,
                           marginLeft: (value[1] - 50) / 1150 * 278-22,
                           zIndex: dragging === 'left' ? 1 : 0,}} > 
                           <img src={round}  onMouseDown={() => handleMouseDown('right')} /> </div>
                 </div> 
-              
-
                 <div  style ={{display: 'flex'}}>
                     <Typography gutterBottom variant='val'  sx={{marginLeft:-0.5, marginTop:1, marginBottom:1.5}} > ${value[0]} </Typography>
                     <Typography   variant='val'  sx={{marginLeft:27,marginTop:1, marginBottom:1.5}}> ${value[1]} </Typography>
