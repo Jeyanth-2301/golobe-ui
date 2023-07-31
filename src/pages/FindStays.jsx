@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import Filter from '../components/Filter'
+import Hotels from '../components/Hotels'
 
 const FindStays = () => {
     return (
@@ -11,6 +12,7 @@ const FindStays = () => {
             <Hero></Hero>
             <Footer></Footer> */}
             <Filter></Filter>
+            
         </div>
     )
 }
