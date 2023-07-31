@@ -44,9 +44,11 @@ const roomsData= [
                 <Grid item xs={12} lg={8} container alignItems="center">
                   <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none' }}>
                     <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover'}} />
-                   <Typography variant="B">
+                    <div style={{ flex: 1, padding: '0 16px' }}>
+                    <Typography variant="B">
                      {room.description} ({room.availablerooms})
                     </Typography>
+                    </div>
                    </Paper>
                 </Grid>
                 <Grid item xs={12} sm={4}>
