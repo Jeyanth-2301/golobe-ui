@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button, Grid, Link, Card } from '@mui/material';
-import instagram from '../../assets/icons/instagram.svg';
-import facebook from '../../assets/icons/facebook.svg';
-import twitter from '../../assets/icons/twitter.svg';
-import logo from '../../assets/icons/logo.svg';
+import instagram from '../../assets/icons/footer-icons/instagram.svg';
+import facebook from '../../assets/icons/footer-icons/facebook.svg';
+import twitter from '../../assets/icons/footer-icons/twitter.svg';
+import logo from '../../assets/icons/footer-icons/logo.svg';
 
 const Foot = () => {
 
