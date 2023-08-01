@@ -1,14 +1,17 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Hero from '../components/Hero'
-import Function from '../components/Function'
+import Footer from '../components/Footer/Footer'
+import Navbar from '../components/Header/Navbar'
+import Hero from '../components/Header/Hero'
+import { Box, Button } from '@mui/material'
+import { Link } from 'react-router-dom';
+
+
 const FindStays = () => {
     return (
         <div>
-            <Navbar></Navbar>
-            <Hero></Hero>
-            <Footer></Footer>
+            <Hero />
+            <Box sx={{ width: '20vh', height: '40vh' }}>
+            </Box>
         </div>
     )
 }

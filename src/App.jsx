@@ -1,8 +1,10 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Navbar from './components/Header/Navbar'
+import Footer from './components/Footer/Footer'
 import Home from "./pages/Home"
 import Stays from "./pages/FindStays"
-import Signup from "./pages/Signup"
+import HotelListing from "./pages/HotelListing"
 import Login from "./pages/Login"
 
 
@@ -10,12 +12,15 @@ import Login from "./pages/Login"
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/stays' element={<Stays />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-      </Routes>
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Stays />} />
+          <Route path='/search-results' element={<HotelListing />} />
+          <Route path='/login' element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react'
-import BG from '../assets/images/bg-stays.jpg'
+import BG from '../../assets/images/bg-stays.jpg'
 import { Box, Container, Stack, Typography } from '@mui/material'
 
 

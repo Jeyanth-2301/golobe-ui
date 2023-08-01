@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Avatar } from '@mui/material';
-import findstays from '../assets/icons/navbar-icons/find-stays.svg'
-import logo from '../assets/icons/navbar-icons/logo-2.svg'
-import heart from '../assets/icons/navbar-icons/heart.svg'
-import profile from '../assets/icons/navbar-icons/profile.jpg'
-import UserDropdown from './user-dropdown';
+import findstays from '../../assets/icons/navbar-icons/find-stays.svg'
+import logo from '../../assets/icons/navbar-icons/logo-2.svg'
+import heart from '../../assets/icons/navbar-icons/heart.svg'
+import profile from '../../assets/icons/navbar-icons/profile.jpg'
+import UserDropdown from '../Header/user-dropdown';
 import { styled } from '@mui/material/styles';
-import theme from '../utils/theme/theme'
+import theme from '../../utils/theme/theme'
 
 const FancyButton = styled(Button)({
     background: 'black',
@@ -15,7 +15,7 @@ const FancyButton = styled(Button)({
     boxShadow: '0 3px 5px 2px rgba(0,0,0,0.25)',
     color: 'white',
     height: 48,
-    padding: '0 30px',
+    padding: '0 3.5vh',
     marginLeft: '8px',
     '&:hover': {
         background: 'white',
@@ -83,7 +83,7 @@ const Navbar = () => {
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
 
     return (
-        <AppBar position="fixed" style={{ zIndex: showIndicator ? 1 : 1000, backgroundColor: 'white', padding: '10px 100px' }}>
+        <AppBar position="fixed" style={{ zIndex: showIndicator ? 1 : 1000, backgroundColor: 'white', padding: '10px 6%' }}>
             <Toolbar>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     {/* SVG Icon */}

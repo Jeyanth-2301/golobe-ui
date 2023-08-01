@@ -1,9 +1,9 @@
 import React from 'react';
-import Foot from '../components/Foot' ;
+import Foot from './Foot';
 
 function Function() {
   return (
-    <div className="Function">
+    <div>
       <Foot />
     </div>
   );
