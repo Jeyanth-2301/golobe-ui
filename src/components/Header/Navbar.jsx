@@ -7,6 +7,7 @@ import profile from '../../assets/icons/navbar-icons/profile.jpg'
 import UserDropdown from '../Header/user-dropdown';
 import { styled } from '@mui/material/styles';
 import theme from '../../utils/theme/theme'
+import { Link } from 'react-router-dom';
 
 const FancyButton = styled(Button)({
     background: 'black',
@@ -27,7 +28,6 @@ const Navbar = () => {
     const [showIndicator, setShowIndicator] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false); // Track user login state
     const [anchorEl, setAnchorEl] = useState(null);
-
     // Function to handle click on the user name and show the dropdown
     const handleUserNameClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -81,7 +81,14 @@ const Navbar = () => {
         askLoggedInStatus();
     }, []);
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
+    const linkStyle = {
+        color: 'white',
+        textDecoration: 'none',
 
+    }
+    const hoverLinkStyle = {
+        color: 'black'
+    };
     return (
         <AppBar position="fixed" style={{ zIndex: showIndicator ? 1 : 1000, backgroundColor: 'white', padding: '10px 6%' }}>
             <Toolbar>
@@ -148,7 +155,7 @@ const Navbar = () => {
                             <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
                                 Signin
                             </Button>
-                            <FancyButton>Login</FancyButton>
+                            <FancyButton><Link to='/login' style={linkStyle} onMouseOver={(e) => Object.assign(e.target.style, hoverLinkStyle)} onMouseOut={(e) => Object.assign(e.target.style, linkStyle)}>Login</Link></FancyButton>
                         </>
                     )}
                     <UserDropdown

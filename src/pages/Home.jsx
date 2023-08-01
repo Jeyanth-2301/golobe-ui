@@ -5,7 +5,7 @@ import Hero from '../components/Header/Hero'
 const Home = () => {
     return (
         <div>
-            <Navbar></Navbar>
+            {/* <Navbar></Navbar> */}
             {/* <Footer></Footer> */}
         </div>
     )
