@@ -5,7 +5,7 @@ import Hero from '../components/Hero'
 import Rooms from '../components/Rooms'
 const FindStays = () => {
     return (
-        <div>
+        <div> 
             {/* <Navbar></Navbar> */}
             {/* <Hero></Hero> */}
             {/* <Footer></Footer> */}
