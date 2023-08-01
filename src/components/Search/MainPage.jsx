@@ -6,7 +6,7 @@ import {Box} from '@mui/material'
 const MainPage = () => {
   return (
     <div>
-       <Box sx={{display:'flex',flexDirection:'column',alignItems:'center',gap:6,marginTop:'-3%'}}>
+       <Box sx={{display:'flex',flexDirection:'column',alignItems:'center',gap:9,marginTop:'-3%'}}>
      <Search />
      <RecentSearch />
      <Cards />

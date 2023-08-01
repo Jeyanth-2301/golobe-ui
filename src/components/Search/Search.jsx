@@ -1,17 +1,18 @@
 import React from 'react'
 import theme from '../../utils/theme/theme.jsx';
-import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button } from '@mui/material';
+import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button, IconButton } from '@mui/material';
 import DirectionsCarSharpIcon from '@mui/icons-material/DirectionsCarSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import AddIcon from '@mui/icons-material/Add';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import RoomIcon from '@mui/icons-material/Room';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
 import build from '../../assets/icons/search-icons/build.svg';
 import car from '../../assets/icons/search-icons/car.svg';
-import person from '../../assets/icons/search-icons/person.svg'
-
+import location from  '../../assets/icons/search-icons/location.svg';
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#1C1B1F"
@@ -63,8 +64,8 @@ const Search = () => {
   const handleCheckOut = (e) => {
     setCheckOutDate(e.target.value);
   };
-  const handleRooms = (e) => {
-    setNumberOfRooms(e.target.value);
+  const handleRooms = () => {
+    setNumberOfRooms(numberOfRooms+1);
   };
 
 
@@ -98,7 +99,7 @@ const Search = () => {
   return (
     <ThemeProvider theme={theme}>
 
-      <Paper elevation={3} sx={{ width: "90vw", height: '35vh', borderRadius: '16px' }} >
+      <Paper elevation={3} sx={{ width: "75vw", height: '35vh', borderRadius: '16px' }} >
         <Box sx={{ paddingTop: '20px', marginLeft: 4 }}>
           <Typography variant="sideheading">Where are you staying?</Typography>
         </Box>
@@ -108,14 +109,14 @@ const Search = () => {
               <StyledTextField
                 variant='outlined'
                 label="Enter Destination" id="destination"
-                sx={{ width: '400px' }}
+                sx={{ width: '340px' }}
                 value={destination}
                 onChange={handleDest}
                 autoComplete='off'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={car} />
+                      <img src={location} />
                     </InputAdornment>
                   ),
                 }} ></StyledTextField></Grid>
@@ -135,16 +136,21 @@ const Search = () => {
               InputLabelProps={{ shrink: true }}></StyledTextField></Grid>
 
 
-            <Grid item ><StyledTextField label="Rooms & Guests" sx={{ width: '250px' }} id="rooms"
-              dafaultValue="1 Room,1 Guest"
+            <Grid item ><StyledTextField label="Rooms" sx={{ width: '250px' }} id="rooms"
               value={numberOfRooms}
-              onChange={handleRooms}
+             
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <img src={person} />
+                    <img src={car} />
                   </InputAdornment>
                 ),
+                endAdornment:(
+                  <InputAdornment position="end">
+                    <IconButton >
+                    <AddCircleIcon  onClick={handleRooms}/></IconButton>
+                  </InputAdornment>
+                )
               }}
 
             >
@@ -152,7 +158,7 @@ const Search = () => {
             </Grid>
           </Grid>
         </FormControl>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 4%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3.8%' }}>
           <Button
             variant="text"
             disableRipple

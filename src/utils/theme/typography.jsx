@@ -86,6 +86,138 @@ const themeTypography = {
         fontWeight: 600,
         lineHeight: 1.2,
     },
+    a: {
+        width: "30.6875rem",
+        height: "3.75rem",
+        
+      fontFamily: "Montserrat",
+      fontSize: "1.7rem",
+      fontWeight: "700",
+      lineHeight: "1.875rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+      
+        
+        },
+       b:{
+
+        marginLeft:"4rem",
+        color:"red", 
+        width: "7.9375rem",
+        height: "2rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.8rem",
+      fontWeight: "600",
+      lineHeight: "2.4375rem",
+      letterSpacing: "0em",
+      textAlign: "right"
+      
+        },
+        c:{
+      width: "27.25rem",
+      height: "1.8125rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.5rem",
+      fontWeight: "600",
+      lineHeight: "1.8125rem",
+      letterSpacing: "0em",
+      marginLeft:"19.5vh",
+        },
+        d:{
+          width: "22 rem",
+      height: "1.0625rem",
+      opacity: "0.046875rem",
+      fontFamily: "Montserrat",
+      fontSize: "1rem",
+      fontWeight: "500",
+      lineHeight: "1.2rem",
+      letterSpacing:"0em",
+      textAlign: "left",
+      
+        },
+        e:{width: "10.3125rem",
+          height: "1.5rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.25rem",
+      fontWeight: "500",
+      lineHeight: "2.5rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+      
+          },
+          f:{
+            width: "8.3125rem",
+      height: "1.5rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.25rem",
+      fontWeight: "600",
+      lineHeight: "2.5rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+      
+          },
+          g:{color:"#8dd3bb",
+            width:  "46.375rem",
+      height: "3rem",
+      padding: "0.5rem",
+      borderRadius: "0.25rem",
+      gap: "0.25rem"
+          },
+          v:{
+            width: "wrap",
+      height: "1.25rem",
+      fontFamily: "Montserrat",
+      fontSize: "1rem",
+      fontWeight: "600",
+      lineHeight: "2rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+          },
+          w:{
+            width: "wrap",
+      height: "1.25rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.1rem",
+      fontWeight: "500",
+      lineHeight: "2rem",
+      letterspacing: "0em",
+      textAlign: "left"
+          },
+          x:{
+            width: "7.125rem",
+      height: "1.25rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.14rem",
+      fontWeight: "600",
+      lineHeight: "1.25rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+      
+          },
+          y:{
+            width: "18.5 rem",
+      height: "1.25rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.1rem",
+      fontWeight: "500",
+      lineHeight: "3rem",
+      letterspacing: "0em",
+      textAlign: "left"
+          },
+          z:{
+            width: "16.0625rem",
+      height: "3rem",
+      fontFamily: "Montserrat",
+      fontSize: "1.6rem",
+      fontWeight: "600",
+      lineHeight: "1.5rem",
+      letterSpacing: "0em",
+      textAlign: "left"
+      
+          },
+    n1:{ fontSize: "30px",
+     fontFamily: "Montserrat",
+      ml: "10px" },
     bot:
     {
         fontSize: "0.9rem",
@@ -183,7 +315,129 @@ const themeTypography = {
         lineHeight:1.2
       
 
-    }
+    },
+    review1:{
+        fontSize:'0.875rem',
+        fontWeight:'400',
+        lineHeight:'normal'
+    },
+    review2:{
+        fontSize:'1rem',
+        fontWeight:'400',
+        lineHeight:'normal'
+    },
+    review3:{
+        fontSize:'3rem',
+        fontWeight:'700',
+        lineHeight:'normal'
+    },
+    review4:{
+        fontSize:'1.25rem',
+        fontWeight:'600',
+        lineHeight:'normal'
+    },
+    review5:{
+        fontSize:'1.25rem',
+        fontWeight:'700',
+        lineHeight:'normal'
+    },
+    A:{
+        fontSize: '1.2rem',
+        fontStyle: 'normal',
+        fontWeight: 700, 
+        lineHeight:'2.6',
+       
+    },
+    B:{
+        padding: '1rem',
+        color: '#121',
+        height: '1.25rem',
+        width: '29rem',
+        fontSize: '1rem',
+        alignSelf: 'center',
+        marginRight: '2.rem',
+        fontWeight: 500,
+        fontStyle: 'normal' ,
+        whiteSpace:'nowrap',
+        lineHeight: '2.7',
+
+    },
+    C:{
+        color: '#121',
+       
+        alignSelf: 'center',
+        height: '1.8125',
+       
+        fontWeight: 600,
+        fontStyle: 'normal',
+        fontSize: '1.5rem',
+        lineHeight: 'normal', 
+    },
+    D:{
+        color: '#121', 
+        fontSize: '0.875rem', 
+        alignSelf: 'center',
+        marginRight: '3.125rem', 
+        fontWeight: 600, 
+        fontStyle: 'normal', 
+        lineHeight: 'normal',
+    },
+    E:{ 
+        color: '#121',
+        fontHeight: '1rem', 
+        fontWeight: 600, 
+        fontStyle: 'normal', 
+        lineHeight: 'normal', 
+        textTransform: 'none', 
+        weight: '5.8125rem', 
+    },
+    luna:
+    {
+        fontSize:'1rem',
+        fontWeight:500
+    },
+    pico:
+    {
+        fontWeight:500,
+        fontSize:'1.05rem'
+    },
+    element1: {
+        fontSize: "1.25rem",
+        fontWeight: 700,
+        lineHeight: "1.57875rem",
+    },
+    element2: {
+        fontSize: "1rem",
+        fontWeight: 500,
+        lineHeight: "1.21875rem",
+    },
+    element3: {
+        fontSize: "2rem",
+        fontWeight: 700,
+        lineHeight: "2.52625rem",
+        marginRight:'25px' ,
+        height:'40px'
+    },
+    element4: {
+        fontSize: "1rem",
+        fontWeight: 700,
+        lineHeight:"1.21875rem",
+       
+    },
+    element5: {
+        fontSize: "0.875rem",
+        fontWeight: 500,
+        lineHeight:"1.066875rem",
+        
+    },
+    element6: {
+        fontSize: "1rem",
+        fontWeight: 500,
+        lineHeight: "1.21875rem",
+        marginLeft:'1.50rem',
+        
+    },
+
 
     
 };
