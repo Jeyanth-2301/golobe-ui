@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Home from "./pages/Home"
 import Stays from "./pages/FindStays"
+import HotelDetails from './pages/HotelDetails';
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<HotelDetails />} />
         <Route path='/stays' element={<Stays />} />
       </Routes>
     </div>
