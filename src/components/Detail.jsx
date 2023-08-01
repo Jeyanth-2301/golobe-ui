@@ -108,7 +108,7 @@ const handleShareClick = () => {
   
 
   return (
-    <div style={{height:'104px',width:'1232px',marginTop:'32px',marginLeft:'104px',marginRight:'104px'}}>
+    <div style={{height:'104px',width:'1232px',marginTop:'32px'}}>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={9} container direction="column" sx={{width:'804px',height:'104px'}}>
           <Grid item sx={{height:'30px',width:'804px'}}>
