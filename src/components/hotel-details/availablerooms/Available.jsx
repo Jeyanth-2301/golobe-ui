@@ -33,11 +33,11 @@ const roomsData= [
     
    return (
       <div>
-        <Box sx={{ height: '330.5px',width:'1232px' ,marginTop:"11vh" }}>
+        <Box sx={{ height: '50vh',width:'90vw' ,marginTop:"11vh" }}>
           <Typography variant="A">
             Available Rooms({totalRooms})
           </Typography><br/>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} >
             {roomsData.map((room, index) => (
               <React.Fragment key={index}>
                 <Grid item xs={12} lg={8} container alignItems="center">

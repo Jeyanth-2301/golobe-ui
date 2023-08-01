@@ -108,17 +108,17 @@ const handleShareClick = () => {
   
 
   return (
-    <div style={{height:'104px',width:'1232px',marginTop:'32px'}}>
+    <div style={{height:'18vh',width:'90vw',marginTop:'2vh'}}>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={9} container direction="column" sx={{width:'804px',height:'104px'}}>
-          <Grid item sx={{height:'30px',width:'804px'}}>
+          <Grid item sx={{height:'30px',width:'1000px'}}>
              <Typography variant="h1" sx={{fontSize:'24px'}}>CVK Park Bosphorus Hotel Istanbul&nbsp;
                   <Typography variant="pico" component="span" style={{display:'inline-flex',alignItems:'center'}}>
                       {renderStars('#FF8682')} &nbsp;5 Star Hotel
                   </Typography>
               </Typography>
            </Grid>
-            <div style={{width:'804px',height:'58px',padding: '10px 0'}}>
+            <div style={{width:'1000px',height:'35px',padding: '10px 0'}}>
             <Grid item>
               <Typography variant='pico' sx={{width:'804px',height:'18px'}}> 
               <img src={location} alt="location"/>Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437
@@ -134,8 +134,8 @@ const handleShareClick = () => {
             </Grid>
             <Grid item xs={3} container direction="column" sx={{marginLeft:'-3px'}}>
               <Grid item sx={{color:'#FF8682',marginBottom:'10px'}}>
-                    <Typography variant="h4" align="right">$240
-                        <Typography variant="body1" style={{display:'inline'}}>/night
+                    <Typography variant="h4" align="right" >$240
+                        <Typography variant="body1" style={{display:'inline',marginTop:'4vh'}}>/night
                         </Typography>
                     </Typography>
                 </Grid>

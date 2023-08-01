@@ -31,7 +31,7 @@ function FullReview() {
   return (
     <>
     
-          <Container variant="outlined" style={{maxWidth:'1232px',marginTop:"11vh",paddingLeft:0}}>
+          <Container variant="outlined" style={{maxWidth:'90vw',marginTop:"11vh",marginBottom:'20vh',paddingLeft:0}}>
             <Box sx={{ display: 'flex', flexDirection: 'column',maxWidth:'1232px', alignItems: 'flex-start' }}>
               <Typography variant='review5' gutterBottom>
                 Reviews
