@@ -10,7 +10,10 @@ const FindStays = () => {
     return (
         <div>
             <Hero />
-            <Box sx={{ width: '20vh', height: '40vh' }}>
+            <Box sx={{ width: '20vh', height: '40vh', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>Link to HotelListing
+                <Button>
+                    <Link to="/search-results" >HotelListing</Link>
+                </Button>
             </Box>
         </div>
     )
