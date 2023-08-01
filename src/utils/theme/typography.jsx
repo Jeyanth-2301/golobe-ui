@@ -49,6 +49,31 @@ const themeTypography = {
     button: {
         textTransform: "none",
     },
+    review1:{
+        fontSize:'0.875rem',
+        fontWeight:'400',
+        lineHeight:'normal'
+    },
+    review2:{
+        fontSize:'1rem',
+        fontWeight:'400',
+        lineHeight:'normal'
+    },
+    review3:{
+        fontSize:'3rem',
+        fontWeight:'700',
+        lineHeight:'normal'
+    },
+    review4:{
+        fontSize:'1.25rem',
+        fontWeight:'600',
+        lineHeight:'normal'
+    },
+    review5:{
+        fontSize:'1.25rem',
+        fontWeight:'700',
+        lineHeight:'normal'
+    }
     
 };
 
