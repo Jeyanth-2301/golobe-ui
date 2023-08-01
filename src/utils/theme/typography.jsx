@@ -56,6 +56,13 @@ const themeTypography = {
         fontWeight: 700,
         lineHeight: 1.2,
     },
+    h13:
+    {
+        fontSize:'0.9 rem',
+        fontWeight: 600,
+        lineHeight:1.2
+
+    },
     button: {
         textTransform: "none",
     },
@@ -78,7 +85,106 @@ const themeTypography = {
         fontSize: "1.35rem",
         fontWeight: 600,
         lineHeight: 1.2,
+    },
+    bot:
+    {
+        fontSize: "0.9rem",
+        fontWeight:10,
+        
+    },
+    bot1:
+    {
+        fontSize: "0.9rem",
+        fontWeight:10,
+    },
+    fil:
+    {
+         
+            fontSize: "1.3rem",
+            fontWeight: 600,
+            lineHeight: 1.2,
+        
+    },
+    h14:
+    {
+        fontSize: "2.9rem",
+        fontWeight: 550,
+        
+        lineHeight: 1.2,
+    },
+    
+    check:
+    {
+        fontSize:'1.2 rem',
+        fontWeight: 500,
+        lineHeight:1.2
+
+    },
+    val:
+    {
+        fontSize:'1.2 rem',
+        fontWeight: 500,
+        lineHeight:1.2
+
+    },
+    heading: {
+        fontFamily: 'TradeGothic LT Extended',
+        fontSize: '20px',
+        lineHeight:'normal',
+        fontWeight: 700,
+        fontStyle: 'normal',                                                
+    },
+    price: {
+        fontFamily: 'Montserrat', 
+        fontSize: '13px', 
+        lineHeight: 'normal', 
+        fontWeight: '500', 
+        fontStyle: 'normal'
+    },
+    subheading: {
+        fontFamily: 'Montserrat', 
+        fontSize: '16px', 
+        fontWeight: '700', 
+        color: '#FF8682'
+    },
+    address: {
+        fontFamily: 'Montserrat',
+        fontSize: '14px',
+        lineHeight:'normal',
+        fontWeight: 500,
+        fontStyle: 'normal',
+        color: '#112211'
+    },
+    rating: {
+        fontFamily: 'Montserrat',
+        fontSize: '16px',
+        lineHeight:'normal',
+        fontWeight: 500,
+        fontStyle: 'normal',
+        color: '#112211'  
+    },
+    amenities: {
+        fontFamily: 'Montserrat',
+        fontSize: '15px',
+        lineHeight:'normal',
+        fontWeight: 500,
+        fontStyle: 'normal'
+    },
+    tax: {
+        fontFamily: 'Montserrat', 
+        fontSize: '13px',
+    },
+    viewbutton: {
+
+    },
+    sort:{
+        fontSize: "0.7rem",
+        fontWeight: 500,
+        lineHeight:1.2
+      
+
     }
+
     
 };
 
