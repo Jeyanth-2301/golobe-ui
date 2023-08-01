@@ -37,7 +37,7 @@ const roomsData= [
    return (
       <div>
         <Box sx={{ height: '346.5px', maxWidth: '1232px'}}>
-          <Typography style={{ fontFamily: 'TradeGothic-LT-Extended', fontSize: '20px', fontStyle: 'normal', fontWeight: 700, lineHeight: 'normal' }}>
+          <Typography style={{ fontFamily: 'TradeGothic-LT-Extended', fontSize: '20px', fontStyle: 'normal', fontWeight: 700, lineHeight: 'normal', marginLeft:16 }}>
             Available Rooms({totalRooms})
           </Typography> <br />
           <Grid container spacing={3}>
@@ -45,7 +45,7 @@ const roomsData= [
               <React.Fragment key={index}>
                 <Grid item xs={12} lg={8} container alignItems="center">
                   <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none' }}>
-                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover'}} />
+                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover', marginLeft:16}} />
                     <div style={{ flex: 1, padding: '0 16px' }}>
                     <Typography style={{ padding: "16px", fontFamily: 'Montserrat', color: '#121', height: '20px', width: '354px', fontSize: '16px', alignSelf: 'center', marginRight: '40px', fontWeight: 500, fontStyle: 'normal' ,whiteSpace:'nowrap'}}>
                      {room.description} ({room.availablerooms})
@@ -61,7 +61,7 @@ const roomsData= [
                     <Typography style={{ fontFamily: 'Montserrat', color: '#121', fontSize: '14px', alignSelf: 'center', marginRight: '50px', fontWeight: 600, fontStyle: 'normal', lineHeight: 'normal' }}>
                       /night
                     </Typography>
-                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB' }}>
+                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB', marginRight:16 }}>
                       <Typography style={{ fontFamily: 'Montserrat', fontHeight: '16px', fontWeight: 600, fontStyle: 'normal', lineHeight: 'normal', textTransform: 'none', weight: '93px', color: '#121' }}>
                         Book now
                       </Typography>
