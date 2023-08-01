@@ -37,7 +37,7 @@ const roomsData= [
    return (
       <div>
         <Box sx={{ height: '346.5px', maxWidth: '1232px'}}>
-          <Typography style={{ fontFamily: 'TradeGothic-LT-Extended', fontSize: '20px', fontStyle: 'normal', fontWeight: 700, lineHeight: 'normal', marginLeft:16 }}>
+          <Typography variant="A">
             Available Rooms({totalRooms})
           </Typography> <br />
           <Grid container spacing={3}>
@@ -47,7 +47,7 @@ const roomsData= [
                   <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none' }}>
                     <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover', marginLeft:16}} />
                     <div style={{ flex: 1, padding: '0 16px' }}>
-                    <Typography style={{ padding: "16px", fontFamily: 'Montserrat', color: '#121', height: '20px', width: '354px', fontSize: '16px', alignSelf: 'center', marginRight: '40px', fontWeight: 500, fontStyle: 'normal' ,whiteSpace:'nowrap'}}>
+                    <Typography variant="B">
                      {room.description} ({room.availablerooms})
                     </Typography>
                     </div>
@@ -55,14 +55,14 @@ const roomsData= [
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Paper style={{ height: '48px', display: 'flex', justifyContent: "flex-end", boxShadow: 'none' }}>
-                    <Typography style={{ color: '#121', fontFamily: 'Montserrat', marginRight: '-56px', alignSelf: 'center', height: '29px', width: '105px', fontWeight: 600, fontStyle: 'normal', fontSize: '24px', lineHeight: 'normal' }}>
+                    <Typography variant="C">
                     {room.price}
                     </Typography>
-                    <Typography style={{ fontFamily: 'Montserrat', color: '#121', fontSize: '14px', alignSelf: 'center', marginRight: '50px', fontWeight: 600, fontStyle: 'normal', lineHeight: 'normal' }}>
+                    <Typography variant="D">
                       /night
                     </Typography>
                     <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB', marginRight:16 }}>
-                      <Typography style={{ fontFamily: 'Montserrat', fontHeight: '16px', fontWeight: 600, fontStyle: 'normal', lineHeight: 'normal', textTransform: 'none', weight: '93px', color: '#121' }}>
+                      <Typography variant="E">
                         Book now
                       </Typography>
                     </Button>

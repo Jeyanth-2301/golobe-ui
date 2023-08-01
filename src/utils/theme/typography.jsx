@@ -73,6 +73,56 @@ const themeTypography = {
         fontSize:'1.25rem',
         fontWeight:'700',
         lineHeight:'normal'
+    },
+    A:{
+        fontSize: '1.2rem',
+        fontStyle: 'normal',
+        fontWeight: 700, 
+        lineHeight:'2.6',
+        marginLeft:'16px' 
+    },
+    B:{
+        padding: '1rem', 
+        color: '#121',
+        height: '1.25rem', 
+        width: '29rem',
+        fontSize: '1rem', 
+        alignSelf: 'center',
+        marginRight: '2.5rem', 
+        fontWeight: 500,
+        fontStyle: 'normal' ,
+        whiteSpace:'nowrap',
+        lineHeight: '2.7', 
+
+    },
+    C:{
+        color: '#121',
+        marginRight: '-3.5rem',
+        alignSelf: 'center',
+        height: '1.8125',
+        width: '6.5625rem',
+        fontWeight: 600,
+        fontStyle: 'normal',
+        fontSize: '1.5rem',
+        lineHeight: 'normal', 
+    },
+    D:{
+        color: '#121', 
+        fontSize: '0.875rem', 
+        alignSelf: 'center',
+        marginRight: '3.125rem', 
+        fontWeight: 600, 
+        fontStyle: 'normal', 
+        lineHeight: 'normal',
+    },
+    E:{ 
+        color: '#121',
+        fontHeight: '1rem', 
+        fontWeight: 600, 
+        fontStyle: 'normal', 
+        lineHeight: 'normal', 
+        textTransform: 'none', 
+        weight: '5.8125rem', 
     }
     
 };

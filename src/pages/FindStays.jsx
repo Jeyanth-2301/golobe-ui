@@ -9,7 +9,7 @@ const FindStays = () => {
             {/* <Navbar></Navbar> */}
             {/* <Hero></Hero> */}
             {/* <Footer></Footer> */}
-            <Rooms></Rooms>
+            
         </div>
     )
 }
