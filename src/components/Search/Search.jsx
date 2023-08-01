@@ -109,7 +109,7 @@ const Search = () => {
               <StyledTextField
                 variant='outlined'
                 label="Enter Destination" id="destination"
-                sx={{ width: '350px' }}
+                sx={{ width: '340px' }}
                 value={destination}
                 onChange={handleDest}
                 autoComplete='off'
@@ -158,7 +158,7 @@ const Search = () => {
             </Grid>
           </Grid>
         </FormControl>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3.8%' }}>
           <Button
             variant="text"
             disableRipple
