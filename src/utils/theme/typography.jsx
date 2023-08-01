@@ -53,7 +53,8 @@ const themeTypography = {
         fontSize: '1.2rem',
         fontStyle: 'normal',
         fontWeight: 700, 
-        lineHeight:'2.6', 
+        lineHeight:'2.6',
+        marginLeft:'16px' 
     },
     B:{
         padding: '1rem', 

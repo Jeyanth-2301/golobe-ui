@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography,Paper,Grid,Box,Button } from '@mui/material' 
+import { Typography,Paper,Grid,Box,Container,Button } from '@mui/material' 
 import room1Image from'../assets/image1.png'
 import room2Image from'../assets/image2.png'
 import room3Image from'../assets/image3.png'
@@ -34,16 +34,17 @@ const roomsData= [
   const Available= () => {
     return (
       <div>
-        <Box sx={{ height: '346.5px', width: '1232px', marginLeft: '104px', marginRight: '104px' }}>
+       
+        <Box backgroundColor="pink" sx={{ height: '346.5px', width:'1232px', marginLeft: '104px', marginRight: '104px' }}>
           <Typography variant="A">
             Available Rooms({totalRooms})
           </Typography> 
           <Grid container spacing={3}>
             {roomsData.map((room, index) => (
               <React.Fragment key={index}>
-                <Grid item xs={12} lg={8} container alignItems="center">
-                  <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none' }}>
-                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover'}} />
+                <Grid item xs={12} lg={8} container alignItems="center" >
+                  <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none'}}>
+                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , marginLeft: '16px', objectFit: 'cover'}} />
                     <div style={{ flex: 1, padding: '0 16px' }}>
                     <Typography variant="B">
                      {room.description} ({room.availablerooms})
@@ -66,7 +67,9 @@ const roomsData= [
             ))}
           </Grid>
         </Box>
+      
       </div>
+      
     );
   };
   
