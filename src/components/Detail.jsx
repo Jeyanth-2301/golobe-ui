@@ -132,7 +132,7 @@ const handleShareClick = () => {
             </Grid>
             </div>
             </Grid>
-            <Grid item xs={3} container direction="column">
+            <Grid item xs={3} container direction="column" sx={{marginLeft:'-3px'}}>
               <Grid item sx={{color:'#FF8682',marginBottom:'10px'}}>
                     <Typography variant="h4" align="right">$240
                         <Typography variant="body1" style={{display:'inline'}}>/night
