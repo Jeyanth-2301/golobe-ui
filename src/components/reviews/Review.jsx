@@ -22,7 +22,7 @@ const Review = ({ user, image, guestRating, comment }) => {
 
   return (
     <>
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, maxWidth:1232 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, width:'100%' }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Avatar alt={user} src={image} sx={{ width: 64, height: 64, mr: 2 }} />
         <Box>
