@@ -82,17 +82,17 @@ const themeTypography = {
         marginLeft:'16px' 
     },
     B:{
-        padding: '1rem', 
+        padding: '1rem',
         color: '#121',
-        height: '1.25rem', 
+        height: '1.25rem',
         width: '29rem',
-        fontSize: '1rem', 
+        fontSize: '1rem',
         alignSelf: 'center',
-        marginRight: '2.5rem', 
+        marginRight: '2.5rem',
         fontWeight: 500,
         fontStyle: 'normal' ,
         whiteSpace:'nowrap',
-        lineHeight: '2.7', 
+        lineHeight: '2.7',
 
     },
     C:{
@@ -124,7 +124,6 @@ const themeTypography = {
         textTransform: 'none', 
         weight: '5.8125rem', 
     }
-    
 };
 
 export default themeTypography;
