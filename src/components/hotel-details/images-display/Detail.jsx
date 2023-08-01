@@ -6,7 +6,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import {Button,IconButton} from '@mui/material';
-import location from  '../assets/icons/location-icon/location.svg'
+import location from  '../../../assets/icons/location-icon/location.svg'
 import {Close} from '@mui/icons-material';
 import {Dialog,DialogContent,DialogTitle,DialogActions,InputAdornment,TextField} from '@mui/material';
 import {EmailIcon,FacebookIcon,WhatsappIcon,TelegramIcon,TwitterIcon,LinkedinIcon} from "react-share";
