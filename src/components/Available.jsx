@@ -36,7 +36,7 @@ const roomsData= [
     
    return (
       <div>
-        <Box sx={{ height: '346.5px', maxWidth: '1232px'}}>
+        <Box sx={{ height: '346.5px', width: '100%'}}>
           <Typography variant="A">
             Available Rooms({totalRooms})
           </Typography> <br />

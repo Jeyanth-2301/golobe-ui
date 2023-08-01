@@ -31,7 +31,7 @@ function FullReview() {
   return (
     <>
     
-          <Container variant="outlined" style={{ maxWidth: 1232, maxHeight: 800}}>
+          <Container variant="outlined" style={{ width: '100%'}}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <Typography variant='review5' gutterBottom>
                 Reviews
@@ -54,10 +54,10 @@ function FullReview() {
               component="div"
               sx={{
                 width: '100%',
-                height: '0.5px',
+                height: '0.031rem',
                 backgroundColor: '#112211',
                 opacity: 0.25,
-                my: '8px',
+                my: '0.5rem',
               }}
             />
             <Reviews reviews={reviews} setReviews={setReviews} averageRating={averageRating} />
