@@ -47,7 +47,7 @@ const roomsData= [
                   <Paper style={{ height: 48, display: flex, boxShadow: none }}>
                     <img src={room.image} alt={`Room ${index + 1}`} style={{ width: 48, height: 48 , objectFit: cover, marginLeft:16}} />
                     <div style={{ flex: 1, padding: 16 }}>
-                    <Typography style={{ padding: 16, fontFamily: Montserrat, color: #121, height: 20, width: 354, fontSize: 16, alignSelf: center, marginRight: 40, fontWeight: 500, fontStyle: normal ,whiteSpace:nowrap}}>
+                    <Typography style={{ padding: 16, fontFamily: Montserrat, color: '#121', height: 20, width: 354, fontSize: 16, alignSelf: center, marginRight: 40, fontWeight: 500, fontStyle: normal ,whiteSpace:nowrap}}>
                      {room.description} ({room.availablerooms})
                     </Typography>
                     </div>
