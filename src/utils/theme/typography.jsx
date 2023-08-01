@@ -49,6 +49,29 @@ const themeTypography = {
     button: {
         textTransform: "none",
     },
+    a:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.0rem",
+       fontWeight:"bold",
+    },
+    b:{
+        lineHeight:"normal",
+        color:"black",
+       fontSize: "1.0rem",
+    },
+    c:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.5rem",
+       fontWeight:"bold",
+    },
+    d:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.25rem",
+       fontWeight:"bold",
+    },
 };
 
 export default themeTypography;
