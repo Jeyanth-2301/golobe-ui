@@ -1,15 +1,19 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import Navbar from "../components/Header/Navbar";
-import Footer from '../components/Footer/Footer'
+import Footer from "../components/Footer/Footer";
 
 const Layout = () => {
+    const location = useLocation();
+    console.log(location)
+    const hideNavbarAndFooter = ["/login", "/signup"].includes(location.pathname);
+
     return (
         <>
-            <Navbar />
+            {!hideNavbarAndFooter && <Navbar />}
             <Outlet />
-            <Footer />
+            {!hideNavbarAndFooter && <Footer />}
         </>
-    )
+    );
 };
 
 export default Layout;

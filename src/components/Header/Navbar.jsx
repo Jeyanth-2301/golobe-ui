@@ -81,14 +81,14 @@ const Navbar = () => {
         askLoggedInStatus();
     }, []);
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
-    const linkStyle = {
-        color: 'white',
-        textDecoration: 'none',
+    // const linkStyle = {
+    //     color: 'white',
+    //     textDecoration: 'none',
 
-    }
-    const hoverLinkStyle = {
-        color: 'black'
-    };
+    // }
+    // const hoverLinkStyle = {
+    //     color: 'black'
+    // };
     return (
         <AppBar position="fixed" style={{ zIndex: showIndicator ? 1 : 1000, backgroundColor: 'white', padding: '10px 6%' }}>
             <Toolbar>
@@ -155,7 +155,7 @@ const Navbar = () => {
                             <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
                                 Signin
                             </Button>
-                            <FancyButton><Link to='/login' style={linkStyle} onMouseOver={(e) => Object.assign(e.target.style, hoverLinkStyle)} onMouseOut={(e) => Object.assign(e.target.style, linkStyle)}>Login</Link></FancyButton>
+                            <Link to='/login' ><FancyButton>Login</FancyButton></Link>
                         </>
                     )}
                     <UserDropdown
