@@ -78,8 +78,8 @@ const themeTypography = {
         fontSize: '1.2rem',
         fontStyle: 'normal',
         fontWeight: 700, 
-        lineHeight:'2.6',
-        marginLeft:'16px' 
+        lineHeight:'3',
+        
     },
     B:{
         padding: '1rem',
@@ -97,10 +97,8 @@ const themeTypography = {
     },
     C:{
         color: '#121',
-        marginRight: '-3.5rem',
         alignSelf: 'center',
         height: '1.8125',
-        width: '6.5625rem',
         fontWeight: 600,
         fontStyle: 'normal',
         fontSize: '1.5rem',

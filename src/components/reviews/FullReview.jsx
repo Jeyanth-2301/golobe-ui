@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {Container, Typography, Box} from '@mui/material';
 import Reviews from './Reviews';
-import reviewsData from './reviewsData';
+import reviewsData from './ReviewsData';
 
 
 function FullReview() {
@@ -31,7 +31,7 @@ function FullReview() {
   return (
     <>
     
-          <Container variant="outlined" style={{ maxWidth:"100%"}}>
+          <Container variant="outlined" style={{ maxWidth:"100%",paddingLeft:0}}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <Typography variant='review5' gutterBottom>
                 Reviews
