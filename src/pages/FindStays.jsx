@@ -4,14 +4,16 @@ import Navbar from '../components/Header/Navbar'
 import Hero from '../components/Header/Hero'
 import { Box, Button } from '@mui/material'
 import { Link } from 'react-router-dom';
+import MainPage from '../components/Search/MainPage'
 
 
 const FindStays = () => {
     return (
         <div>
             <Hero />
-            <Box sx={{ width: '20vh', height: '40vh' }}>
-            </Box>
+            <MainPage />
+            {/* <Box sx={{ width: '20vh', height: '40vh' }}>
+            </Box> */}
         </div>
     )
 }
