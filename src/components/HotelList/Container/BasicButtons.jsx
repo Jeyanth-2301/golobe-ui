@@ -9,10 +9,10 @@ import UserDropdown from './sort-dropdown';
 import theme from '../../../utils/theme/theme.jsx';
 export default function BasicButtons() {
   const [showIndicator, setShowIndicator] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('Recommended');
     const [loggedIn, setLoggedIn] = useState(false); 
     const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedOption, setSelectedOption] = useState('Recommended');
-
+  
   
     const handleUserNameClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -22,7 +22,10 @@ export default function BasicButtons() {
     const handleDropdownClose = () => {
         setAnchorEl(null);
     };
-
+    const handleOptionSelect =(option)=>{
+setSelectedOption(option)
+setAnchorEl(null)
+    };
     const handleLogoClick = () => {
         setShowIndicator(!showIndicator);
     };
@@ -36,7 +39,7 @@ export default function BasicButtons() {
               <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>257 places </h5>
           </Box>
           <div  style ={{whiteSpace: 'nowrap', display:'flex'}}>
-          <Typography sx = {{fontSize: '14px'}}>Sort by <b> Recommended  </b> </Typography>
+          <Typography sx = {{fontSize: '14px'}}>Sort by <b>{selectedOption}</b> </Typography>
           <div>
             <img src ={ drop}  sx ={{marginLeft:'10px'}} onClick={handleUserNameClick} style={{ cursor: 'pointer' }} />
        
@@ -44,8 +47,11 @@ export default function BasicButtons() {
        <UserDropdown
           anchorEl={anchorEl}
           onClose={handleDropdownClose}
+          // onOptionClick={handleOptionSelect}
+          setSelectedOption ={setSelectedOption}
           onLogout={() => {
           handleDropdownClose(); 
+    
           setLoggedIn(false);
           } }/>
    
