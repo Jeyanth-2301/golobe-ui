@@ -13,6 +13,7 @@ import Hoteldetail from './pages/HotelDetails'
 import HotelListing from './pages/HotelListing'
 import BookingDetail from './pages/BookingDetailsPage'
 import Profile from './pages/Profile'
+import PaymentPage from './pages/PaymentPage'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path='hotel-listing' element={<HotelListing />}></Route>
             <Route path="hotel-details" element={<Hoteldetail />} />
             <Route path='booking-details' element={<BookingDetail />}></Route>
+            <Route path='payment-page' element={<PaymentPage />}></Route>
             <Route path='profile' element={<Profile />}></Route>
           </Route>
         </Routes>
