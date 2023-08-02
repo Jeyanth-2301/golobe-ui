@@ -3,6 +3,7 @@ import { Container } from '@mui/material'
 import Detail from './TitleCard';
 import Booking from './Booking'
 import Terms from './Terms'
+import Top from '../hotel-details/images-display/Top';
 
 const Main = () => {
     const bookingDetails = {
@@ -18,7 +19,8 @@ const Main = () => {
 
     return (
         <>
-            <Container id="pageContent" style={{ border: '1px solid' }}>
+            <Container id="pageContent" style={{ paddingTop:50 }}>
+                <Top/>
                 <Detail />
                 <Booking bookingDetails={bookingDetails} />
                 <Terms />
