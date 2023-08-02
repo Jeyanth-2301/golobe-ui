@@ -4,7 +4,7 @@ import html2pdf from 'html2pdf.js'
 import {Grid,Typography, Box } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share';
 import {Button,IconButton} from '@mui/material';
-import location from  '../assets/icons/location.svg'
+import location from  '../../assets/icons/location.svg';
 import {Close} from '@mui/icons-material';
 import {Dialog,DialogContent,DialogTitle,DialogActions,InputAdornment,TextField} from '@mui/material';
 import {EmailIcon,FacebookIcon,WhatsappIcon,TelegramIcon,TwitterIcon,LinkedinIcon} from "react-share";

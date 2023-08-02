@@ -1,6 +1,5 @@
 import React from 'react';
 import {Container} from '@mui/material'
-import Top from './nav';
 import Detail from './TitleCard';
 import Booking from './Booking'
 import Terms from './Terms'
@@ -20,8 +19,6 @@ const Main = () => {
   return (
     <>
       <Container id="pageContent" style={{border: '1px solid'}}>
-       
-      <Top />
       <Detail/>
       <Booking bookingDetails={bookingDetails} />
       <Terms />

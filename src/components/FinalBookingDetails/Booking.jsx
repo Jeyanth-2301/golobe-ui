@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Typography, Avatar, Grid } from '@mui/material';
-import Building from '../assets/icons/building.svg';
-import avatar from '../assets/icons/avatar.svg';
-import Time from '../assets/icons/time.svg'
-import Room from '../assets/icons/room.svg'
-import Hotel from '../assets/icons/hotel.svg'
+import Building from '../../assets/icons/building.svg';
+import avatar from '../../assets/icons/avatar.svg';
+import Time from '../../assets/icons/time.svg'
+import Room from '../../assets/icons/room.svg'
+import Hotel from '../../assets/icons/hotel.svg'
 
 const formatDate = (dateString) => {
   const options = { weekday: 'short', month: 'short', day: 'numeric' };

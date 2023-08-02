@@ -2,7 +2,7 @@ import React from 'react'
 //import Navbar from '../components/Navbar'
 //import Footer from '../components/Footer'
 //import Hero from '../components/Hero'
-import Details from '../components/Details'
+import Details from '../components/FinalBookingDetails/Details'
 
 const FindStays = () => {
     return (
