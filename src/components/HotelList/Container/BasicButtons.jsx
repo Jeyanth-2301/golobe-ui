@@ -11,6 +11,7 @@ export default function BasicButtons() {
   const [showIndicator, setShowIndicator] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false); 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('Recommended');
 
   
     const handleUserNameClick = (event) => {
