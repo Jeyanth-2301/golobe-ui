@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@mui/material'
+import { Box } from '@mui/material'
 import Detail from './TitleCard';
 import Booking from './Booking'
 import Terms from './Terms'
@@ -19,13 +19,12 @@ const Main = () => {
 
     return (
         <>
-            <Container id="pageContent" style={{ paddingTop:50 }}>
-                <Top/>
+            <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0px 10%' }}>
+                <Top />
                 <Detail />
                 <Booking bookingDetails={bookingDetails} />
                 <Terms />
-            </Container>
-
+            </Box>
         </>
     );
 };

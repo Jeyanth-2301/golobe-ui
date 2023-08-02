@@ -6,7 +6,7 @@ const PaymentPage = () => {
     return (
         <>
             <Details />
-            <Box sx={{ width: '20vh', height: '50vh' }}></Box>
+            <Box sx={{ width: '20vh', height: '30vh' }}></Box>
         </>
     )
 }
