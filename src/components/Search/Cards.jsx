@@ -68,11 +68,11 @@ const Cards = () => {
   return (
     <ThemeProvider theme={theme}>
       
-    <Grid container sx={{height: '95vh',width:'90vw' }} >
+    <Grid container sx={{height: '90vh',width:'75vw' }} >
     <Box 
     sx={{ display: "flex",flexDirection:'column'}}>
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Typography variant="h4n" component="h6" >
+          <Typography variant="h4n" component="h6" sx={{marginLeft:1}}>
             Fall Into Travel!
           </Typography>
         <Button variant='outlined' sx={{color:'black'}} disabledElevation>See all</Button> 
@@ -80,13 +80,13 @@ const Cards = () => {
     <Typography 
     variant="body1" 
     component="h6" 
-    sx={{ marginTop: 1 }}>
+    sx={{ marginTop: 1.2 ,marginLeft:1}}>
     Going somewhere to celebrate the season? Whether you're going home or somewhere to roam! We have got the travel tools to get you to your destination 
     </Typography></Box>
-    <Grid container direction="row" spacing={1.5} sx={{marginTop:1}}>
+    <Grid container direction="row" spacing={1} sx={{marginTop:1}}>
       
       {imageList.map((image) => (
-        <Grid item key={image.id} sx={{width:'25%'}}>
+        <Grid item key={image.id} sx={{width:'25%',marginTop:1}}>
             <Card
             sx={{
               height:'400px',
@@ -98,21 +98,22 @@ const Cards = () => {
               objectFit:'cover',
               overflow:'hidden',
               borderRadius:'14px',
-              width:'290px'}}>
+              marginLeft:0.8,
+              width:'270px'}}>
 
 
          
             <CardContent >
-            < Grid container spacing={7} sx={{marginTop:'80%',color:'white'}} >
+            < Grid container spacing={7} sx={{marginTop:'85%',color:'white'}} >
             <Grid item xs={8} >
-              <Typography gutterBottom variant="h6" component="div" sx={{ whiteSpace: 'nowrap' }}>
+              <Typography gutterBottom variant="h6" component="div" sx={{ whiteSpace: 'nowrap',marginLeft:0.5 }}>
                 {image.title}
               </Typography>
-              <Typography gutterBottom variant="caption" component="div" sx={{ whiteSpace: 'nowrap' }}>
+              <Typography gutterBottom variant="caption" component="div" sx={{ whiteSpace: 'nowrap',marginLeft:0.5 }}>
                 {image.description}
               </Typography>
             </Grid>
-            <Grid item xs={4} sx={{marginTop:'10px',textAlign:'right' }}>
+            <Grid item xs={4} sx={{marginTop:'25px',textAlign:'right' }}>
               <Typography variant="h6" sx={{color:theme.palette.background.default}}>
                 {image.price}
               </Typography>
@@ -126,7 +127,7 @@ const Cards = () => {
                   position: 'absolute',
                   bottom: '20px',alignItems:'center',
                  
-                   marginLeft:"2%",
+                   marginLeft:"0.5%",
                  
                   width:'240px',
                   color:'black',

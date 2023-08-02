@@ -4,7 +4,7 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 
 const Top = () => {
   return (
-    <div style={{width:'600px',display: 'flex' }}>
+    <div style={{width:'90vw',marginTop:'15vh',display: 'flex', }}>
         <Typography variant="pico" sx={{color:'#FF8682'}}>Turkey</Typography>
             <ChevronRightOutlinedIcon fontSize='small' />
             <Typography variant="pico" sx={{color:'#FF8682'}} >Istanbul</Typography>

@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Typography, Button, Box, Avatar } from '@mui/material'
 import findstays from '../../assets/icons/navbar-icons/find-stays.svg'
 import logo from '../../assets/icons/navbar-icons/logo-2.svg'
 import heart from '../../assets/icons/navbar-icons/heart.svg'
-import profile from '../../assets/icons/navbar-icons/profile.jpg'
 import UserDropdown from '../Header/user-dropdown';
 import { styled } from '@mui/material/styles';
 import theme from '../../utils/theme/theme'
@@ -80,15 +79,16 @@ const Navbar = () => {
 
         askLoggedInStatus();
     }, []);
+    const url = 'https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
-    const linkStyle = {
-        color: 'white',
-        textDecoration: 'none',
+    // const linkStyle = {
+    //     color: 'white',
+    //     textDecoration: 'none',
 
-    }
-    const hoverLinkStyle = {
-        color: 'black'
-    };
+    // }
+    // const hoverLinkStyle = {
+    //     color: 'black'
+    // };
     return (
         <AppBar position="fixed" style={{ zIndex: showIndicator ? 1 : 1000, backgroundColor: 'white', padding: '10px 6%' }}>
             <Toolbar>
@@ -135,7 +135,7 @@ const Navbar = () => {
                             <span>|</span>
                             <Box sx={{ display: 'flex', alignItems: 'center', margin: '2%' }}>
                                 {hasProfilePicture ? (
-                                    <Avatar src={profile} alt="User Avatar" sx={{
+                                    <Avatar src={url} alt="User Avatar" sx={{
                                         width: 35,
                                         height: 35,
                                     }} />
@@ -152,10 +152,11 @@ const Navbar = () => {
                     ) : (
                         // Show "Signin" and "Login" buttons when not logged in
                         <>
-                            <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
-                                Signin
-                            </Button>
-                            <FancyButton><Link to='/login' style={linkStyle} onMouseOver={(e) => Object.assign(e.target.style, hoverLinkStyle)} onMouseOut={(e) => Object.assign(e.target.style, linkStyle)}>Login</Link></FancyButton>
+                            <Link to='/signup' >
+                                <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
+                                    Signin
+                                </Button></Link>
+                            <Link to='/login' ><FancyButton>Login</FancyButton></Link>
                         </>
                     )}
                     <UserDropdown

@@ -12,8 +12,8 @@ const FindStays = () => {
         <div>
             <Hero />
             <MainPage />
-            {/* <Box sx={{ width: '20vh', height: '40vh' }}>
-            </Box> */}
+            <Box sx={{ width: '20vh', height: '15vh' }}>
+            </Box>
         </div>
     )
 }

@@ -13,7 +13,7 @@ const Hotelimage = () => {
     "https://cf.bstatic.com/xdata/images/hotel/max1024x768/329809727.jpg?k=d0aa4dc6969d68866e3daefb7d0fb7f6cbfd8ca45270f60fc5a504eb4408e510&o=&hp=1"]
   return (
  <div>
-    <Grid container spacing={0.5} sx={{height:'100vh',width:'90vw',marginTop:'32px',alignItems: 'stretch',justifyContent: 'flex-start'}}>
+    <Grid container spacing={0.5} sx={{height:'100vh',width:'90vw',alignItems: 'stretch',justifyContent: 'flex-start'}}>
        <Grid item xs={6} sx={{height: '99.75%', overflow: 'hidden'}}>
          <img src={mainImage} alt="Main" style={{ width: '100%', height: '99.7%',objectFit:'cover',margin: 0, padding: 0 ,marginLeft:'-3px',marginRight: '-4px'}} />
        </Grid>
