@@ -2,7 +2,14 @@ import React from 'react';
 import { MenuItem, Menu } from '@mui/material';
 import { Typography } from '@mui/material';
 
-const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
+const UserDropdown = ({ anchorEl, onClose, onLogout,onOptionClick,setSelectedOption}) => {
+   
+
+     const handleDropdownOptionClick = (option) =>{
+        setSelectedOption(option);
+        
+        // onOptionClick(option);
+    };
     return (
         <Menu
             anchorEl={anchorEl}
@@ -17,9 +24,10 @@ const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
                 horizontal: 'right',
             }}
         >
-            <MenuItem><Typography variant='body2'>Price</Typography></MenuItem>
-            <MenuItem><Typography variant='body2'>Rating</Typography></MenuItem>
-            <MenuItem><Typography variant='body2'>Amenties</Typography></MenuItem>
+            {/* <MenuItem><Typography onClick ={() =>  handleDropdownOptionClick ('Recommended')} variant='body2'>Recommended</Typography></MenuItem> */}
+            <MenuItem><Typography   onClick ={() =>  handleDropdownOptionClick ('Price')}variant='body2'>Price</Typography></MenuItem>
+            <MenuItem><Typography   onClick ={() => handleDropdownOptionClick ('Rating')}variant='body2'>Rating</Typography></MenuItem>
+            <MenuItem><Typography   onClick ={() => handleDropdownOptionClick ('Amenties')}variant='body2'>Amenties</Typography></MenuItem>
            
         </Menu>
     );
