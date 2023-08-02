@@ -19,7 +19,7 @@ const Main = () => {
 
   return (
     <>
-      <Container style={{border: '1px solid'}}>
+      <Container id="pageContent" style={{border: '1px solid'}}>
        
       <Top />
       <Detail/>

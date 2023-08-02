@@ -1,5 +1,6 @@
 //import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
+import html2pdf from 'html2pdf.js'
 import {Grid,Typography, Box } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share';
 import {Button,IconButton} from '@mui/material';
@@ -20,8 +21,28 @@ const Detail = () => {
     
 const [isDownloaded, setIsDownloaded] = useState(false);
 const handleDownloadClick = () =>{
+  const content = document.getElementById('pageContent');
+  const opt = {
+    margin:10,
+    filename: 'Confirmation.pdf',
+    image: {type: 'jpeg', quality: 0.98},
+    html2canvas: {scale: 2},
+    jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
+  };
+    content.style.fontSize = '5px';
+    html2pdf().from(content).set(opt).save();
     setIsDownloaded(true);
-}
+};
+
+useEffect(() => {
+  if(isDownloaded){
+    const content = document.getElementById('pageContent');
+    content.style.fontSize = null;
+  }
+}, [isDownloaded]);
+
+
 
 const handleShareClick = () => {
   setOpen(true);
@@ -100,7 +121,7 @@ const handleShareClick = () => {
   
 
   return (
-    <Box style={{height:'104px',width:'100%',marginTop:'32px', paddingLeft:'0px'}}>
+    <Box  style={{height:'104px',width:'100%',marginTop:'32px', paddingLeft:'0px'}}>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={9} container direction="column" sx={{width:'804px',height:'104px'}}>
           <Grid item sx={{height:'30px',width:'804px'}}>
@@ -164,7 +185,7 @@ const handleShareClick = () => {
       </Dialog>
 </div>
                     </Grid>
-                   <Grid item>
+                   <Grid item >
                     {isDownloaded ? (
                         <Button variant='contained' color='secondary' disabled>Downloaded</Button>
                     ):(
