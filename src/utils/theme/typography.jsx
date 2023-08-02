@@ -217,7 +217,8 @@ const themeTypography = {
           },
     n1:{ fontSize: "30px",
      fontFamily: "Montserrat",
-      ml: "10px" }
+      ml: "10px" },
+      
     bot:
     {
         fontSize: "0.9rem",
