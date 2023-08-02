@@ -7,26 +7,26 @@ function Terms() {
     <>
     <Container  variant="outlined" style={{maxWidth: 1232, marginTop:64}}>
         <Box >
-            <Typography variant='h3' style={{marginBottom: 34}}>
+            <Typography variant='h4' style={{marginBottom: 34}}>
                 Terms and Conditions
             </Typography>
         </Box>
         <Box sx={{display:'flex', alignItems:'flexstart', alignself:'stretch'}}>
-            <Typography variant='h4' style={{marginBottom:16}}>
-                Payments
+            <Typography variant='h6' style={{marginBottom:16}}>
+               <b>Payments</b> 
             </Typography>
         </Box>
         <Box sx={{alignSelf:'stretch'}}>
             <ul style={{marginLeft:30, textAlign:'justify'}}>
                 <li>
-                    <Typography variant='body1'>
+                    <Typography variant='body2'>
                         If you are purchasing your ticket using a debit or credit card via the Website,
                         we will process these payments via the automated secure common payment gateway 
                         which will be subject to fraud screening purposes. <br/><br/>
                     </Typography>
                 </li>
                 <li>
-                    <Typography variant='body1'>
+                    <Typography variant='body2'>
                     If you do not supply the correct card billing address and/or cardholder information, 
                     your booking will not be confirmed and the overall cost may increase. We reserve the 
                     right to cancel your booking if payment is declined for any reason or if you have 
@@ -37,7 +37,7 @@ function Terms() {
                     </Typography>
                 </li>
                 <li>
-                    <Typography variant='body1'>
+                    <Typography variant='body2'>
                     Golobe may require the card holder to provide additional payment verification 
                     upon request by either submitting an online form or visiting the nearest Golobe 
                     office, or at the airport at the time of check-in. Golobe reserves the right to 
@@ -51,12 +51,12 @@ function Terms() {
             </ul>
         </Box>
         <Box sx={{display:'flex', alignItems:'flexstart', alignself:'stretch'}}>
-            <Typography variant='h4' style={{marginBottom:16, marginTop:34}}>
-                Contact Us
+            <Typography variant='h6' style={{marginBottom:16, marginTop:34}}>
+                <b>Contact Us</b>
             </Typography>
         </Box>
         <Box alignSelf='stretch'style={{marginBottom: '3rem'}}>
-            <Typography variant='body1'>
+            <Typography variant='body2'>
                 If you have any questions about our Website or our Terms of Use, please contact:<br/>
                 Golobe Group Q.C.S.C<br/>
                 Golobe Tower<br/>
