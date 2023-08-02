@@ -66,7 +66,7 @@ const RecentSearch = () => {
 
   return (
 
-    <Grid container sx={{ height: '22vh', width: '75vw',marginTop:3}}>
+    <Grid container sx={{ height: '22vh', width: '75vw', marginTop: 3 }}>
       <Box sx={{ display: "flex", flexDirection: 'column' }}>
 
         <Typography variant="h4n" component="h6" marginLeft={1} >
@@ -76,8 +76,8 @@ const RecentSearch = () => {
 
         <Grid container spacing={1} direction="row" sx={{ marginTop: 2, width: '75vw', height: '20vh' }}>
           {imgdata.map((image) => (
-            <Grid item key={image.id} xs={3} sx={{ width: '25%'}}>
-              <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" ,marginLeft:1}}>
+            <Grid item key={image.id} xs={3} sx={{ width: '25%' }}>
+              <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", marginLeft: 1 }}>
                 <Box
                   sx={{
                     width: 90,

@@ -12,7 +12,9 @@ import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
 import build from '../../assets/icons/search-icons/build.svg';
 import car from '../../assets/icons/search-icons/car.svg';
-import location from  '../../assets/icons/search-icons/location.svg';
+import location from '../../assets/icons/search-icons/location.svg';
+import { Link } from 'react-router-dom';
+
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#1C1B1F"
@@ -65,7 +67,7 @@ const Search = () => {
     setCheckOutDate(e.target.value);
   };
   const handleRooms = () => {
-    setNumberOfRooms(numberOfRooms+1);
+    setNumberOfRooms(numberOfRooms + 1);
   };
 
 
@@ -138,17 +140,17 @@ const Search = () => {
 
             <Grid item ><StyledTextField label="Rooms" sx={{ width: '250px' }} id="rooms"
               value={numberOfRooms}
-             
+
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <img src={car} />
                   </InputAdornment>
                 ),
-                endAdornment:(
+                endAdornment: (
                   <InputAdornment position="end">
                     <IconButton >
-                    <AddCircleIcon  onClick={handleRooms}/></IconButton>
+                      <AddCircleIcon onClick={handleRooms} /></IconButton>
                   </InputAdornment>
                 )
               }}
@@ -168,15 +170,17 @@ const Search = () => {
           >
             Add Promo Code
           </Button>
-          <StyledButton
-            variant="outlined"
-            disableElevation
-            disableRipple
-            startIcon={<img src={build} alt="Build Icon" />}
-            onClick={handleSearch}
-          >
-            Show Places
-          </StyledButton>
+          <Link to='/hotel-listing' >
+            <StyledButton
+              variant="outlined"
+              disableElevation
+              disableRipple
+              startIcon={<img src={build} alt="Build Icon" />}
+              onClick={handleSearch}
+            >
+              Show Places
+            </StyledButton>
+          </Link>
         </Box>
 
       </Paper>

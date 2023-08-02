@@ -6,10 +6,13 @@ import Home from "./pages/Home"
 import Stays from "./pages/FindStays"
 // import HotelListing from "./pages/HotelListing"
 import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 import Layout from "./pages/Layout";
 import FindStays from './pages/FindStays'
 import Hoteldetail from './pages/HotelDetails'
-
+import HotelListing from './pages/HotelListing'
+import BookingDetail from './pages/BookingDetailsPage'
+import Profile from './pages/Profile'
 
 const App = () => {
   return (
@@ -19,19 +22,13 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<FindStays />} />
             <Route path='login' element={<Login />}></Route>
-            {/* <Route path="hotel-listing" element={<HotelListing />} /> */}
+            <Route path='signup' element={<Signup />}></Route>
+            <Route path='hotel-listing' element={<HotelListing />}></Route>
             <Route path="hotel-details" element={<Hoteldetail />} />
+            <Route path='booking-details' element={<BookingDetail />}></Route>
+            <Route path='profile' element={<Profile />}></Route>
           </Route>
         </Routes>
-
-        {/* <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
-
-        {/* <Routes>
-          <Route path='/' element={<Stays />} />
-          <Route path='/search-results' element={<HotelListing />} />
-          <Route path='/login' element={<Login />} />
-        </Routes> */}
       </BrowserRouter>
     </div>
   );

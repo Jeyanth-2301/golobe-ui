@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,6 +15,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Link } from 'react-router-dom';
+
 
 const theme = createTheme();
 
@@ -90,7 +91,7 @@ export default function LoginSide() {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              
+
             }}
           >
             <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
@@ -138,18 +139,20 @@ export default function LoginSide() {
                   />
                 </Grid>
               </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: "#8DD3BB" }}
-              >
-                Login
-              </Button>
+              <Link to='/' >
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, bgcolor: "#8DD3BB" }}
+                >
+                  Login
+                </Button>
+              </Link>
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   Don't have an account?
-                  <Link href="#" variant="body2">
+                  <Link to='/signup'>
                     Signup
                   </Link>
                 </Grid>

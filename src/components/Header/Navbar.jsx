@@ -152,9 +152,10 @@ const Navbar = () => {
                     ) : (
                         // Show "Signin" and "Login" buttons when not logged in
                         <>
-                            <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
-                                Signin
-                            </Button>
+                            <Link to='/signup' >
+                                <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
+                                    Signin
+                                </Button></Link>
                             <Link to='/login' ><FancyButton>Login</FancyButton></Link>
                         </>
                     )}
