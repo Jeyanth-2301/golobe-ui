@@ -20,8 +20,8 @@ export default function Price({ value,changePrice}){
          color:  theme.palette.text.primary,
          marginLeft:'4px',
         '& .MuiSlider-thumb': {
-            height: 25,
-            width: 25,
+            height: 23,
+            width: 23,
             backgroundColor: theme.palette.primary.main,
             border: '2px solid theme.palette.primary.main',
         '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
