@@ -441,6 +441,29 @@ const themeTypography = {
         marginLeft: '1.50rem',
 
     },
+    p1:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.0rem",
+       fontWeight:"bold",
+    },
+    p2:{
+        lineHeight:"normal",
+        color:"black",
+       fontSize: "1.0rem",
+    },
+    p3:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.5rem",
+       fontWeight:"bold",
+    },
+    p4:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.25rem",
+       fontWeight:"bold",
+    },
 
 };
 
