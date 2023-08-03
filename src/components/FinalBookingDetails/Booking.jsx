@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Typography, Avatar, Grid } from '@mui/material';
 import Building from '../../assets/icons/building.svg';
-import avatar from '../../assets/icons/avatar.svg';
 import Time from '../../assets/icons/time.svg'
 import Room from '../../assets/icons/room.svg'
-import Hotel from '../../assets/icons/hotel.svg'
+
 
 const formatDate = (dateString) => {
   const options = { weekday: 'short', month: 'short', day: 'numeric' };
@@ -91,7 +90,7 @@ const Booking = ({ bookingDetails }) => {
             borderStartEndRadius: '16px',
           }}
         >
-          <Avatar src={avatar} alt="image" />
+          <Avatar style={{ width:'3rem', height: '3rem'}}src='https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'alt="image" />
           <Typography variant="body1" style={{ marginLeft: '1rem' }}>
             <b>{name}</b>
           </Typography>
@@ -148,7 +147,7 @@ const Booking = ({ bookingDetails }) => {
       </Box>
       <Box style={{ border: '1px solid #EAEAEA',width:'23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
        <Box style={{  width: '10.5rem'}}>
-        <img src={Hotel} />
+        <img style={{width: '10rem', height: '10rem', }} src='https://s3-alpha-sig.figma.com/img/a8f8/a3bd/0fbb63b80b094364944041f8aa0cad46?Expires=1691971200&Signature=WY~42XaIAYkATC9RuIRqxivjxU0hBAAMVG70ai3YugMW638ysWkQDGxYy4~os0BUPvMYF~Ykb6UFxWZoXd3E8iT2WB13FRTtTqTLxHp4a2wLYld6TcVj2o2PHzsw~i9Xtg5E4cs-H5NZT8sFkZF3c10eKS0-Wo8Q7VcfqdycQ8xmSLE4F1bCNU2u~hX7i3pE8H~ZkJ8jpfKB3l3ovLrYAMOnpSNiaylyEq1SDQtUJhiyMy6A49HXfSEy9jxdLTiWWstpYXnbOPGrynNoo7VanqTYc~7vgBhF1Q1zVR1Fc~c4BoDWdTBL~ts5K0glQP3HHznwJ1gsRAEVP8YwsDpdRw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4' />
        </Box>
       </Box>
     </Box>
