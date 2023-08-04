@@ -457,6 +457,9 @@ const themeTypography = {
        color:"black",
        fontSize: "1.5rem",
        fontWeight:"bold",
+       fontSize: '32px', 
+       fontWeight: 700, 
+       paddingBottom: '4px'
     },
     p4:{
         lineHeight:"normal",
