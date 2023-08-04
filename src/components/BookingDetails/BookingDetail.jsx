@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -17,7 +18,11 @@ import check from '../../assets/icons/Booking-icons/checking.png';
 
 
 const BookingDetail = () => {
-
+  const [cookies, setCookie] = useCookies(['creditCards']);
+  useEffect(() => {
+    const savedCards = cookies.creditCards || [];
+    setSelectedCards(savedCards);
+  }, []);
   const items = [
     { name: "Base Fare", price: 240 },
     { name: "Discount", price: 0 },
@@ -58,9 +63,14 @@ const BookingDetail = () => {
   };
 
   // Callback function to receive the selected credit card details from the popup
-  const handleCardSelection = (cardNumber, expDate) => {
+  const handleCardSelection = (cardNumber, expDate,saveCardInfo) => {
     const formattedCardNumber = getLast8Digits(cardNumber);
-    const newCard = { cardNumber: formattedCardNumber, expDate };
+    const newCard = { cardNumber: formattedCardNumber, expDate, saveCardInfo };
+    if (saveCardInfo) {
+      // Store the card details in cookies only when the checkbox is checked
+      setCookie('creditCards', [...selectedCards, newCard], { path: '/' });
+    }
+  
     setSelectedCards((prevCards) => [...prevCards, newCard]); // Add the new card to the array
     handleClosePopup();
   };
@@ -130,7 +140,7 @@ const BookingDetail = () => {
                 />
               </Box>
               <Typography variant='f'><strong>
-                Friday,Dec9</strong>
+                Sunday,Dec11</strong>
               </Typography>
             </Box>
 
@@ -143,7 +153,7 @@ const BookingDetail = () => {
 
           {/* 
 <Grid container justifyContent="left" alignItems="flex-start"> */}
-          <Box sx={{ marginTop: '20px', marginLeft: '30px', padding: '2vh', height: 'wrap', width: '114vh', alignItems: 'left' }}>
+          <Box sx={{ marginTop: '20px', marginLeft: '30px', padding: '2vh', height: 'wrap', width: '105.2vh', alignItems: 'left' }}>
             {!showRadioButton ? (
               <React.Fragment>
                 <Button variant="contained" style={{ zIndex: 1 }} fullWidth onClick={handleContinueClick}>
@@ -152,32 +162,37 @@ const BookingDetail = () => {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <RadioGroup value={selectedOption} onChange={handleRadioChange}>
-                  <Box sx={{ borderRadius: '10px', bgcolor: '#8dd3bb', marginTop: '5px', padding: '2vh', width: '110vh', alignItems: 'left' }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Typography style={{ marginLeft: '1px' }}>**** 4321 02/27</Typography>
-                      <FormControl>
-                        <FormControlLabel
-                          value="option"
-                          control={<Radio checked={selectedOption === 'option'} color='secondary' />}
-                          labelPlacement="end"
+<RadioGroup value={selectedOption} onChange={handleRadioChange}>
+  {selectedCards.map((card, index) => (
+    <Box
+      key={index}
+      sx={{
+        borderRadius: '10px',
+        bgcolor: '#8dd3bb',
+        marginTop: '5px',
+        padding: '2vh',
+        width: '101.1vh',
+        alignItems: 'left',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
 
-                        />
-                      </FormControl>
-                    </Box>
+<Typography style={{ marginLeft: '1px' }}>{card.cardNumber} {card.expDate}</Typography>
+      <FormControl>
 
-
-                    {selectedCards.map((card, index) => (
                       <FormControlLabel
                         key={index}
                         value={`${card.cardNumber} ${card.expDate}`}
                         control={<Radio color='secondary' />}
-                        label={`${card.cardNumber} ${card.expDate}`}
+                        
                         labelPlacement="start"
                         sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
                       />
-                    ))}
+                  </FormControl>
                   </Box>
+                  ))}
                 </RadioGroup>
 
                 <Box
@@ -187,7 +202,7 @@ const BookingDetail = () => {
                   marginTop={'20px'}
                   marginLeft={'4px'}
                   padding={2}
-                  width={'109vh'}
+                  width={'100.3vh'}
                   height={110}
                   display="flex"
                   flexDirection="column"
@@ -221,7 +236,7 @@ const BookingDetail = () => {
           justifyContent="flex-start"
           alignItems="flex-end"
           position={'absolute'}
-          style={{ position: 'absolute', bottom: '2vh', right: '20px' }}
+          style={{ position: 'absolute', bottom: '9vh', right: '20px' }}
         >
           <Box sx={{
             margin: '50px', marginLeft: '30px', padding: '2vh', height: 'wrap', width: '575px', alignItems: 'center', border: '1px solid #000',
