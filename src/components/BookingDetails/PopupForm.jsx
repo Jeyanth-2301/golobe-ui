@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
@@ -8,38 +8,71 @@ import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import axios from "axios";
 
 const validationSchema = Yup.object().shape({
   cardNumber: Yup.string()
     .required("Card number is required")
-    .matches(/^\d{16}$/, "Card number must be 16 digits")
-    .notOneOf(
-      [
-        "0000000000000000",
-        "1111111111111111",
-        "2222222222222222",
-        "3333333333333333",
-        "4444444444444444",
-        "5555555555555555",
-        "6666666666666666",
-        "7777777777777777",
-        "8888888888888888",
-        "9999999999999999"
-      ],
-      "Invalid card number"
-    ),
-  expDate: Yup.string()
+    .matches(/^\d{16}$/, "Card number must be 16 digits"),
+
+    expirationDate: Yup.string()
     .required("Expiration date is required")
-    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid format (MM/YY)"),
-  cvc: Yup.string()
-    .required("CVC is required")
-    .matches(/^\d{3}$/, "Invalid CVC"),
-  nameOnCard: Yup.string()
+    .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid format (MM/YY)")
+    .test(
+      "futureDate",
+      "Expired card",
+      function (value) {
+        if (!value) return false;
+
+        const today = new Date();
+        const currentYear = today.getFullYear() % 100;
+        const currentMonth = today.getMonth() + 1;
+
+        const [expMonth, expYear] = value.split("/").map(Number);
+
+        // Check if the expiration year is greater than or equal to the current year
+        if (expYear < currentYear) {
+          return false;
+        } else if (expYear === currentYear) {
+          // Check if the expiration month is greater than or equal to the current month
+          return expMonth >= currentMonth;
+        } else {
+          return true;
+        }
+      }
+    ),
+  cvv: Yup.string()
+    .required("CVV is required")
+    .matches(/^\d{3}$/, "Invalid CVV"),
+  cardHolder: Yup.string()
     .required("Name on card is required")
     .matches(/^[A-Za-z\s]+$/, "Only alphabets and spaces are allowed")
 });
 
 const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleSubmit = async (values) => {
+    setIsSubmitting(true);
+    try {
+      // Make the HTTP POST request to your backend API endpoint
+      const response = await axios.post("http://localhost:3200/auth/users/user/cards/saveCard", {
+        cardNumber: values.cardNumber,
+        expirationDate: values.expirationDate,
+        cvv: values.cvv,
+        cardHolder: values.cardHolder,
+      });
+
+      // Handle the response from the backend (if needed)
+
+      // Close the popup after successful submission
+      handleClosePopup();
+    } catch (error) {
+      // Handle errors if the request fails
+      console.error("Error adding card:", error);
+    }
+    setIsSubmitting(false);
+  };
+
   return (
     <Dialog open={open} onClose={handleClosePopup} fullWidth maxWidth="sm">
       <DialogContent>
@@ -52,9 +85,9 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
         <Formik
           initialValues={{
             cardNumber: "",
-            expDate: "",
-            cvc: "",
-            nameOnCard: "",
+            expirationDate: "",
+            cvv: "",
+            cardHolder: "",
             saveCardInfo: false
           }}
           validationSchema={validationSchema}
@@ -62,7 +95,7 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
             console.log(values);
             // Your form submission logic here
             handleClosePopup();
-            handleCardSelection(values.cardNumber, values.expDate);
+            handleCardSelection(values.cardNumber, values.expirationDate);
             setTimeout(() => {
               setSubmitting(false); // Set isSubmitting to false after form submission
               handleClosePopup();
@@ -83,52 +116,58 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
 
               <Field
                 as={TextField}
-                name="expDate"
-                label="Exp. Date (MM/YY)"
+                name="expirationDate"
+                label="Expiry Date (MM/YY)"
                 fullWidth
                 sx={{ width: "250px", mb: 2 }}
-                error={touched.expDate && Boolean(errors.expDate)}
-                helperText={touched.expDate && errors.expDate}
+                error={touched.expirationDate && Boolean(errors.expirationDate)}
+                helperText={touched.expirationDate && errors.expirationDate}
               />
 
               <Field
                 as={TextField}
-                name="cvc"
-                label="CVC"
+                name="cvv"
+                label="CVV"
                 fullWidth
                 sx={{ width: "250px", mb: 2, ml: 6 }}
-                error={touched.cvc && Boolean(errors.cvc)}
-                helperText={touched.cvc && errors.cvc}
+                error={touched.cvv && Boolean(errors.cvv)}
+                helperText={touched.cvv && errors.cvv}
                 type="password"
               />
 
               <Field
                 as={TextField}
-                name="nameOnCard"
-                label="Name on Card"
+                name="cardHolder"
+                label="Card Holder"
                 fullWidth
                 sx={{ mb: 2 }}
-                error={touched.nameOnCard && Boolean(errors.nameOnCard)}
-                helperText={touched.nameOnCard && errors.nameOnCard}
+                error={touched.cardHolder && Boolean(errors.cardHolder)}
+                helperText={touched.cardHolder && errors.cardHolder}
               />
 
               <FormControlLabel
                 value="secure"
                 control={<Checkbox key="secureCheckbox" />}
-                label="Securely save my information for 1-click checkout"
+                label="Securely save my information for 1-click checkout" 
                 labelPlacement="end"
+                name="saveCardInfo"
               />
 
               <Button
                 variant="contained"
-                style={{ bgcolor: "#8dd3bb", marginTop: "15px" }}
+                style={{ bgcolor: "#8dd3bb", marginTop: "15px", marginBottom:"25px" }}
                 fullWidth
                 type="submit"
                 disabled={!isValid}
+                onClick={() => {
+                  handleSubmit(values); // Call handleSubmit to submit the form
+                  handleCardSelection(values.cardNumber, values.expirationDate, values.saveCardInfo); // Pass the value of the checkbox
+                }}
+            
               >
                 Add Card
               </Button>
-              <Typography sx={{ mt: "35px" }}>
+              <Typography variant='d' lineHeight='1'> 
                 By confirming your subscription, you allow The Outdoor Inn Crowd
                 Limited to charge your card for this payment and future payments
                 in accordance with their terms. You can always cancel your
