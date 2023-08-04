@@ -12,6 +12,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import PopupForm from '../BookingDetails/PopupForm';
 import check from '../../assets/icons/Booking-icons/checking.png';
+import { Link } from 'react-router-dom';
 
 
 
@@ -328,9 +329,11 @@ const BookingDetail = () => {
 
           </Box>
           {isRadioButtonClicked && (
-            <Button variant="contained" style={{ zIndex: 1, width: '578px', marginLeft: '28px' }} onClick={handleContinueClick}>
-              Pay Now
-            </Button>
+            <Link to='/payment-page'>
+              <Button variant="contained" style={{ zIndex: 1, width: '578px', marginLeft: '28px' }} onClick={handleContinueClick}>
+                Pay Now
+              </Button>
+            </Link>
           )}
         </Grid>
 
