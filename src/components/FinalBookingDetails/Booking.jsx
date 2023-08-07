@@ -148,7 +148,7 @@ const Booking = () => {
       </Box>
       <Box style={{ border: '1px solid #EAEAEA',width:isMobile ?'100%' : '23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
        <Box style={{  width: '10.5rem'}}>
-        <img style={{width: '10rem', height: '10rem', }} src='https://s3-alpha-sig.figma.com/img/a8f8/a3bd/0fbb63b80b094364944041f8aa0cad46?Expires=1691971200&Signature=WY~42XaIAYkATC9RuIRqxivjxU0hBAAMVG70ai3YugMW638ysWkQDGxYy4~os0BUPvMYF~Ykb6UFxWZoXd3E8iT2WB13FRTtTqTLxHp4a2wLYld6TcVj2o2PHzsw~i9Xtg5E4cs-H5NZT8sFkZF3c10eKS0-Wo8Q7VcfqdycQ8xmSLE4F1bCNU2u~hX7i3pE8H~ZkJ8jpfKB3l3ovLrYAMOnpSNiaylyEq1SDQtUJhiyMy6A49HXfSEy9jxdLTiWWstpYXnbOPGrynNoo7VanqTYc~7vgBhF1Q1zVR1Fc~c4BoDWdTBL~ts5K0glQP3HHznwJ1gsRAEVP8YwsDpdRw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4' />
+        <img style={{width: '10rem', height: '10rem',borderRadius: '16px' }} src='https://s3-alpha-sig.figma.com/img/a8f8/a3bd/0fbb63b80b094364944041f8aa0cad46?Expires=1691971200&Signature=WY~42XaIAYkATC9RuIRqxivjxU0hBAAMVG70ai3YugMW638ysWkQDGxYy4~os0BUPvMYF~Ykb6UFxWZoXd3E8iT2WB13FRTtTqTLxHp4a2wLYld6TcVj2o2PHzsw~i9Xtg5E4cs-H5NZT8sFkZF3c10eKS0-Wo8Q7VcfqdycQ8xmSLE4F1bCNU2u~hX7i3pE8H~ZkJ8jpfKB3l3ovLrYAMOnpSNiaylyEq1SDQtUJhiyMy6A49HXfSEy9jxdLTiWWstpYXnbOPGrynNoo7VanqTYc~7vgBhF1Q1zVR1Fc~c4BoDWdTBL~ts5K0glQP3HHznwJ1gsRAEVP8YwsDpdRw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4' />
        </Box>
       </Box>
     </Box>
