@@ -1,54 +1,47 @@
-// components/ReviewForm.js
-import React, { useState } from 'react';
-import { TextField, Typography, Button, Box, Grid } from '@mui/material';
+import React, { useState } from "react";
+import {
+  TextField,
+  Typography,
+  Button,
+  Box,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
 
-const ReviewForm = ({ onReviewSubmit }) => {
-  const [user, setUser] = useState('');
+const ReviewForm = ({ onReviewSubmit, loading }) => {
   const [guestRating, setGuestRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newReview = {
-      user,
       guestRating,
       comment,
     };
     onReviewSubmit(newReview);
-    setUser('');
-    setGuestRating
-(0);
-    setComment('');
+    setGuestRating(0);
+    setComment("");
   };
 
   return (
-    <Box sx={{ maxWidth: 400, mx: 'auto' }}>
-      <Typography variant="review2" gutterBottom>
+    <Box sx={{ maxWidth: 400, mx: "auto" }}>
+      <Typography variant="h6" gutterBottom>
         Write a Review
       </Typography>
       <form onSubmit={handleSubmit}>
-        <Typography variant='review1'>
-        <TextField
-          label="Name"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-          fullWidth
-          required
-        /><br/><br/>
         <TextField
           type="number"
-          label="guestRating"
+          label="Rating (1-5)"
           value={guestRating}
           onChange={(e) => {
             // Limit the guestRating to be between 1 and 5
-            let value = e.target.value;
+            let value = parseFloat(e.target.value);
             if (value < 1) {
               value = 1;
             } else if (value > 5) {
               value = 5;
             }
-            setGuestRating
-        (value);
+            setGuestRating(value);
           }}
           fullWidth
           required
@@ -57,7 +50,10 @@ const ReviewForm = ({ onReviewSubmit }) => {
             max: 5, // Maximum value
             step: 0.1, // Decimal step value
           }}
-        /><br/><br/>
+          sx={{
+            my: 2,
+          }}
+        />
         <TextField
           label="Comment"
           value={comment}
@@ -66,11 +62,31 @@ const ReviewForm = ({ onReviewSubmit }) => {
           multiline
           required
         />
-        </Typography>
-        <Grid container justifyContent='center'>
-        <Button type="submit" variant="contained" color="primary" sx={{ mt: 2, background:'#8DD3BB' }}>
-          Submit Review
-        </Button>
+        <Grid container justifyContent="center">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            sx={{ mt: 2, background: "#8DD3BB" }}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                Submit Review{" "}
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    verticalAlign: "middle",
+                    ml: 1,
+                    color: "white",
+                    width: "1.5rem",
+                  }}
+                />
+              </>
+            ) : (
+              "Submit Review"
+            )}
+          </Button>
         </Grid>
       </form>
     </Box>

@@ -36,7 +36,7 @@ const roomsData= [
     
    return (
       <div>
-        <Box sx={{ height: '346.5px', maxWidth: '1232px'}}>
+        <Box sx={{ height: '346.5px', maxWidth: '100%'}}>
           <Typography variant="A">
             Available Rooms({totalRooms})
           </Typography> <br />
@@ -45,7 +45,7 @@ const roomsData= [
               <React.Fragment key={index}>
                 <Grid item xs={12} lg={8} container alignItems="center">
                   <Paper style={{ height: '48px', display: 'flex', boxShadow: 'none' }}>
-                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover', marginLeft:16}} />
+                    <img src={room.image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px' , objectFit: 'cover'}} />
                     <div style={{ flex: 1, padding: '0 16px' }}>
                     <Typography variant="B">
                      {room.description} ({room.availablerooms})
@@ -61,7 +61,7 @@ const roomsData= [
                     <Typography variant="D">
                       /night
                     </Typography>
-                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB', marginRight:16 }}>
+                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB'}}>
                       <Typography variant="E">
                         Book now
                       </Typography>
