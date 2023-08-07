@@ -7,7 +7,7 @@ import { ThemeProvider } from '@emotion/react';
 import UserDropdown from './sort-dropdown';
 
 import theme from '../../../utils/theme/theme.jsx';
-export default function BasicButtons() {
+export default function BasicButtons({items}) {
   const [showIndicator, setShowIndicator] = useState(false);
   const [selectedOption, setSelectedOption] = useState('Recommended');
     const [loggedIn, setLoggedIn] = useState(false); 
@@ -33,10 +33,10 @@ setAnchorEl(null)
    
    <ThemeProvider theme={theme}>
      <>
-     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px'}}>
+     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px'}}>
           <Box sx={{display:'flex',gap:'5%'}}>
               <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>showing 4 of </b></Typography> 
-              <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>257 places </h5>
+              <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>{items.length} places </h5>
           </Box>
           <div  style ={{whiteSpace: 'nowrap', display:'flex'}}>
           <Typography sx = {{fontSize: '14px'}}>Sort by <b>{selectedOption}</b> </Typography>

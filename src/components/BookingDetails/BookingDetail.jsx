@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -14,33 +14,34 @@ import check from '../../assets/icons/Booking-icons/checking.png';
 import axios from 'axios';
 import Confetti from 'react-confetti';
 import { Paper } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const BookingDetail = () => {
 
   const [location, setLocation] = useState('');
   const [hotelName, setHotelName] = useState('');
-  const [room , setRoom] = useState('');
-  const [checkin, setCheckin]=useState('');
-  const [checkout, setCheckout]=useState('');
- 
-const formatDate = (dateString)=>{
-  const options = {weekday:'short',month:'short',day:'numeric'};
-  return new Date(dateString).toLocaleDateString('en-US',options);
-}
+  const [room, setRoom] = useState('');
+  const [checkin, setCheckin] = useState('');
+  const [checkout, setCheckout] = useState('');
+
+  const formatDate = (dateString) => {
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  }
 
 
 
 
   useEffect(() => {
 
-    const fetch=  async()=> {
-      try{
-       const response = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
-       const res = await axios.get('http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c');
-       const data = response.data;
-       setLocation(data.location.address);
-       setHotelName(data.hotelName);
-     
+    const fetch = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
+        const res = await axios.get('http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c');
+        const data = response.data;
+        setLocation(data.location.address);
+        setHotelName(data.hotelName);
+
         const reservationValue = res.data;
         const firstReservation = reservationValue[0];
         const roomType = firstReservation.reservation.roomType;
@@ -49,17 +50,17 @@ const formatDate = (dateString)=>{
         setRoom(roomType);
         setCheckin(checkInDate);
         setCheckout(checkOutDate);
-      
-    } catch (error) {
-      console.error('Error in fetching:', error);
-    }
-  };
-  
-  fetch();
-}, []);
-  
-    
-  
+
+      } catch (error) {
+        console.error('Error in fetching:', error);
+      }
+    };
+
+    fetch();
+  }, []);
+
+
+
   const items = [
     { name: "Base Fare", price: 240 },
     { name: "Discount", price: 0 },
@@ -89,8 +90,8 @@ const formatDate = (dateString)=>{
     const storedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
     setSelectedCards(storedCards);
   }, []);
-  
-  
+
+
   const getLast8Digits = (cardNumber) => {
     return " **** " + cardNumber.slice(-4);
   };
@@ -106,21 +107,21 @@ const formatDate = (dateString)=>{
   const [showConfetti, setShowConfetti] = useState(false);
   const handleButtonClick = () => {
     setShowNewButton(false);
-      setShowPaymentPopup(true);
-        setShowConfetti(true);
-        setTimeout(() => {
-          setShowPaymentPopup(false);
-          setShowConfetti(false);
-          setTimeout(() => {
-             // Hide the "Pay Now" button
-            setShowNewButton(true);  // Show the "View Booking" button
-          }, 500);
-        }, 4000);
-      
-  
+    setShowPaymentPopup(true);
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowPaymentPopup(false);
+      setShowConfetti(false);
+      setTimeout(() => {
+        // Hide the "Pay Now" button
+        setShowNewButton(true);  // Show the "View Booking" button
+      }, 500);
+    }, 4000);
+
+
   };
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
-  
+
   return (
     <div>
       <Box sx={{ height: "100vh" }}>
@@ -145,12 +146,12 @@ const formatDate = (dateString)=>{
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '135px' }}>
               <LocationOnIcon fontSize='small' />
               <Typography variant="d">
-               {location}
+                {location}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', justifyContent: 'space-between' }}>
               <Typography variant='e'><strong>
-               {formatDate (checkin)}</strong>
+                {formatDate(checkin)}</strong>
               </Typography>
               <Box
                 sx={{
@@ -169,7 +170,7 @@ const formatDate = (dateString)=>{
                 />
               </Box>
               <Typography variant='f'><strong>
-                {formatDate (checkout)}</strong>
+                {formatDate(checkout)}</strong>
               </Typography>
             </Box>
           </Box>
@@ -184,33 +185,33 @@ const formatDate = (dateString)=>{
               </React.Fragment>
             ) : (
               <React.Fragment>
-<RadioGroup value={selectedOption} onChange={handleRadioChange}>
-  {selectedCards.map((card, index) => (
-    <Box
-      key={index}
-      sx={{
-        borderRadius: '10px',
-        bgcolor: '#8dd3bb',
-        marginTop: '5px',
-        padding: '2vh',
-        width: '101.1vh',
-        alignItems: 'left',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-<Typography style={{ marginLeft: '1px' }}>{card.cardNumber} {card.expDate}</Typography>
-      <FormControl>
-                      <FormControlLabel
-                        key={index}
-                        value={`${card.cardNumber} ${card.expDate}`}
-                        control={<Radio color='secondary' />}                 
-                        labelPlacement="start"
-                        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
-                      />
-                  </FormControl>
-                  </Box>
+                <RadioGroup value={selectedOption} onChange={handleRadioChange}>
+                  {selectedCards.map((card, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        borderRadius: '10px',
+                        bgcolor: '#8dd3bb',
+                        marginTop: '5px',
+                        padding: '2vh',
+                        width: '101.1vh',
+                        alignItems: 'left',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography style={{ marginLeft: '1px' }}>{card.cardNumber} {card.expDate}</Typography>
+                      <FormControl>
+                        <FormControlLabel
+                          key={index}
+                          value={`${card.cardNumber} ${card.expDate}`}
+                          control={<Radio color='secondary' />}
+                          labelPlacement="start"
+                          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
+                        />
+                      </FormControl>
+                    </Box>
                   ))}
                 </RadioGroup>
                 <Box
@@ -333,55 +334,56 @@ const formatDate = (dateString)=>{
             </Grid>
           </Box>
           {isRadioButtonClicked && (
-            <Button variant="contained" style={{ zIndex: 1, width: '578px', marginLeft: '28px'}} onClick={handleButtonClick}>
+            <Button variant="contained" style={{ zIndex: 1, width: '578px', marginLeft: '28px' }} onClick={handleButtonClick}>
               Pay Now
             </Button>
           )}
-           {showNewButton && (
-            <Box style={{marginTop:'20px',marginLeft:'248px'}}>
-        <Button variant="contained" style={{ backgroundColor: '#FF8682'}} >
-          View Booking
-        </Button>
-        </Box>
-      )}
-       {showPaymentPopup && (
-        
-        <Paper
-          sx={{
-            position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            padding: '80px',
-            backgroundColor: '#FF8682',
-            color: 'black',
-            border: '1px solid #000',
-            borderRadius: '8px',
-            textAlign: 'center',
-            zIndex: 1000,
-          }}
-        >
-          
- {showConfetti && (
-  
-            <Confetti
-              width={Box.width}
-              height={Box.innerHeight}
-              recycle={false}
-              numberOfPieces={1000}
-              style={{
-                position: 'absolute',
+          {showNewButton && (
+            <Box style={{ marginTop: '20px', marginLeft: '248px' }}>
+              <Link to="/payment-page">
+                <Button variant="contained" style={{ backgroundColor: '#FF8682' }} >
+                  View Booking
+                </Button></Link>
+            </Box>
+          )}
+          {showPaymentPopup && (
+
+            <Paper
+              sx={{
+                position: 'fixed',
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none',
-              }}  
-              onComplete={() => setShowConfetti(false)}
-            />
+                padding: '80px',
+                backgroundColor: '#FF8682',
+                color: 'black',
+                border: '1px solid #000',
+                borderRadius: '8px',
+                textAlign: 'center',
+                zIndex: 1000,
+              }}
+            >
+
+              {showConfetti && (
+
+                <Confetti
+                  width={Box.width}
+                  height={Box.innerHeight}
+                  recycle={false}
+                  numberOfPieces={1000}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    pointerEvents: 'none',
+                  }}
+                  onComplete={() => setShowConfetti(false)}
+                />
+              )}
+              <Typography><strong>Payment Successful !!!</strong></Typography>
+            </Paper>
           )}
-         <Typography><strong>Payment Successful !!!</strong></Typography>
-        </Paper>
-      )}
         </Grid>
       </Box>
     </div>
