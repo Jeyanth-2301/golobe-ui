@@ -9,7 +9,7 @@ import FullReview from '../components/hotel-details/reviews/FullReview'
 
 const Hoteldetail = () => {
     return (
-        <div >
+        <div>
             <Box sx={{ display: "flex", flexDirection: 'column', marginLeft: '4.7%' }}>
                 <Top />
             </Box>
