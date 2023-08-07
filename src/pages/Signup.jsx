@@ -47,7 +47,7 @@ export default function SignInSide() {
     setSnackbarSeverity("success");
     setSnackbarMessage(message);
     setSnackbarOpen(true);
-    navigate("/login");
+    navigate("/");
   };
 
   const handleRegistrationFailure = (message) => {

@@ -9,8 +9,16 @@ const HotelListing = () => {
   const destination = queryParameters.get('q');
   const checkInDate = queryParameters.get('checkIn');
   const checkOutDate = queryParameters.get('checkOut');
-  const numberOfRooms = queryParameters.get('rooms');
+
   const [searchresults, setSearchResults] = useState([]);
+  const numberOfRooms=parseInt(queryParameters.get("rooms"));
+  const [dest,setDest]=useState(destination);
+  const[In,setIn]=useState(checkInDate);
+  const [out,setOut]=useState(checkOutDate);
+  const[room,setRoom]=useState(numberOfRooms);
+
+
+
   const [selectedPrice, setSelectedPrice] = useState([899, 17375]);
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedAmenities, setSelectedAmenities] = useState([]);
@@ -73,13 +81,13 @@ const HotelListing = () => {
         .map((amenity) => amenity.label);
 
       const url = `http://localhost:3200/hotels/search?q=${encodeURIComponent(
-        destination
+        dest
       )}&checkIn=${encodeURIComponent(
-        checkInDate
+        In
       )}&checkOut=${encodeURIComponent(
-        checkOutDate
+        out
       )}&rooms=${encodeURIComponent(
-        numberOfRooms
+        room
       )}&amenities=${encodeURIComponent(
         selectedAmenitiesIds.join(',')
       )}&priceRanges=${encodeURIComponent(
@@ -101,10 +109,10 @@ const HotelListing = () => {
   useEffect(() => {
     handleSearch();
   }, [
-    destination,
-    checkInDate,
-    checkOutDate,
-    numberOfRooms,
+    dest,
+    In,
+    out,
+    room,
     selectedPrice,
     selectedRating,
     amenties,
@@ -114,10 +122,15 @@ const HotelListing = () => {
   return (
     <div>
       <Searchafter
-        dest={destination}
-        checkin={checkInDate}
-        checkout={checkOutDate} 
-        rooms={numberOfRooms}
+        dest={dest}
+        checkin={In}
+        checkout={out} 
+        rooms={room}
+        setIn={setIn}
+        setOut={setOut}
+        setDest={setDest}
+        setRoom={setRoom}
+        handleSearch={handleSearch}
       />
       <Filter
         handleChangePrice={handleChangePrice}
