@@ -24,7 +24,7 @@ import url from '../assets/login/image1.png'
 
 const theme = createTheme();
 
-export default function LoginSide() {
+ function LoginSide() {
    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
