@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
  import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
@@ -25,44 +24,72 @@ import url from '../assets/login/image1.png'
 
 const theme = createTheme();
 
-export default function LoginSide() {
+ function LoginSide() {
    const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
+
+  const handleLoginSuccess = (message) => {
+    setSnackbarSeverity("success");
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+    navigate("/");
+  };
+
+  const handleLoginFailure = (message) => {
+    setSnackbarSeverity("error");
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
   const handleSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
   
     if (!email.trim()) {
-      alert("Please enter your Email Address.");
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a valid Email Address.");
+      setSnackbarOpen(true);
+      setLoading(false);
       return;
     }
-  
+
     if (!/\S+@\S+\.\S+/.test(email)) {
-      alert("Please enter a valid Email Address.");
+      // alert("Please enter a valid Email Address.");
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a valid Email Address.");
+      setSnackbarOpen(true);
+      setLoading(false);
       return;
     }
-  
+
     if (!password.trim()) {
-      alert("Please enter a Password.");
-      return;
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a password");
+      setSnackbarOpen(true);
+      setLoading(false);
     }
   
     const apiUrl = 'http://localhost:3200/auth/login?by=local';
     const requestData = {
-      email, 
+      email,
       password,
     };
+
     try {
       const response = await axios.post(apiUrl, requestData);
       console.log('API response:', response.data);
@@ -83,7 +110,8 @@ export default function LoginSide() {
         setSnackbarMessage('Login failed. Please check your credentials.');
         
       }
-      setSnackbarOpen(true);
+    } finally {
+      setLoading(false);
     }
     
   };
@@ -128,7 +156,7 @@ export default function LoginSide() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     autoComplete="new-password"
                     InputProps={{
@@ -144,23 +172,25 @@ export default function LoginSide() {
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                    control={
+                      <Checkbox value="allowExtraEmails" color="primary" />
+                    }
                     label="Remember me"
                   />
                 </Grid>
               </Grid>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}></Box>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, bgcolor: "#8DD3BB" }}
+                disabled={loading}
               >
-                Login
+                {loading ? <CircularProgress size={26} /> : "Login"}
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  Dont have an account?
+                  Don't have an account?
                   <Link href="#" variant="body2">
                     Signup
                   </Link>
@@ -173,7 +203,7 @@ export default function LoginSide() {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                     <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
                       sx={{
                         width: "150px",
@@ -247,8 +277,7 @@ export default function LoginSide() {
             showStatus={false}
             showThumbs={false}
             showArrows={false}
-            style={{ height: '100%', width: '100%' }}
-
+            style={{ height: "100%", width: "100%" }}
           >
             <div>
               <img src={url}
@@ -271,10 +300,10 @@ export default function LoginSide() {
       </Grid>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={handleSnackbarClose}
       >
-         <MuiAlert
+        <MuiAlert
           elevation={6}
           variant="filled"
           onClose={handleSnackbarClose}
@@ -285,4 +314,6 @@ export default function LoginSide() {
       </Snackbar>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;

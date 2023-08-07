@@ -4,14 +4,16 @@ import ViewButton from "./ViewButton";
 import FavIcon from "./FavIcon";
 import Divider from "@mui/material/Divider";
 
-function FavAndView(){
+function FavAndView( {hotelId }){
+    console.log(hotelId )
+
     return( 
         <>
         <Box>
             <Box sx={{width:'90%',height:'1px', border:'1px solid rgba(0,0,0,0.2)', marginLeft:'20px', marginTop:'-50px', marginBottom:'20px'}}></Box>
             <Box m ={1} display = "flex" justifyContent= "space-between">
-            <FavIcon/>
-            <ViewButton/>
+            <FavIcon  hotelIds= {hotelId} />
+            <ViewButton hotelIds= {hotelId}  />
             </Box> 
         </Box>
         </>
