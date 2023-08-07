@@ -68,13 +68,35 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        const askLoggedInStatus = () => {
-            // const response = window.prompt("Are you logged in? (yes/no)");
-            // if (response && response.toLowerCase() === 'yes') {
-            //     setLoggedIn(true);
-            // } else {
-            //     setLoggedIn(false);
+        const askLoggedInStatus = async () => {
+            // console.log("useeffect of navbar called");
+            // const apiUrl = "http://localhost:3200/auth/users/user/islogined";
+            // try {
+            //     const response = await fetch(
+            //         apiUrl,
+            //         {
+            //             method: "GET",
+            //             headers: {
+            //                 "Content-Type": "application/json",
+            //             },
+            //             credentials: "include",
+            //         });
+            //     console.log('API response:', response.data);
+            //     if (response.data.success) {
+            //         setLoggedIn(true);
+            //     }
+            //     else {
+            //         setLoggedIn(false);
+            //     }
+            // } catch (error) {
+            //     console.error('API error:', error);
             // }
+            const response = window.prompt("Are you logged in? (yes/no)");
+            if (response && response.toLowerCase() === 'yes') {
+                setLoggedIn(true);
+            } else {
+                setLoggedIn(false);
+            }
         };
 
         askLoggedInStatus();
@@ -128,10 +150,14 @@ const Navbar = () => {
                     {loggedIn ? (
 
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '7%' }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
-                                <img src={heart} />
-                                <Typography>Favourites</Typography>
-                            </Box>
+                            <Link to='/favourites'>
+                                <div>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
+                                        <img src={heart} />
+                                        <Typography>Favourites</Typography>
+                                    </Box>
+                                </div>
+                            </Link>
                             <span>|</span>
                             <Box sx={{ display: 'flex', alignItems: 'center', margin: '2%' }}>
                                 {hasProfilePicture ? (
