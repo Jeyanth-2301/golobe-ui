@@ -248,6 +248,12 @@ const themeTypography = {
         fontWeight: '700',
         color: '#FF8682'
     },
+    night: {
+        fontFamily: 'Montserrat',
+        fontSize: '12px',
+        fontWeight: '500',
+        color: '#FF8682'
+    },
     address: {
         fontFamily: 'Montserrat',
         fontSize: '14px',
