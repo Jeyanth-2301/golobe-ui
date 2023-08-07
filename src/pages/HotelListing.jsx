@@ -3,7 +3,7 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
-
+//13
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const destination = queryParameters.get('q');
@@ -116,7 +116,7 @@ const HotelListing = () => {
       <Searchafter
         dest={destination}
         checkin={checkInDate}
-        checkout={checkOutDate}
+        checkout={checkOutDate} 
         rooms={numberOfRooms}
       />
       <Filter
