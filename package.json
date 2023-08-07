@@ -18,7 +18,12 @@
     "formik": "^2.4.2",
     "html2pdf.js": "^0.10.1",
     "react": "^18.2.0",
+<<<<<<< HEAD
     "react-confetti": "^6.1.0",
+=======
+    "react-cookie": "^4.1.1",
+    "react-cookies": "^0.1.1",
+>>>>>>> 308fc98a9adb4db3dab957aada3896cf620827df
     "react-dom": "^18.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.14.2",

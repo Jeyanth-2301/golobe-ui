@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -17,33 +20,26 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import axios from 'axios';
-
+import url from '../assets/login/image1.png'
 const theme = createTheme();
 export default function SignInSide() {
- /* const containerStyle = {
-    height: '400px', // Set a fixed height for the carousel
-    width: '400px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  };
-
-  const imageStyle = {
-    height: '400px',
-    width: '400px',
-    objectFit: 'cover',
-  };*/
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbarMessage, setSnackbarMessage] = useState('')
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
   const handleConfirmPasswordVisibility = () => {
     setShowConfirmPassword((prevShowConfirmPassword) => !prevShowConfirmPassword);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const firstName = data.get('firstName');
@@ -73,17 +69,14 @@ export default function SignInSide() {
       alert('Please enter a valid Email Address.');
       return;
     }
-    const phoneRegex = /^[0-9]{10}$/; 
-  if (!phoneRegex.test(phoneNumber)) {
-    alert('Please enter a valid 10-digit phone number.');
-  }
-
-
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phoneNumber)) {
+      alert('Please enter a valid 10-digit phone number.');
+    }
     if (!password.trim()) {
       alert('Please enter a Password.');
       return;
     }
-
     if (password !== confirmPassword) {
       alert('Passwords do not match.');
       return;
@@ -97,27 +90,41 @@ export default function SignInSide() {
       password,
       confirmPassword
     };
-    axios.post(apiUrl, requestData)
-    .then((response) => {
-      console.log('API response:', response.data);
-    })
-    .catch((error) => {
-      console.error('API error:', error);
-    });
-};
+    const response = await axios.post(apiUrl, requestData)
+      .then((response) => {
+        console.log('API response:', response.data);
+        navigate('/login');
+      })
+      .catch((error) => {
+        console.error('API error:', error);
+        if (error.response && error.response.data && error.response.data.message) {
+          
+          setSnackbarSeverity('error');
+          setSnackbarMessage('Login failed: ' + error.response.data.message);
+        } else {
+          setSnackbarSeverity('error');
+          setSnackbarMessage('Login failed. Please check your credentials.');
+        }
+        setSnackbarOpen(true);
+      });
+  };
   return (
+  
     <ThemeProvider theme={theme}>
+        <Box sx={{height:"100vh"}}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
           item
           xs={false}
-          sm={4}
-          md={7}
+          sm={8}
+          md={6}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+             display: 'flex',
+              alignItems: 'center',
+             justifyContent: 'center',
+            height: '100%',
+            padding: '100px',
           }}
         >
           <Carousel
@@ -126,36 +133,34 @@ export default function SignInSide() {
             showStatus={false}
             showThumbs={false}
             showArrows={false}
-            
+            style={{ height: '50vh', width: '100%' }}
           >
-            
-              <img
-                src="src/assets/signup/image1.png"
-                alt="Slider 1"
-                
-              />
-            
-            
-              <img
-                src="src/assets/signup/image2.png"
-                alt="Slider 2"
-              
-              />
-            
-              <img
-                src="src/assets/signup/image3.png"
-                alt="Slider 3"
-               
-              />
+            <img
+              src={url}
+              alt="Slider 1"
+              style={{ width: '100%', objectFit: 'cover' }}
+
+            />
+            <img
+              src={url}
+              alt="Slider 2"
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            />
+            <img
+              src={url}
+              alt="Slider 3"
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            />
           </Carousel>
         </Grid>
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <Box
+        <Grid item xs={12} sm={8} md={6} component={Paper} elevation={7} square >
+        <Box
             sx={{
               my: 8,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
+              padding: '50px',
             }}
           >
             <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
@@ -165,7 +170,6 @@ export default function SignInSide() {
             <Typography sx={{ mb: 4 }}>
               Let's get you all set up so that you can access your own account
             </Typography>
-
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -209,7 +213,6 @@ export default function SignInSide() {
                     autoComplete="phone"
                   />
                 </Grid>
-
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -239,7 +242,7 @@ export default function SignInSide() {
                     type={showConfirmPassword ? 'text' : 'password'}
                     id="confirmPassword"
                     autoComplete="new-password"
-                    // Add the endAdornment with the IconButton
+                    
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -263,69 +266,84 @@ export default function SignInSide() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  Already have an account?
-                  {/* Use Link to create a link to the LoginPage */}
+                  Already have an account?                  
                   <Link href="/login" variant="body2">
                     Login
                   </Link>
-                  </Grid>
-                  <Grid 
+                </Grid>
+                <Grid
                   container
                   direction="row"
                   justifyContent="space-between"
                   sx={{ marginTop: '10px' }}
+                >
+                  <Button
+                    component="a"
+                    href="http://localhost:3200/auth/login?by=google"
+                    target="_self"
+                    rel="noopener noreferrer"
                   >
-                     <Button
-          component="a"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-               <Box sx={{
-                width:"150px",
-                height:"56px",
-                border:"1px solid #8DD3BB",
-                alignItems:"center",
-                justifyContent:"flex-start",
-                display:"flex"
-               }}
-               >
-                <Box sx={{ display:'flex', alignItems:'center', height:'30px', width:'30px', overflow:'hidden' , marginLeft:'60px'}}>
-                <img src="src/assets/signup/google.png"
-                alt="google"
-               />
-                </Box>
-               </Box>
-               </Button>
-               <Button
-          component="a"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-               <Box sx={{
-                width:"150px",
-                height:"56px",
-                border:"1px solid #8DD3BB",
-                alignItems:"center",
-                justifyContent:"center",
-                display:"flex"
-               }}
-               >
-<Box sx={{ display:'flex', alignItems:'center', height:'30px', width:'30px', overflow:'hidden' , marginLeft:'10px'}}>
-                <img src="src/assets/signup/facebook.png"
-                alt="facebook"
-                
-                />
-                </Box>
-               </Box>
-               </Button>
-               </Grid>
+                    <Box sx={{
+                      width: "150px",
+                      height: "56px",
+                      border: "1px solid #8DD3BB",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      display: "flex"
+                    }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center', height: '30px', width: '30px', overflow: 'hidden', marginLeft: '60px' }}>
+                        <img src="src/assets/signup/google.png"
+                          alt="google"
+                        />
+                      </Box>
+                    </Box>
+                  </Button>
+                  <Button
+                    component="a"
+                    href="http://localhost:3200/auth/login?by=facebook"
+                    target="_self"
+                    rel="noopener noreferrer"
+                  >
+                    <Box sx={{
+                      width: "150px",
+                      height: "56px",
+                      border: "1px solid #8DD3BB",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      display: "flex"
+                    }}
+                    >
+                      <Box sx={{ display: 'flex', alignItems: 'center', height: '30px', width: '30px', overflow: 'hidden', marginLeft: '10px' }}>
+                        <img src="src/assets/signup/facebook.png"
+                          alt="facebook"
+
+                        />
+                      </Box>
+                    </Box>
+                  </Button>
+                </Grid>
               </Grid>
             </Box>
-          </Box>
+            </Box>
         </Grid>
       </Grid>
+      </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+         <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity={snackbarSeverity}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </ThemeProvider>
+   
   );
-              }
+}
