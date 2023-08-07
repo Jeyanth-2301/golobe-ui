@@ -150,10 +150,14 @@ const Navbar = () => {
                     {loggedIn ? (
 
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '7%' }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
-                                <img src={heart} />
-                                <Typography>Favourites</Typography>
-                            </Box>
+                            <Link to='/favourites'>
+                                <div>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
+                                        <img src={heart} />
+                                        <Typography>Favourites</Typography>
+                                    </Box>
+                                </div>
+                            </Link>
                             <span>|</span>
                             <Box sx={{ display: 'flex', alignItems: 'center', margin: '2%' }}>
                                 {hasProfilePicture ? (

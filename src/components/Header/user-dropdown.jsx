@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem, Menu } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
     return (
@@ -17,7 +18,7 @@ const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
                 horizontal: 'right',
             }}
         >
-            <MenuItem><Typography variant='body2'>My Account</Typography></MenuItem>
+            <Link to='/profile'><Button><MenuItem><Typography variant='body' >My Account</Typography></MenuItem></Button></Link>
             <MenuItem><Typography variant='body2'>Payments</Typography></MenuItem>
             <MenuItem><Typography variant='body2'>Settings</Typography></MenuItem>
             <MenuItem><Typography variant='body2'>Support</Typography></MenuItem>
