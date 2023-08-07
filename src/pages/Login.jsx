@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
- import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
@@ -26,7 +26,7 @@ import url from '../assets/login/image1.png'
 const theme = createTheme();
 
 export default function LoginSide() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
@@ -42,50 +42,50 @@ export default function LoginSide() {
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-  
+
     if (!email.trim()) {
       alert("Please enter your Email Address.");
       return;
     }
-  
+
     if (!/\S+@\S+\.\S+/.test(email)) {
       alert("Please enter a valid Email Address.");
       return;
     }
-  
+
     if (!password.trim()) {
       alert("Please enter a Password.");
       return;
     }
-  
+
     const apiUrl = 'http://localhost:3200/auth/login?by=local';
     const requestData = {
-      email, 
+      email,
       password,
     };
     try {
       const response = await axios.post(apiUrl, requestData);
       console.log('API response:', response.data);
-      
+
       setSnackbarSeverity('success');
       setSnackbarMessage(response.data.message);
       setSnackbarOpen(true);
-       
-       navigate('/');
+
+      navigate('/');
     } catch (error) {
       console.error('API error:', error);
       if (error.response && error.response.data && error.response.data.message) {
-        
+
         setSnackbarSeverity('error');
         setSnackbarMessage('Login failed: ' + error.response.data.message);
       } else {
         setSnackbarSeverity('error');
         setSnackbarMessage('Login failed. Please check your credentials.');
-        
+
       }
       setSnackbarOpen(true);
     }
-    
+
   };
 
   return (
@@ -99,7 +99,7 @@ export default function LoginSide() {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              padding:"80px"
+              padding: "80px"
 
             }}
           >
@@ -109,7 +109,7 @@ export default function LoginSide() {
             <Typography sx={{ mb: 4 }}>
               Login to access your Golobe Account
             </Typography>
-            
+
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -165,8 +165,8 @@ export default function LoginSide() {
                     Signup
                   </Link>
                 </Grid>
-                
-              
+
+
                 <Grid
                   container
                   direction="row"
@@ -236,9 +236,9 @@ export default function LoginSide() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-           justifyContent: 'center',
-          height: '100%',
-          padding: '70px',
+            justifyContent: 'center',
+            height: '100%',
+            padding: '70px',
           }}
         >
           <Carousel
@@ -252,29 +252,29 @@ export default function LoginSide() {
           >
             <div>
               <img src={url}
-              alt="Slider 1"
-              style={{ height: '100%', width: '100%', objectFit: 'cover',borderRadius:'10%' }} />
+                alt="Slider 1"
+                style={{ height: '100%', width: '100%', objectFit: 'cover', borderRadius: '10%' }} />
             </div>
             <div>
-              <img src={url}  
-              alt="Slider 2"
-              style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+              <img src={url}
+                alt="Slider 2"
+                style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
             </div>
             <div>
-              <img src={url} 
-               alt="Slider 3"
+              <img src={url}
+                alt="Slider 3"
                 style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
             </div>
           </Carousel>
         </Grid>
-        
+
       </Grid>
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
         onClose={handleSnackbarClose}
       >
-         <MuiAlert
+        <MuiAlert
           elevation={6}
           variant="filled"
           onClose={handleSnackbarClose}
