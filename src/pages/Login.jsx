@@ -159,7 +159,7 @@ export default function LoginSide() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  Don't have an account?
+                  Dont have an account?
                   <Link href="#" variant="body2">
                     Signup
                   </Link>
