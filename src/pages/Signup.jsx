@@ -79,6 +79,7 @@ export default function SignInSide() {
     }
     if (password !== confirmPassword) {
       alert('Passwords do not match.');
+      
       return;
     }
     const apiUrl = 'http://localhost:3200/auth/register';
