@@ -178,7 +178,7 @@ const ReviewForm = ({ onReviewSubmit }) => {
         </Button>
         </Grid>
       </form>
-      <Box sx={{width:123, height:60}}></Box>
+      <Box sx={{width:123, height:70}}></Box>
     </Box>
   );
 };
