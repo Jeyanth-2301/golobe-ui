@@ -33,7 +33,7 @@ setAnchorEl(null)
    
    <ThemeProvider theme={theme}>
      <>
-     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px'}}>
+     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px'}}>
           <Box sx={{display:'flex',gap:'5%'}}>
               <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>showing 4 of </b></Typography> 
               <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>257 places </h5>

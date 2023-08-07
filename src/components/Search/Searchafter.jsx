@@ -48,44 +48,44 @@ const StyledButton = styled(Button)({
 
 
 
-const Search = () => {
+const Searchafter = ({dest,checkin,checkout,rooms}) => {
 
 
 
-  const navigate=useNavigate();
+//   const navigate=useNavigate();
 
-  const [destination, setDestination] = useState('');
-  const [checkInDate, setCheckInDate] = useState('');
-  const [checkOutDate, setCheckOutDate] = useState('');
-  const [numberOfRooms, setNumberOfRooms] = useState(1);
+//   const [destination, setDestination] = useState('');
+//   const [checkInDate, setCheckInDate] = useState('');
+//   const [checkOutDate, setCheckOutDate] = useState('');
+//   const [numberOfRooms, setNumberOfRooms] = useState(1);
 
-  const [searchresults, setSearchResults] = useState([]);
+//   const [searchresults, setSearchResults] = useState([]);
 
-  const handleDest = (e) => {
-    setDestination(e.target.value);
-  };
-  const handleCheckIn = (e) => {
-    setCheckInDate(e.target.value);
-  };
-  const handleCheckOut = (e) => {
-    setCheckOutDate(e.target.value);
-  };
-  const handleRooms = () => {
-    setNumberOfRooms(numberOfRooms + 1);
-  };
+//   const handleDest = (e) => {
+//     setDestination(e.target.value);
+//   };
+//   const handleCheckIn = (e) => {
+//     setCheckInDate(e.target.value);
+//   };
+//   const handleCheckOut = (e) => {
+//     setCheckOutDate(e.target.value);
+//   };
+//   const handleRooms = () => {
+//     setNumberOfRooms(numberOfRooms + 1);
+//   };
 
 
   
 
 
-const handleSearch=()=>{
+// const handleSearch=()=>{
 
-    const queryString = `?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
-    navigate(`/hotel-listing${queryString}`);
+//     const queryString = `?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
+//     navigate(`/hotel-listing${queryString}`);
 
 
 
-  }
+//   }
    
 
   
@@ -95,10 +95,8 @@ const handleSearch=()=>{
   return (
     <ThemeProvider theme={theme}>
 
-      <Paper elevation={3} sx={{ width: "75vw", height: '35vh', borderRadius: '16px' }} >
-        <Box sx={{ paddingTop: '20px', marginLeft: 4 }}>
-          <Typography variant="sideheading">Where are you staying?</Typography>
-        </Box>
+      <Paper elevation={3} sx={{ width: "75vw", height: '20vh', borderRadius: '16px',marginTop:'9%' }} >
+      
         <FormControl >
           < Grid container direction="row" spacing={2} sx={{ marginTop: '10px', marginLeft: 2 }} >
             <Grid item>
@@ -106,8 +104,8 @@ const handleSearch=()=>{
                 variant='outlined'
                 label="Enter Destination" id="destination"
                 sx={{ width: '340px' }}
-                value={destination}
-                onChange={handleDest}
+                value={dest}
+              
                 autoComplete='on'
                 InputProps={{
                   startAdornment: (
@@ -121,19 +119,19 @@ const handleSearch=()=>{
               <StyledTextField type="date" label="Check In" variant='outlined'
                 id="checkin"
                 InputLabelProps={{ shrink: true }}
-                value={checkInDate}
-                onChange={handleCheckIn}
+                value={checkin}
+              
               ></StyledTextField></Grid>
 
             <Grid item><StyledTextField type="date" label="Check Out" id="checkout"
               variant='outlined'
-              value={checkOutDate}
-              onChange={handleCheckOut}
+              value={checkout}
+           
               InputLabelProps={{ shrink: true }}></StyledTextField></Grid>
 
 
             <Grid item ><StyledTextField label="Rooms" sx={{ width: '250px' }} id="rooms"
-              value={numberOfRooms}
+              value={rooms}
 
               InputProps={{
                 startAdornment: (
@@ -141,12 +139,7 @@ const handleSearch=()=>{
                     <img src={car} />
                   </InputAdornment>
                 ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton >
-                      <AddCircleIcon onClick={handleRooms} /></IconButton>
-                  </InputAdornment>
-                )
+              
               }}
 
             >
@@ -154,7 +147,7 @@ const handleSearch=()=>{
             </Grid>
           </Grid>
         </FormControl>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3.8%' }}>
+        {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3.8%' }}>
           <Button
             variant="text"
             disableRipple
@@ -175,11 +168,11 @@ const handleSearch=()=>{
               Show Places
             </StyledButton>
        
-        </Box>
+        </Box> */}
 
       </Paper>
     </ThemeProvider>
   )
 }
 
-export default Search
+export default Searchafter

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Detail from '../components/hotel-details/images-display/Detail'
 import Hotelimage from '../components/hotel-details/images-display/Hotelimage'
