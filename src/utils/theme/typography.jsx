@@ -89,72 +89,53 @@ const themeTypography = {
     a: {
         width: "30.6875rem",
         height: "3.75rem",
-
-        fontFamily: "Montserrat",
         fontSize: "1.7rem",
         fontWeight: "700",
-        lineHeight: "1.875rem",
-        letterSpacing: "0em",
-        textAlign: "left"
-
+        lineHeight: "1.875rem"
 
     },
     b: {
 
-        marginLeft: "4rem",
+        marginLeft: "4.3rem",
         color: "red",
         width: "7.9375rem",
         height: "2rem",
-        fontFamily: "Montserrat",
         fontSize: "1.8rem",
         fontWeight: "600",
         lineHeight: "2.4375rem",
-        letterSpacing: "0em",
-        textAlign: "right"
 
     },
     c: {
         width: "27.25rem",
         height: "1.8125rem",
-        fontFamily: "Montserrat",
         fontSize: "1.5rem",
         fontWeight: "600",
         lineHeight: "1.8125rem",
-        letterSpacing: "0em",
         marginLeft: "19.5vh",
     },
     d: {
         width: "22 rem",
         height: "1.0625rem",
         opacity: "0.046875rem",
-        fontFamily: "Montserrat",
         fontSize: "1rem",
         fontWeight: "500",
         lineHeight: "1.2rem",
-        letterSpacing: "0em",
-        textAlign: "left",
 
     },
     e: {
         width: "10.3125rem",
         height: "1.5rem",
-        fontFamily: "Montserrat",
         fontSize: "1.25rem",
         fontWeight: "500",
         lineHeight: "2.5rem",
-        letterSpacing: "0em",
-        textAlign: "left"
 
     },
     f: {
         width: "8.3125rem",
         height: "1.5rem",
-        fontFamily: "Montserrat",
         fontSize: "1.25rem",
         fontWeight: "600",
         lineHeight: "2.5rem",
-        letterSpacing: "0em",
-        textAlign: "left"
 
     },
     g: {
@@ -168,58 +149,42 @@ const themeTypography = {
     v: {
         width: "wrap",
         height: "1.25rem",
-        fontFamily: "Montserrat",
         fontSize: "1rem",
         fontWeight: "600",
         lineHeight: "2rem",
-        letterSpacing: "0em",
-        textAlign: "left"
     },
     w: {
         width: "wrap",
         height: "1.25rem",
-        fontFamily: "Montserrat",
         fontSize: "1.1rem",
         fontWeight: "500",
         lineHeight: "2rem",
-        letterspacing: "0em",
-        textAlign: "left"
     },
     x: {
         width: "7.125rem",
         height: "1.25rem",
-        fontFamily: "Montserrat",
         fontSize: "1.14rem",
         fontWeight: "600",
         lineHeight: "1.25rem",
-        letterSpacing: "0em",
-        textAlign: "left"
 
     },
     y: {
         width: "18.5 rem",
         height: "1.25rem",
-        fontFamily: "Montserrat",
         fontSize: "1.1rem",
         fontWeight: "500",
         lineHeight: "3rem",
-        letterspacing: "0em",
-        textAlign: "left"
     },
     z: {
         width: "16.0625rem",
         height: "3rem",
-        fontFamily: "Montserrat",
         fontSize: "1.6rem",
         fontWeight: "600",
         lineHeight: "1.5rem",
-        letterSpacing: "0em",
-        textAlign: "left"
 
     },
     n1: {
         fontSize: "30px",
-        fontFamily: "Montserrat",
         ml: "10px"
     },
     bot:
@@ -440,6 +405,32 @@ const themeTypography = {
         lineHeight: "1.21875rem",
         marginLeft: '1.50rem',
 
+    },
+    p1:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.0rem",
+       fontWeight:"bold",
+    },
+    p2:{
+        lineHeight:"normal",
+        color:"black",
+       fontSize: "1.0rem",
+    },
+    p3:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.5rem",
+       fontWeight:"bold",
+       fontSize: '32px', 
+       fontWeight: 700, 
+       paddingBottom: '4px'
+    },
+    p4:{
+        lineHeight:"normal",
+       color:"black",
+       fontSize: "1.25rem",
+       fontWeight:"bold",
     },
 
 };
