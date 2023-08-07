@@ -193,7 +193,7 @@ export default function LoginSide() {
                           marginLeft: "60px",
                         }}
                       >
-                        <img src="google.png" alt="google" />
+                        <img src="src/assets/login/google.png" alt="google" />
                       </Box>
                     </Box>
                   </Button>
@@ -218,7 +218,7 @@ export default function LoginSide() {
                           marginLeft: "10px",
                         }}
                       >
-                        <img src="facebook.png" alt="facebook" />
+                        <img src="src/assets/login/facebook.png" alt="facebook" />
                       </Box>
                     </Box>
                   </Button>
