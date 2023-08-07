@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 //import React from 'react'
 import { useState, useEffect } from 'react';
 import html2pdf from 'html2pdf.js'
