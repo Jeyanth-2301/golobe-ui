@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Detail from '../components/hotel-details/images-display/Detail'
 import Hotelimage from '../components/hotel-details/images-display/Hotelimage'
@@ -9,7 +10,7 @@ import FullReview from '../components/hotel-details/reviews/FullReview'
 
 const Hoteldetail = () => {
     return (
-        <div >
+        <div>
             <Box sx={{ display: "flex", flexDirection: 'column', marginLeft: '4.7%' }}>
                 <Top />
             </Box>

@@ -13,15 +13,15 @@ import theme from '../../../utils/theme/theme.jsx';
 
 export default function Price({ value,changePrice}){
   const { isExpanded, toggleDropdown } = useDropdown();
-  const [isClicked, setClicked] = useState(false);
+//   const [isClicked, setClicked] = useState(false);
   const sliderRef = useRef(null);
 
   const PrettoSlider = styled(Slider)(({theme}) =>(({     
          color:  theme.palette.text.primary,
          marginLeft:'4px',
         '& .MuiSlider-thumb': {
-            height: 23,
-            width: 23,
+            height: 20,
+            width: 20,
             backgroundColor: theme.palette.primary.main,
             border: '2px solid theme.palette.primary.main',
         '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
@@ -32,7 +32,7 @@ export default function Price({ value,changePrice}){
         
   },  })))
 
-  const [dragging, setDragging] = useState('');
+//   const [dragging, setDragging] = useState('');
 
   const iconStyle = {
     cursor: 'pointer',
@@ -59,7 +59,7 @@ export default function Price({ value,changePrice}){
                 size='small'
                 value={value}
                 onChange={changePrice}
-                defaultValue={50}  min={50} max={1200}  
+                defaultValue={899}  min={899} max={17375}  
                 ref={sliderRef}/>
                
                 <div  style ={{display: 'flex'}}>

@@ -3,16 +3,16 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import expand from '../../../assets/icons/drop-icons/expand.svg';
-
 import { useDropdown } from './Usedropdown'; 
 import { ThemeProvider } from '@emotion/react';
 import theme from '../../../utils/theme/theme.jsx';
 import { IconButton } from '@mui/material';
 
 
-export default function Rate({value,selectRating}){
+export default function Rate({selectRating}){
   const { isExpanded, toggleDropdown } = useDropdown();
-    const ButtonStyle = styled(Box) (({theme})=> ({
+  const ratingValues = [1, 2, 3, 4, 5];
+      const ButtonStyle = styled(Box) (({theme})=> ({
             width: 40,
             height:40,
             borderRadius: 5,
@@ -37,48 +37,31 @@ export default function Rate({value,selectRating}){
         e.target.style.backgroundColor = 'white';
       };
 return(
- <ThemeProvider theme={theme}>
-    <Box sx={{ my: 3, mx: 2}}>
-        <Grid container alignItems="center" sx={{marginBottom:2.3}} >
-            <Grid item xs={10} sx={{marginTop:1}}>
-                <Typography gutterBottom variant="h13" >Rating  </Typography>
-            </Grid>
-              <Grid item sx={{marginTop:1}} >
-              <IconButton>    <img src ={expand}  alt=" " onClick={toggleDropdown} style ={iconStyle} /> </IconButton></Grid> 
-        </Grid>
-        <Typography color="text.secondary" variant="body2">
-              {isExpanded && (
-             
-                  <div style ={{display:"flex"}}>
-                      <ButtonStyle   value ={value} 
-                           onClick= { (e) =>  selectRating(e.target.value)} 
-                        //     onChange =  { (e) =>  selectRating(e.target.value)} 
-                            onMouseEnter={handleBoxMouseEnter}
-                            onMouseLeave={handleBoxMouseLeave}  > <Typography variant ="val">0+</Typography> 
-                      </ButtonStyle>
-                      <ButtonStyle   value ={value}
-                           onClick= { (e) =>  selectRating(e.target.value)} 
-                            onMouseEnter={handleBoxMouseEnter}
-                            onMouseLeave={handleBoxMouseLeave} ><Typography variant ="val">1+</Typography>
-                      </ButtonStyle>
-                      <ButtonStyle   value ={value} 
-                           onClick= { (e) =>  selectRating(e.target.value)} 
-                            onMouseEnter={handleBoxMouseEnter}
-                            onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">2+</Typography>
-                      </ButtonStyle>
-                      <ButtonStyle  value ={value}
-                          onClick= { (e) =>  selectRating(e.target.value)} 
-                            onMouseEnter={handleBoxMouseEnter}
-                            onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">3+</Typography>
-                      </ButtonStyle>
-                      <ButtonStyle value ={value}
-                           onClick= { (e) =>  selectRating(e.target.value)} 
-                            onMouseEnter={handleBoxMouseEnter}
-                            onMouseLeave={handleBoxMouseLeave}><Typography variant ="val">4+</Typography>
-                      </ButtonStyle>
-                </div > )}
-      </Typography>
-    </Box>
- </ThemeProvider>
+            <ThemeProvider theme={theme}>
+                  <Box sx={{ my: 3, mx: 2}}>
+                              <Grid container alignItems="center" sx={{marginBottom:2.3}} >
+                                          <Grid item xs={10} sx={{marginTop:1}}>
+                                                  <Typography gutterBottom variant="h13" >Rating  </Typography>
+                                          </Grid>
+                                    <Grid item sx={{marginTop:1}} >
+                                                  <IconButton>    <img src ={expand}  alt=" " onClick={toggleDropdown} style ={iconStyle} /> </IconButton></Grid> 
+                                    </Grid>
+                        <Typography color="text.secondary" variant="body2">
+                              {isExpanded && (
+                                    <div style={{ display: "flex" }}>
+                              {ratingValues.map((value) => (
+                                    <ButtonStyle
+                                          key={value}
+                                          data-value={value}
+                                          onClick={() => selectRating(value)}
+                                          onMouseEnter={handleBoxMouseEnter}
+                                          onMouseLeave={handleBoxMouseLeave}  >
+                                          <Typography variant="val">{`${value - 1}+`}</Typography>
+                                    </ButtonStyle>
+                              ))}
+                  </div> )}
+                        </Typography>
+                  </Box>
+            </ThemeProvider>
 );
 }

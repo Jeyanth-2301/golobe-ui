@@ -9,12 +9,13 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
+import { useLocalStorage } from "react-use"; // Import the hook
+
 
 const validationSchema = Yup.object().shape({
   cardNumber: Yup.string()
     .required("Card number is required")
     .matches(/^\d{16}$/, "Card number must be 16 digits"),
-
     expirationDate: Yup.string()
     .required("Expiration date is required")
     .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid format (MM/YY)")
@@ -23,13 +24,10 @@ const validationSchema = Yup.object().shape({
       "Expired card",
       function (value) {
         if (!value) return false;
-
         const today = new Date();
         const currentYear = today.getFullYear() % 100;
         const currentMonth = today.getMonth() + 1;
-
         const [expMonth, expYear] = value.split("/").map(Number);
-
         // Check if the expiration year is greater than or equal to the current year
         if (expYear < currentYear) {
           return false;
@@ -48,9 +46,14 @@ const validationSchema = Yup.object().shape({
     .required("Name on card is required")
     .matches(/^[A-Za-z\s]+$/, "Only alphabets and spaces are allowed")
 });
-
 const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [saveCardInfo, setSaveCardInfo] = useLocalStorage(
+    "saveCardInfo",
+    false
+  );
+  
+  
   const handleSubmit = async (values) => {
     setIsSubmitting(true);
     try {
@@ -61,9 +64,7 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
         cvv: values.cvv,
         cardHolder: values.cardHolder,
       });
-
       // Handle the response from the backend (if needed)
-
       // Close the popup after successful submission
       handleClosePopup();
     } catch (error) {
@@ -72,7 +73,7 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
     }
     setIsSubmitting(false);
   };
-
+  
   return (
     <Dialog open={open} onClose={handleClosePopup} fullWidth maxWidth="sm">
       <DialogContent>
@@ -81,7 +82,6 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
         >
           <strong>Add New Card</strong>
         </Typography>
-
         <Formik
           initialValues={{
             cardNumber: "",
@@ -96,10 +96,10 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
             // Your form submission logic here
             handleClosePopup();
             handleCardSelection(values.cardNumber, values.expirationDate);
-            setTimeout(() => {
+            
               setSubmitting(false); // Set isSubmitting to false after form submission
               handleClosePopup();
-            }, 1000);
+          
           }}
         >
           {({ errors, touched, isValid }) => (
@@ -113,7 +113,6 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
                 error={touched.cardNumber && Boolean(errors.cardNumber)}
                 helperText={touched.cardNumber && errors.cardNumber}
               />
-
               <Field
                 as={TextField}
                 name="expirationDate"
@@ -123,7 +122,6 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
                 error={touched.expirationDate && Boolean(errors.expirationDate)}
                 helperText={touched.expirationDate && errors.expirationDate}
               />
-
               <Field
                 as={TextField}
                 name="cvv"
@@ -134,7 +132,6 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
                 helperText={touched.cvv && errors.cvv}
                 type="password"
               />
-
               <Field
                 as={TextField}
                 name="cardHolder"
@@ -144,26 +141,22 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
                 error={touched.cardHolder && Boolean(errors.cardHolder)}
                 helperText={touched.cardHolder && errors.cardHolder}
               />
-
               <FormControlLabel
                 value="secure"
-                control={<Checkbox key="secureCheckbox" />}
+                control={<Checkbox key="secureCheckbox" 
+                checked={saveCardInfo}
+                    onChange={(e) => setSaveCardInfo(e.target.checked)}
+                  />}
                 label="Securely save my information for 1-click checkout" 
                 labelPlacement="end"
-                name="saveCardInfo"
               />
-
               <Button
                 variant="contained"
                 style={{ bgcolor: "#8dd3bb", marginTop: "15px", marginBottom:"25px" }}
                 fullWidth
                 type="submit"
                 disabled={!isValid}
-                onClick={() => {
-                  handleSubmit(values); // Call handleSubmit to submit the form
-                  handleCardSelection(values.cardNumber, values.expirationDate, values.saveCardInfo); // Pass the value of the checkbox
-                }}
-            
+                onClick={handleSubmit}
               >
                 Add Card
               </Button>
@@ -180,5 +173,4 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
     </Dialog>
   );
 };
-
 export default PopupForm;

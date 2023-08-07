@@ -44,13 +44,10 @@ const Navbar = () => {
     const logoText = "Find Stays";
     const processName = (name) => {
         if (name.includes(' ')) {
-            // If the name contains a space, reject all words after the space
             return name.split(' ')[0];
         } else if (name.length > 8) {
-            // If the name without space is longer than 8 letters, print the first seven letters and add '...'
             return name.substring(0, 7) + '...';
         } else {
-            // Otherwise, return the original name
             return name;
         }
     };
@@ -66,19 +63,29 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
     useEffect(() => {
-        const askLoggedInStatus = () => {
-            // const response = window.prompt("Are you logged in? (yes/no)");
-            // if (response && response.toLowerCase() === 'yes') {
-            //     setLoggedIn(true);
-            // } else {
-            //     setLoggedIn(false);
-            // }
-        };
+        const askLoggedInStatus = async () => {
+            const storedLoggedInStatus = localStorage.getItem('loggedInStatus');
 
+            if (storedLoggedInStatus) {
+                // Use the stored value from localStorage if available
+                setLoggedIn(storedLoggedInStatus === 'true');
+            } else {
+                // Prompt the user and set the value in localStorage
+                const response = window.prompt("Are you logged in? (yes/no)");
+                if (response && response.toLowerCase() === 'yes') {
+                    setLoggedIn(true);
+                    localStorage.setItem('loggedInStatus', 'true');
+                } else {
+                    setLoggedIn(false);
+                    localStorage.setItem('loggedInStatus', 'false');
+                }
+            }
+        };
         askLoggedInStatus();
     }, []);
+
+
     const url = 'https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
     // const linkStyle = {
@@ -128,10 +135,14 @@ const Navbar = () => {
                     {loggedIn ? (
 
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '7%' }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
-                                <img src={heart} />
-                                <Typography>Favourites</Typography>
-                            </Box>
+                            <Link to='/favourites'>
+                                <div>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
+                                        <img src={heart} />
+                                        <Typography>Favourites</Typography>
+                                    </Box>
+                                </div>
+                            </Link>
                             <span>|</span>
                             <Box sx={{ display: 'flex', alignItems: 'center', margin: '2%' }}>
                                 {hasProfilePicture ? (
@@ -152,6 +163,9 @@ const Navbar = () => {
                     ) : (
                         // Show "Signin" and "Login" buttons when not logged in
                         <>
+                            {/* <Button>
+                                Checks
+                            </Button> */}
                             <Link to='/signup' >
                                 <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
                                     Signin
