@@ -5,8 +5,12 @@ import Rating from '@mui/material/Rating';
 import {React, useState} from "react";
 import Divider from '@mui/material/Divider';
 
-function Content(){
-    const [value, setValue] = useState(5);
+function Content({items}){
+    console.log(items)
+    const [value, setValue] = useState(items.hotelType);
+
+    const hotelRating = Math.round(items.rating)
+
     return(                  
         <Box sx = {{height: 220}}>
             <CardContent>
@@ -15,29 +19,29 @@ function Content(){
                         Starting from
                     </Typography>
                     <Typography variant = "subheading">
-                            <subheader> $104/night</subheader>
+                        {items.ratePerNight}
                     </Typography>
                     <Typography 
                         sx={{ fontFamily: 'Montserrat',fontSize: '13px',marginLeft: 4.5}}>excl. tax
                     </Typography>                            
                 </Grid>         
                 <Grid item sx = {{textAlign : 'left',marginTop:-6.5,marginBottom: 2 }}>
-                    <Typography variant = "heading">CVK Park Bosphorus Hotel Istanbul</Typography>
+                    <Typography variant = "heading">{items.hotelName}</Typography>
                 </Grid>
                 <Grid container direction="row" alignItems="center">   
                             <Grid item sx={{ textAlign: 'left'}}><LocationOnIcon/></Grid>
                             <Grid item sx={{textAlign:'left',marginBottom: 2,marginTop:1}}>      
                                 <Typography variant = "address">
-                                    Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437
+                                   {items.location.address}
                                 </Typography>
                             </Grid>   
                              <Grid container direction = "row">  
                                 <Grid item sx = {{marginBottom: 3}}>
                                     <Rating sx ={{color: "#FF8682"}}
                                         name="simple-controlled"
-                                        value={value}
-                                        onChange={(newValue) => {
-                                        setValue(newValue);  }} />
+                                        value = {hotelRating}
+                                        readOnly 
+                                         />
                                 </Grid>    
                                 <Grid item sx = {{flexDirection : 'row',marginTop: 0.3}}>
                                     <Typography variant = "rating">{Math.round(value)} Star Hotel</Typography>         
@@ -45,12 +49,12 @@ function Content(){
                                 <Grid item sx = {{textAlign :  'left',marginLeft: 10,fontSize: 14}}>
                                     <CoffeeIcon size = "small"/>
                                     <Grid sx = {{marginLeft: 4,marginTop: -3}}>
-                                          <Typography variant = "amenities">20+Aminities</Typography>
+                                          <Typography variant = "amenities">{items.amenities.length}+Aminities</Typography>
                                     </Grid> 
                                 </Grid>  
                             </Grid>  
-                            <Button variant="outlined" sx = {{marginTop: -1,height:'40px',color: "#112211"}}> 4.2</Button>
-                            <Grid item sx ={{marginTop: -1,pl:1}}><b>Very Good</b> 371reviews</Grid>       
+                            <Button variant="outlined" sx = {{marginTop: -1,height:'40px',color: "#112211"}}>{items.rating}</Button>
+                            <Grid item sx ={{marginTop: -1,pl:1}}><b>{items.overallReview}</b> {items.numReviews}     reviews</Grid>       
                                 
                 <Divider variant="middle" /> 
                 </Grid>
