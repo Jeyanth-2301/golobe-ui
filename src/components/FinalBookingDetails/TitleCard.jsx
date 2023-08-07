@@ -147,7 +147,7 @@ const handleShareClick = () => {
       
 
   return (
-    <Box style={{padding: '16px', paddingBottom: '32px'}}>
+    <Box style={{padding: '8px', paddingBottom: '32px',}}>
     <Box  style={{height:'auto',width:'100%', marginTop:'32px',paddingLeft:'0px'}}>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={12} sm={12} md={9} container direction="column" sx={{width:'804px',height:'104px'}}>
