@@ -197,7 +197,7 @@ const Login = () => {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                     <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
                       sx={{
                         width: "150px",
