@@ -10,6 +10,7 @@ import Signup from "./pages/Signup"
 import Layout from "./pages/Layout";
 import FindStays from './pages/FindStays'
 import Hoteldetail from './pages/HotelDetails'
+import Interiorimages from './pages/Interiorimages'
 import HotelListing from './pages/HotelListing'
 import BookingDetail from './pages/BookingDetailsPage'
 import Profile from './pages/Profile'
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='signup' element={<Signup />}></Route>
             <Route path='hotel-listing' element={<HotelListing />}></Route>
             <Route path="hotel-details" element={<Hoteldetail />} />
+            <Route path="interior-images" element={<Interiorimages />} />
             <Route path='booking-details' element={<BookingDetail />}></Route>
             <Route path='payment-page' element={<PaymentPage />}></Route>
             <Route path='profile' element={<Profile />}></Route>

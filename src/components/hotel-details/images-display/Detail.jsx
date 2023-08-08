@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect} from 'react';
 import { Grid, Typography } from '@mui/material'
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -10,9 +10,45 @@ import location from '../../../assets/icons/location-icon/location.svg'
 import { Close } from '@mui/icons-material';
 import { Dialog, DialogContent, DialogTitle, DialogActions, InputAdornment, TextField } from '@mui/material';
 import { EmailIcon, FacebookIcon, WhatsappIcon, TelegramIcon, TwitterIcon, LinkedinIcon } from "react-share";
-import { Link } from 'react-router-dom';
+import axios from 'axios'
+const Detail = ({data}) => {
+  
+  const [name,setName]=useState(null)
+  const [hotelTypeStars, setHotelTypeStars] = useState([]);
+  const [hotelType,setHotelType]=useState(null)
+  const [loc,setLoc]=useState(null);
+  const [id,setId]=useState(null);
+  const [hotelRating, setHotelRating] = useState(null);
+  const [number,setNumber]=useState(null)
+  const [rate,setRate]=useState(null)
+  const [review, setReview] = useState(null);
+ 
+  useEffect(() => {
+    if (data) {
+      
+        const name=data.hotelName;
+        setName(name)
+        const id=data._id;
+        setId(id)
+        console.log(id)
+        const hotelRating = data.hotelType;
+        setHotelType(hotelRating)
+        setHotelTypeStars(renderStars(hotelRating));
+        const loc=data.location.address;
+        setLoc(loc)
+        const rate=data.rating;
+        const show= rate % 1 === 0 ? rate.toFixed(0) : rate.toFixed(1);
+        setHotelRating(show)
+        const revno=data.numReviews;
+        setNumber(revno)
+        const rpn=data.ratePerNight;
+        setRate(rpn)
+        const allreview=data.overallReview;
+        setReview(allreview)
+      }
+  }, [data]);
 
-const Detail = () => {
+
   const commonIconButtonStyle = {
     height: '32px',
     color: '#112211',
@@ -22,18 +58,38 @@ const Detail = () => {
     marginRight: '12px',
   };
 
-  const renderStars = (star) => {
+  const renderStars = (rating) => {
     const stars = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < rating; i++) {
       stars.push(
-        <StarOutlinedIcon key={i} fontSize="small" style={{ color: star }} />
+        <StarOutlinedIcon key={i} fontSize="small" style={{ color:'#FF8682' }} />
       );
     }
     return stars;
   };
   const [isFavorite, setIsFavorite] = useState(false);
   const handleFavoriteClick = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    const newIsFavorite = !isFavorite;
+    setIsFavorite(newIsFavorite);
+
+    const url = `http://localhost:3200/auth/users/64cb50827767115059b3eaa7/favourites/${id}`;
+    const method = newIsFavorite ? 'POST' : 'DELETE';
+
+    axios({
+      
+      method,
+      url,
+    })
+      .then(response => {
+        
+        console.log('Request successful:', response);
+      })
+      .catch(error => {
+        
+        console.error('Error making request:', error);
+       
+        setIsFavorite(isFavorite);
+      });
   };
   const handleShareClick = () => {
     setOpen(true);
@@ -110,41 +166,40 @@ const Detail = () => {
 
 
   return (
-    <div style={{ height: '18vh', width: '90vw', marginTop: '2vh' }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={9} container direction="column" sx={{ width: '804px', height: '104px' }}>
-          <Grid item sx={{ height: '30px', width: '1000px' }}>
-            <Typography variant="h1" sx={{ fontSize: '24px' }}>CVK Park Bosphorus Hotel Istanbul&nbsp;
-              <Typography variant="pico" component="span" style={{ display: 'inline-flex', alignItems: 'center' }}>
-                {renderStars('#FF8682')} &nbsp;5 Star Hotel
+    <div >
+      <Grid container  style={{height:'15vh',width:'90vw',marginTop:'2vh'}}>
+        <Grid item xs={10} container direction="column">
+          <Grid item sx={{height:'5vh'}}>
+             <Typography variant="h1" sx={{fontSize:'24px'}}>{name}&nbsp;
+                  <Typography variant="pico" component="span" style={{display:'inline-flex',alignItems:'center'}}>
+                      {hotelTypeStars} 
+                      {hotelType} Star Hotel
+                  </Typography>
               </Typography>
-            </Typography>
-          </Grid>
-          <div style={{ width: '1000px', height: '35px', padding: '10px 0' }}>
-            <Grid item>
-              <Typography variant='pico' sx={{ width: '804px', height: '18px' }}>
-                <img src={location} alt="location" />Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437
+           </Grid>
+            <div >
+            <Grid item style={{height:'5vh',padding:'1vh 0'}}>
+              <Typography variant='pico'> 
+              <img src={location} alt="location"/>{loc}
               </Typography>
             </Grid>
-            <Grid item container alignItems="center" sx={{ width: '400px', height: '32px', marginTop: '8px' }}>
-              <Button variant="contained" color="primary" style={{
-                backgroundColor: 'white', color: 'black', width: '25px', height: '25px',
-                borderColor: 'blue', borderRadius: '4px', minWidth: '35px', maxWidth: '35px', padding: '10px', marginRight: '5px',
-              }}>4.2</Button>
-              <Typography variant="body1" sx={{ fontWeight: '700' }}>Very Good</Typography>&nbsp;
-              <Typography variant="pico">371 reviews</Typography>
+            <Grid item container alignItems="center" sx={{height:'5vh',padding:'1vh 0'}}>
+               <Typography variant='body1' sx={{fontWeight:'500',marginLeft:'0.2vw'}}>{hotelRating}</Typography>&nbsp;
+               <Typography variant="body1" sx={{fontWeight:'700'}}>{review}</Typography>&nbsp;
+               <Typography variant="pico">{number} reviews</Typography>
             </Grid>
-          </div>
-        </Grid>
-        <Grid item xs={3} container direction="column" sx={{ marginLeft: '-3px' }}>
-          <Grid item sx={{ color: '#FF8682', marginBottom: '10px' }}>
-            <Typography variant="h4" align="right" >$240
-              <Typography variant="body1" style={{ display: 'inline', marginTop: '4vh' }}>/night
-              </Typography>
-            </Typography>
-          </Grid>
+            </div>
+            </Grid>
+            <Grid item xs={2} container direction="column" sx={{height:'15vh',marginLeft:'-2px',width:'10vw'}}>
+              <Grid item sx={{color:'#FF8682',alignItems:'center',height:'7.5vh',marginTop:'0.5vh'}}>
+                    <Typography variant="h4" align="right">Rs {rate}
+                        <Typography variant="body1" style={{display:'inline'}}>/night
+                        </Typography>
+                    </Typography>
+                </Grid>
+
           <Grid item style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <Grid item>
+            <Grid item >
               <IconButton sx={commonIconButtonStyle} onClick={handleFavoriteClick}>
                 {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
             </Grid>
@@ -187,14 +242,7 @@ const Detail = () => {
                 </Dialog>
               </div>
             </Grid>
-            <Grid item>
-              <Link to='/booking-details' >
-                <Button variant="contained" color="primary" sx={{
-                  color: '#112211', lineHeight: 'normal', border: '1px solid black',
-                  gap: '4px', borderRadius: '4px', padding: '7px', marginLeft: '5px', '&:hover': { backgroundColor: '#8DD3BB' },
-                }}>Book now</Button>
-              </Link>
-            </Grid>
+            
           </Grid>
         </Grid>
       </Grid>
