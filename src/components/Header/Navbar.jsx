@@ -6,7 +6,7 @@ import heart from '../../assets/icons/navbar-icons/heart.svg'
 import UserDropdown from '../Header/user-dropdown';
 import { styled } from '@mui/material/styles';
 import theme from '../../utils/theme/theme'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const FancyButton = styled(Button)({
     background: 'black',
@@ -22,8 +22,17 @@ const FancyButton = styled(Button)({
         color: 'black',
     },
 });
-
+const HoverableBox = styled(Box)({
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4%',
+    cursor: 'default',
+    '&:hover': {
+        cursor: 'pointer',
+    },
+});
 const Navbar = () => {
+    const navigate = useNavigate();
     const [showIndicator, setShowIndicator] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false); // Track user login state
     const [anchorEl, setAnchorEl] = useState(null);
@@ -36,11 +45,13 @@ const Navbar = () => {
     const handleDropdownClose = () => {
         setAnchorEl(null);
     };
-
+    const handleFav = () => {
+        navigate("/favourites");
+    }
     const handleLogoClick = () => {
         setShowIndicator(!showIndicator);
+        navigate("/");
     };
-
     const logoText = "Find Stays";
     const processName = (name) => {
         if (name.includes(' ')) {
@@ -84,6 +95,8 @@ const Navbar = () => {
                         console.log("User is logged in.");
                         if (responseData.info) {
                             console.log("User data:", responseData.info);
+                            setProfilepic(responseData.info.profilePicture);
+                            setUserName(responseData.info.userName);
                         } else {
                             console.log("No user data available.");
                         }
@@ -101,9 +114,19 @@ const Navbar = () => {
 
         askLoggedInStatus();
     }, []);
-
-
-    const url = 'https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
+    const loggedOut = () => {
+        fetch(
+            "http://localhost:3200/auth/logout",
+            {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            }
+        );
+        navigate("/")
+    }
+    const [Profilepic, setProfilepic] = useState('https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4')
+    const [userName, setUserName] = useState('')
     const [hasProfilePicture, setHasProfilePicture] = useState(true); // Set it to `false` if the user doesn't have a profile picture
     // const linkStyle = {
     //     color: 'white',
@@ -152,25 +175,21 @@ const Navbar = () => {
                     {loggedIn ? (
 
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: '7%' }}>
-                            <Link to='/favourites'>
-                                <div>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: '4%' }}>
-                                        <img src={heart} />
-                                        <Typography>Favourites</Typography>
-                                    </Box>
-                                </div>
-                            </Link>
+                            <HoverableBox onClick={handleFav} sx={{ display: 'flex', alignItems: 'center', gap: '4%' }} >
+                                <img src={heart} />
+                                <Typography>Favourites</Typography>
+                            </HoverableBox>
                             <span>|</span>
                             <Box sx={{ display: 'flex', alignItems: 'center', margin: '2%' }}>
                                 {hasProfilePicture ? (
-                                    <Avatar src={url} alt="User Avatar" sx={{
+                                    <Avatar src={Profilepic} alt="User Avatar" sx={{
                                         width: 35,
                                         height: 35,
                                     }} />
                                 ) : (
                                     <Avatar src="//" alt="J" sx={{ width: 40, height: 40 }} />)}
                                 <Typography variant="body1" sx={{ marginLeft: '8px', cursor: 'pointer' }} onClick={handleUserNameClick}>
-                                    {processName('John Doe')}
+                                    {userName}
                                 </Typography>
                             </Box>
                             {/* <Button onClick={() => setLoggedIn(false)} sx={{ color: theme.palette.text.primary, marginLeft: '16px' }}>
@@ -196,6 +215,7 @@ const Navbar = () => {
                         onLogout={() => {
                             handleDropdownClose(); // Close the dropdown after logout
                             setLoggedIn(false);
+                            loggedOut();
                         }}
                     // Add more props as needed for your custom dropdown items
                     />

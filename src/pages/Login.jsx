@@ -120,13 +120,13 @@ const Login = () => {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              padding: "80px",
+              padding: "70px",
             }}
           >
             <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
               LOGIN
             </Typography>
-            <Typography sx={{ mb: 4 }}>
+            <Typography sx={{ mb: 2 }}>
               Login to access your Golobe Account
             </Typography>
             <Box
@@ -135,7 +135,7 @@ const Login = () => {
               onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >
-              <Grid container spacing={2}>
+              <Grid container spacing={1.5}>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -197,7 +197,7 @@ const Login = () => {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                     <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
                       sx={{
                         width: "150px",
@@ -262,7 +262,7 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             height: "100%",
-            padding: "70px",
+            padding: "110px",
           }}
         >
           <Carousel
@@ -321,6 +321,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
