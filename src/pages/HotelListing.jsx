@@ -66,8 +66,8 @@ const HotelListing = () => {
   
 
   // ... other functions and state
-
   const handleSearch = async () => {
+    console.log("Entered handleSearch")
     try {
       const selectedAmenitiesIds = [...amenties, ...extraAment]
         .filter((amenity) => amenity.checked)
@@ -88,18 +88,21 @@ const HotelListing = () => {
       )}&rating=${encodeURIComponent(selectedRating)}`;
 
       console.log("url", url);
-      const response = await fetch(url);
-      const data = await response.json();
+
+    // const response = await fetch(url,{mode: "no-cors"}).then(response => response.json())
+    const response = await fetch(url).then(response => response.json())
+
+    console.log(response)
+    // const data = await response.json();
 
       setSearchResults(data);
-    
-      console.log("Slength", searchresults.length)
       console.log('After displaying data', data);
       // console.log("url", url);
     } catch (error) {
       console.error('Error occurred during fetch:', error);
     }
   };
+
 
   useEffect(() => {
     handleSearch();
@@ -132,11 +135,7 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-     {searchresults.length >= 1 ? (
-        <Hotels data={searchresults} />
-       ) : ( 
-       <NoDataCard /> 
-       )} 
+      <Hotels data={searchresults} />
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );

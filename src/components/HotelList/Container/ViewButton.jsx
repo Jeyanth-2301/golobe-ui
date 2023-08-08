@@ -73,9 +73,6 @@ fetch(url, fetchOptions)
         marginRight: '28px',
         marginLeft: '50px',
         marginTop: -0.3,
-        '&:hover' :{
-          backgroundColor:'#8DD3BB'
-        }
       }}
     >
       <Typography

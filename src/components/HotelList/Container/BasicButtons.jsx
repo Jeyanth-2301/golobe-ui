@@ -32,9 +32,9 @@ setAnchorEl(null)
    
    <ThemeProvider theme={theme}>
      <>
-     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px', marginLeft:'30px'}}>
-          <Box sx={{display:'flex',gap:'5%',marginLeft: '3px'}}>
-              <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>Showing 4 of </b></Typography> 
+     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px'}}>
+          <Box sx={{display:'flex',gap:'5%'}}>
+              <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>showing 4 of </b></Typography> 
               <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>{items.length} places </h5>
           </Box>
           <div  style ={{whiteSpace: 'nowrap', display:'flex',marginRight: '55px', marginRight:'-3px'}}>

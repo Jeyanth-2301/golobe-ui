@@ -12,13 +12,12 @@ function Content({items}){
     const addLine2 = items.location.address.slice(address + 1).trim();
 
 
-    const hotelRating = parseFloat(items.rating).toFixed(1);
-    const hotelStarRating = items.hotelType;
+    const hotelRating = Math.round(items.rating)
 
     return(                  
         <Box sx = {{height: 220}}>
             <CardContent>
-                <Grid item sx={{ flex: '1 0 auto',marginLeft: 53.5,marginTop: -1.5}} > 
+                <Grid item sx={{ flex: '1 0 auto',marginLeft: 51.5}} > 
                     <Grid item sx = {{marginLeft: '23px'}}>
                     <Typography variant = "price" component="span">
                         Starting from
@@ -35,7 +34,7 @@ function Content({items}){
                     </Grid>
                     
                     <Typography
-                        sx={{ fontFamily: 'Montserrat', fontSize: '13px', marginLeft: '67px', marginTop: '-2px' }}>
+                        sx={{ fontFamily: 'Montserrat', fontSize: '13px', marginLeft: '60px', marginTop: '2px' }}>
                         excl. tax
                     </Typography>                           
                 </Grid>    
@@ -70,20 +69,12 @@ function Content({items}){
                                 <Grid item sx = {{textAlign :  'left',marginLeft: 10,fontSize: 14}}>
                                     <CoffeeIcon size = "small"/>
                                     <Grid sx = {{marginLeft: 4,marginTop: -3}}>
-                                          <Typography variant = "amenities">
-                                            <b>{items.amenities.length}</b>+Aminities
-                                          </Typography>
+                                          <Typography variant = "amenities">{items.amenities.length}+Aminities</Typography>
                                     </Grid> 
                                 </Grid>  
                             </Grid>  
-                            <Button variant="outlined" sx = {{marginTop: -1,height:'40px',color: "#112211"}}>{hotelRating}</Button>
-                            <Grid item sx={{ marginTop: -1, pl: 1 }}>
-                                <Typography variant="review">
-                                    {items.overallReview} {items.numReviews}{""} 
-                                    <span style={{ marginRight: '5px' }}><Typography variant = "address"> reviews</Typography></span> 
-                                </Typography>
-                            </Grid>
-       
+                            <Button variant="outlined" sx = {{marginTop: -1,height:'40px',color: "#112211"}}>{items.rating}</Button>
+                            <Grid item sx ={{marginTop: -1,pl:1}}><b>{items.overallReview}</b> {items.numReviews}     reviews</Grid>       
                                 
                 <Divider variant="middle" /> 
                 </Grid>
