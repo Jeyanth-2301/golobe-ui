@@ -33,8 +33,10 @@ function FullReview() {
   // fetching of review data
   const fetchReviewsData = async () => {
     try {
+      const params = new URLSearchParams(window.location.search);
+      const hotelId = params.get('q'); 
       const response = await fetch(
-        "http://localhost:3200/hotels/64c7a67362874d48eb6d3ed2/guest-reviews"
+        `http://localhost:3200/hotels/${hotelId}/guest-reviews`
       );
       if (!response.ok) {
         setErrorMessage("Failed to fetch reviews data");
@@ -54,7 +56,7 @@ function FullReview() {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:3200/hotels/64c7a67362874d48eb6d3ed2/reviews",
+        `http://localhost:3200/hotels/${hotelId}/reviews`,
         {
           method: "POST",
           headers: {
