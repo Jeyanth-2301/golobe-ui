@@ -443,6 +443,13 @@ const themeTypography = {
        fontSize: "1.25rem",
        fontWeight:"bold",
     },
+    foot:{
+      
+      fontSize: "2.15rem",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "2.9rem",
+    },
 
 };
 

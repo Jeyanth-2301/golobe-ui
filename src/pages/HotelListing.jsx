@@ -10,9 +10,9 @@ const HotelListing = () => {
   const destination = queryParameters.get('q');
   const checkInDate = queryParameters.get('checkIn');
   const checkOutDate = queryParameters.get('checkOut');
-
+  const numberOfRooms = queryParameters.get('rooms');
   const [searchresults, setSearchResults] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState([899, 17375]);
+  const [selectedPrice, setSelectedPrice] = useState([899, 10000]);
   const [selectedRating, setSelectedRating] = useState(null);
 
   const [amenties, setAmenties] = useState([
@@ -92,11 +92,11 @@ const HotelListing = () => {
     // const response = await fetch(url,{mode: "no-cors"}).then(response => response.json())
     const response = await fetch(url).then(response => response.json())
 
-    console.log(response)
+    // console.log(response)
     // const data = await response.json();
 
-      setSearchResults(data);
-      console.log('After displaying data', data);
+      setSearchResults(response);
+      console.log('After displaying data', response);
       // console.log("url", url);
     } catch (error) {
       console.error('Error occurred during fetch:', error);
@@ -107,10 +107,10 @@ const HotelListing = () => {
   useEffect(() => {
     handleSearch();
   }, [
-    dest,
-    In,
-    out,
-    room,
+    destination,
+    checkInDate,
+    checkOutDate,
+    numberOfRooms,
     selectedPrice,
     selectedRating,
     amenties,
@@ -120,15 +120,10 @@ const HotelListing = () => {
   return (
     <div>
       <Searchafter
-        dest={dest}
-        checkin={In}
-        checkout={out} 
-        rooms={room}
-        setIn={setIn}
-        setOut={setOut}
-        setDest={setDest}
-        setRoom={setRoom}
-        handleSearch={handleSearch}
+        dest={destination}
+        checkin={checkInDate}
+        checkout={checkOutDate} 
+        rooms={numberOfRooms}
       />
       <Filter
         handleChangePrice={handleChangePrice}

@@ -33,7 +33,6 @@ function FavIcon({hotelIds}){
                 .then(data => {
                     console.log('PUT request succeeded with response:', data);
                 })
-                
                 .catch(error => {
                     console.error('There was a problem with the PUT request:', error);
                 });

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 //import React from 'react'
 import { useState, useEffect} from 'react';
 import html2pdf from 'html2pdf.js'
@@ -54,15 +54,15 @@ const handleDownloadClick = () =>{
   const opt = {
     margin:10,
     filename: 'Confirmation.pdf',
-    image: {type: 'jpeg', quality: 0.98},
-    html2canvas: {scale: 2},
+    image: {type: 'jpg', quality: 1},
+    html2canvas: {scale: 1.5},
     jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
     pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
   };
     // content.style.fontSize = '5px';
     html2pdf().from(content).set(opt).save();
     content.setAttribute('style', originalStyles);
-//     setIsDownloaded(true);
+     setIsDownloaded(true);
 };
 
 useEffect(() => {

@@ -59,7 +59,7 @@ export default function Price({ value,changePrice}){
                 size='small'
                 value={value}
                 onChange={changePrice}
-                defaultValue={899}  min={899} max={10000}  
+                defaultValue={899}  min={899} max={17375}  
                 ref={sliderRef}/>
                
                 <div  style ={{display: 'flex'}}>

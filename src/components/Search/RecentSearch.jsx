@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 const RecentSearch = () => {
 
   const[imgdata,setData]=useState([]);
+  const [loggedIn,setLoggedIn]=useState(false)
 
   const  imgList=[{
 
@@ -35,16 +36,55 @@ const RecentSearch = () => {
   
 
 
+
 ]
+
+
+const askLoggedInStatus = async () => {
+  try {
+      const response = await fetch(
+          "http://localhost:3200/auth/users/user/islogined",
+          {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+          }
+      );
+
+      if (response.ok) {
+          const responseData = await response.json();
+
+          if (responseData.success) {
+              setLoggedIn(true);
+
+              console.log("User is logged in.");
+             
+          } else {
+              setLoggedIn(false);
+              console.log("User is not logged in.");
+          }
+      } 
+  } catch (error) {
+      console.error("An error occurred:", error.message);
+  }
+};
+
+
 
 
 
   const fetchData = async () =>{
     try{
     const url="http://localhost:3200/auth/users/recent";// i have to call the endpoint without the userid 
-    const response = await fetch(url);
+    const response = await fetch(url,{
+      
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+    
+    });
     const data = await response.json();
-    console.log(data);
+    console.log("recent data",data);
     setData(data);
    }
    catch(error){
@@ -55,9 +95,18 @@ const RecentSearch = () => {
 
 
 
-    useEffect (() => {
+  
+useEffect(() => {
+  askLoggedInStatus();
+  
+}, []);
+
+useEffect(() => {
+  if (loggedIn) {
     fetchData();
-  },[] )
+  }
+}, [loggedIn]);
+
 
 
   return (
