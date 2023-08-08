@@ -59,15 +59,9 @@ const handleDownloadClick = () =>{
   const opt = {
     margin:10,
     filename: 'Confirmation.pdf',
-<<<<<<< HEAD
     image: {type: 'jpeg', quality: 0.98},
     html2canvas: {scale: 2},
     jsPDF: {unit: 'mm', format: 'a4', orientation: 'landscape'},
-=======
-    image: {type: 'jpg', quality: 1},
-    html2canvas: {scale: 1.5},
-    jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
->>>>>>> 0a841574314793c72cdbca1bf5a28abb41bfead9
     pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
   };
     // content.style.fontSize = '5px';
