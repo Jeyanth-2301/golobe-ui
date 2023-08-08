@@ -37,6 +37,11 @@ export default function LoginSide() {
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
+  const handleClick= () =>{
+navigate('/')
+  }
+    
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -173,9 +178,9 @@ export default function LoginSide() {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer" onClick={handleClick ()}>
                     <Box
-                      sx={{
+                      sx={{ 
                         width: "150px",
                         height: "56px",
                         border: "1px solid #8DD3BB",
@@ -183,6 +188,7 @@ export default function LoginSide() {
                         justifyContent: "flex-start",
                         display: "flex",
                       }}
+                      
                     >
                       <Box
                         sx={{

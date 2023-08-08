@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
 import {useState} from  'react';
 import drop from '../../../assets/icons/drop-icons/drop.svg';
 import { Box, Grid, Typography } from '@mui/material';
@@ -33,13 +32,13 @@ setAnchorEl(null)
    
    <ThemeProvider theme={theme}>
      <>
-     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px'}}>
-          <Box sx={{display:'flex',gap:'5%'}}>
-              <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>showing 4 of </b></Typography> 
+     <Box sx={{display:'flex',justifyContent:'space-between',marginTop:'25px',marginBottom: '10px', marginLeft:'30px'}}>
+          <Box sx={{display:'flex',gap:'5%',marginLeft: '3px'}}>
+              <Typography sx = {{fontSize : '14px', whiteSpace: 'nowrap'}}><b>Showing 4 of </b></Typography> 
               <h5 style ={{color: theme.palette.text.secondary, whiteSpace: 'nowrap'}}>{items.length} places </h5>
           </Box>
-          <div  style ={{whiteSpace: 'nowrap', display:'flex'}}>
-          <Typography sx = {{fontSize: '14px'}}>Sort by <b>{selectedOption}</b> </Typography>
+          <div  style ={{whiteSpace: 'nowrap', display:'flex',marginRight: '55px', marginRight:'-3px'}}>
+          <Typography sx = {{fontSize: '14px', marginLeft:'20px'}}>Sort by <b>{selectedOption}</b> </Typography>
           <div>
             <img src ={ drop}  sx ={{marginLeft:'10px'}} onClick={handleUserNameClick} style={{ cursor: 'pointer' }} />
        

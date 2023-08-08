@@ -4,6 +4,7 @@ import Media from "./Media";
 import Content from "./Content";
 import FavAndView from "./FavAndView";
 import Divider from '@mui/material/Divider';
+import NoDataCard from "./Nodata";
 // import { Scrollbar } from 'react-scrollbars-custom';
 
 
@@ -15,7 +16,8 @@ function MainCard({hotelData, showAllHotels}){
     
 <>
 {showAllHotels ? 
-    <Container  sx={{overflowY: "auto", overflowX :'hidden', height :"calc(100vh - 100px)" }}> 
+    <Container  sx={{overflowY: "auto", overflowX :'hidden', height : 1400 }}> 
+    {hotelData.length >= 1 ? ( <>
     {hotelData.map((hotel)=>(
     <Card  key ={hotel._id} sx={{display: 'flex', margin: 1, height: 299,elevation : 4, width: 880,marginBottom: '50px', borderRadius:'12px',marginTop: '55px'}} >
         <Media imageUrl = {hotel.images[0]} />
@@ -26,24 +28,29 @@ function MainCard({hotelData, showAllHotels}){
             <FavAndView  hotelId = {hotel._id}/>
         </Grid>
     </Card>  
-    ))}
-
+    ))}  </> ) :(< NoDataCard />)}
  </Container> :
+
 <>
-    {hotelData.map((hotel)=>(
 
-        <Card  key = {hotel._id} sx={{display: 'flex', margin: 1, height: 299,elevation : 4, width: 850,marginBottom: '50px', borderRadius:'12px',marginTop: '55px'}} >
-            <Media imageUrl = {hotel.images[0]} />
-            <Grid container rowSpacing={2}>
-                <Grid item xs ={12}>
-                <Content items = {hotel}/> </Grid>
-                <Divider variant = "middle"/>
-                <FavAndView hotelId ={hotel._id}/>
-            </Grid>
-        </Card>  
-  
+    <Container > 
+    {hotelData.length >= 1 ? ( <>
+        {hotelData.map((hotel)=>(
+            <Card  key = {hotel._id} sx={{display: 'flex', margin: 1, height: 299,elevation : 4, width: 880,marginBottom: '50px', borderRadius:'12px',marginTop: '55px'}} >
+                <Media imageUrl = {hotel.images[0]} />
+                <Grid container rowSpacing={2}>
+                    <Grid item xs ={12}>
+                    <Content items = {hotel}/> </Grid>
+                    <Divider variant = "middle"/>
+                    <FavAndView hotelId ={hotel._id}/>
+                </Grid>
+            </Card>  
+    
 
-    ))}
+        ))} </>) : (< NoDataCard />)}
+    </Container>
+
+
     </>
     }
     </>

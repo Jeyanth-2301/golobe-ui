@@ -3,6 +3,7 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
+import NoDataCard from '../components/HotelList/Container/Nodata';
 //13
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -11,10 +12,9 @@ const HotelListing = () => {
   const checkOutDate = queryParameters.get('checkOut');
   const numberOfRooms = queryParameters.get('rooms');
   const [searchresults, setSearchResults] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState([899, 17375]);
+  const [selectedPrice, setSelectedPrice] = useState([899, 10000]);
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-  const[selectExtraAment, setSelectExtraAment] = useState([]);
+
   const [amenties, setAmenties] = useState([
     { id: 1, label: 'Airport shuttle', checked: false },
     // ... other amenities
@@ -32,6 +32,7 @@ const HotelListing = () => {
     { id: 10, label: 'Facilities for disabled guests', checked: false }
     
   ]);
+  
   const handleChangePrice = (e, newValue) => {
     setSelectedPrice(newValue);
 
@@ -91,6 +92,8 @@ const HotelListing = () => {
       const data = await response.json();
 
       setSearchResults(data);
+    
+      console.log("Slength", searchresults.length)
       console.log('After displaying data', data);
       // console.log("url", url);
     } catch (error) {
@@ -129,7 +132,11 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-      <Hotels data={searchresults} />
+     {searchresults.length >= 1 ? (
+        <Hotels data={searchresults} />
+       ) : ( 
+       <NoDataCard /> 
+       )} 
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );
