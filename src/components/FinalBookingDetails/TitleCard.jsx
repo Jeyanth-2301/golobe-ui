@@ -48,6 +48,9 @@ const Detail = () => {
 const [isDownloaded, setIsDownloaded] = useState(false);
 const handleDownloadClick = () =>{
   const content = document.getElementById('pageContent');
+  const originalStyles =  content.getAttribute('style');
+  content.style.fontSize = '10px';
+
   const opt = {
     margin:10,
     filename: 'Confirmation.pdf',
@@ -56,9 +59,10 @@ const handleDownloadClick = () =>{
     jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
     pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
   };
-    content.style.fontSize = '5px';
+    // content.style.fontSize = '5px';
     html2pdf().from(content).set(opt).save();
-    setIsDownloaded(true);
+    content.setAttribute('style', originalStyles);
+//     setIsDownloaded(true);
 };
 
 useEffect(() => {

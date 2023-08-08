@@ -21,15 +21,12 @@ function Hotels({data}) {
                 <Container sx={{ width: '970px', height: '1508px', marginTop: '-810px', marginRight: '100px' }}>
                     <Box sx={{ height: '30px' }}>
                         <BasicButtons items = {data} />
-                    </Box>
-                   
-                    <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels}  />
-                
+                    </Box>       
+                    <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels}  />       
                     <Box sx={{ marginTop: 3 }}>
                         <Button  onClick={()=> setShowAllHotels(!showAllHotels)}  
-                         
-                            disableRipple disableElevation 
-                            sx={{ width: 858, height: '48px', backgroundColor: "#112211",
+                              disableRipple disableElevation 
+                            sx={{ width: 890, marginLeft: 3,height: '48px', backgroundColor: "#112211",
                             '&:hover': {
                                 backgroundColor: '#112211'
                             }

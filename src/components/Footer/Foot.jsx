@@ -27,6 +27,35 @@ const Foot = () => {
     setvalidEmail(true);
   };
 
+ 
+const currentDate = new Date();
+
+
+const checkInDate = new Date(currentDate);
+checkInDate.setDate(currentDate.getDate() + 1);
+
+const checkOutDate = new Date(checkInDate);
+checkOutDate.setDate(checkInDate.getDate() + 2);
+
+
+const formattedCheckIn = formatDate(checkInDate);
+const formattedCheckOut = formatDate(checkOutDate);
+
+
+const tirunelveli = `http://localhost:5173/hotel-listing?q=Tirunelveli&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&rooms=1`;
+const chennai = `http://localhost:5173/hotel-listing?q=Chennai&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&rooms=1`;
+const cochin = `http://localhost:5173/hotel-listing?q=Cochin&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&rooms=1`;
+const bangalore = `http://localhost:5173/hotel-listing?q=Bangalore&checkIn=${formattedCheckIn}&checkOut=${formattedCheckOut}&rooms=1`;
+
+
+
+// Function to format date as YYYY-MM-DD
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
 
 
   return (
@@ -70,23 +99,23 @@ const Foot = () => {
       <Container maxwidth="md" maxHeight="md" style={{ marginTop: '50px' }}>
         <Grid container justifyContent="center">
           <Grid item xs={6} sm={2} direction={'column'} spacing={10}>
-            <Typography varient='h6' style={{ marginBottom: '20px', color: 'black' }}>Residence</Typography>
+            <Typography variant='body1' style={{ marginBottom: '20px', color: 'black' }}><b>Residence</b></Typography>
 
             <Typography variant='body2'>
-              <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Canada </Link>
+              <Link href={tirunelveli} underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Tirunelveli </Link>
             </Typography>
             <Typography variant='body2'>
-              <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>France </Link>
+              <Link href={chennai} underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Chennai </Link>
             </Typography>
             <Typography variant='body2'>
-              <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Germany</Link>
+              <Link href={cochin} underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Cochin</Link>
             </Typography>
             <Typography variant='body2' >
-              <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Australia</Link>
+              <Link href={bangalore} underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Bangalore</Link>
             </Typography>
           </Grid>
           <Grid item xs={6} sm={2} direction={'column'} spacing={10}>
-            <Typography varient='h6' style={{ marginBottom: '20px', color: 'black' }}>Activities</Typography>
+            <Typography variant='body1' style={{ marginBottom: '20px', color: 'black' }}><b>Activities</b></Typography>
             <Typography variant='body2'>
               <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Northern Lights</Link>
             </Typography>
@@ -98,7 +127,7 @@ const Foot = () => {
             </Typography>
           </Grid>
           <Grid item xs={6} sm={2} direction={'column'} spacing={10}>
-            <Typography varient='h6' style={{ marginBottom: '20px', color: 'black' }}>Blogs</Typography>
+            <Typography variant='body1' style={{ marginBottom: '20px', color: 'black' }}><b>Blogs</b></Typography>
             <Typography variant='body2'>
               <Link href="#" underline="hover" style={{ display: 'block', marginBottom: '17px', color: 'black' }}>Bali Travel Guide</Link>
             </Typography>
@@ -111,8 +140,8 @@ const Foot = () => {
           </Grid>
 
           <Grid item xs={12} sm={4} >
-            <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
-              Follow Us
+            <Typography variant="body1" gutterBottom style={{ color: 'black' }}>
+             <b> Follow Us</b>
             </Typography>
             <Link href="https://www.facebook.com/" color="#000000">
               <img src={facebook} />

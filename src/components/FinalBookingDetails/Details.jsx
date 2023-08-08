@@ -11,7 +11,7 @@ const Main = () => {
   return (
     <>
       
-      <Container id="pageContent" style={{marginTop:'7rem'}}>
+      <Container id="pageContent" style={{marginTop:'7rem', width:'100%'}}>
       <Top />
       <Detail/>
       <Booking  />
