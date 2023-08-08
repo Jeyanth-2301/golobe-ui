@@ -3,7 +3,7 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
-import NoDataCard from '../components/HotelList/Container/Nodata';
+
 //13
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
