@@ -1,36 +1,65 @@
 import React from 'react';
 import { Grid, Paper, Typography} from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import axios from 'axios';
+import {useState,useEffect} from 'react';
 
 const Overviewsection = () => {
-  const review="Very Good";
-  const totalreview="750"
- const components=['Near park','Near Nightlife','Near Hospital'];
+  const [overview,setoverview]=useState();
+  const [numReviews,setnumReviews]=useState();
+  const [rating,setrating]=useState();
+  const [overallReview,setoverallReview]=useState();
+  const [locationFeatures,setlocationFeatures]=useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const hotelId = params.get('q'); 
+      const url = `http://localhost:3200/hotels/${hotelId}`;
+        const response=await axios.get(url)
+      const data=response.data;
+      console.log(data)
+      if(data){
+        setoverview(data.overview);
+        setnumReviews(data.numReviews);
+        const ratings=data.rating;
+        const rate=ratings%1===0?ratings.toFixed(0):ratings.toFixed(1);
+        setrating(rate);
+        setoverallReview(data.overallReview);
+        setlocationFeatures(data.locationFeatures);
+      }
+
+    } catch (error) {
+      console.error('Error fetching data:', error.message);
+    }
+  };
   return (
     <div>
       
     <Grid container  style={{ height: '50vh',width:'90vw',marginTop:'70px'}}>
-     <Grid item xs={12} style={{ height: '250px',width:'1232px',overflow: 'hidden' }}  >
-          <Typography variant="element1">Overview</Typography><br/>
-          <Typography variant="element2">Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.</Typography>
-     </Grid>
+     <Grid item xs={12}  style={{ height: '20px',width:'1232px',overflow:'hidden' , fontFamily: "Montserrat, sans-serif", fontSize: "1.25rem",fontWeight: 700,lineHeight: "1.57875rem",}}  >Overview</Grid>
+     <Grid item xs={12}  style={{ height: '140px',width:'1232px',overflow:'auto',marginTop:'15px', fontFamily: "Montserrat, sans-serif",  fontSize: "1rem",fontWeight: 500,lineHeight: "1.21875rem",}}  >{overview}</Grid>   
+   
      
     <Grid container  style={{height:'145px',width:'1232px' }} >
            
               <Paper style={{ height: '145px',width:'166px',overflow: 'hidden', backgroundColor:'#8DD3BB' ,border: '0.5px  #000', borderRadius: '12px' }}>
                  <Paper elevation={0} style={{ height: '113px',width:'96px',marginLeft:'16px',backgroundColor:'#8DD3BB',marginTop:'16px',marginBottom:'16px' }}>
-                    <Typography variant='element3' >4.2</Typography><br/><br/>
-                    <Typography variant='element4'  >{review}</Typography><br/>
-                    <Typography variant='element5'>{totalreview} Reviews</Typography>
+                    <Typography variant='element3' >{rating}</Typography><br/><br/>
+                    <Typography variant='element4'  >{overallReview}</Typography><br/>
+                    <Typography variant='element5'>{numReviews} Reviews</Typography>
                  </Paper>
               </Paper>
-      {components.map((feature, index) => (
+      {locationFeatures.map((feature, index) => (
         <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
            <div>
               <Paper style={{ height: '145px',width:'160px',overflow: 'hidden',marginLeft:'40px',border: '2px solid #8DD3BB',borderRadius: '12px'}} >
                 <AutoAwesomeIcon style={{ fontSize:40 ,marginLeft:'10px' ,marginTop:'10px'}}/><br/><br/><br/>
-                <Typography variant='element6' >{feature}</Typography>
-              </Paper>
+                <Grid sx={{  fontSize: "1rem",fontWeight: 500,lineHeight: "1.21875rem", marginLeft: '1.25rem',alignItems:'center'}}>{feature}</Grid>
+               </Paper>
           </div>
           
         </Grid>
