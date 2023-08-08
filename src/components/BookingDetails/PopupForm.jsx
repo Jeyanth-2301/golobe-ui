@@ -57,22 +57,34 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
   const handleSubmit = async (values) => {
     setIsSubmitting(true);
     try {
-      // Make the HTTP POST request to your backend API endpoint
-      const response = await axios.post("http://localhost:3200/auth/users/user/cards/saveCard", {
-        cardNumber: values.cardNumber,
-        expirationDate: values.expirationDate,
-        cvv: values.cvv,
-        cardHolder: values.cardHolder,
+      const response = await fetch("http://localhost:3200/auth/users/user/cards/saveCard", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cardNumber: values.cardNumber,
+          expirationDate: values.expirationDate,
+          cvv: values.cvv,
+          cardHolder: values.cardHolder,
+        }),
       });
-      // Handle the response from the backend (if needed)
-      // Close the popup after successful submission
-      handleClosePopup();
+  
+      if (response.ok) {
+        // Handle the response from the backend (if needed)
+        // Close the popup after successful submission
+        handleClosePopup();
+      } else {
+        // Handle errors if the request fails
+        const errorData = await response.json();
+        console.error("Error adding card:", errorData);
+      }
     } catch (error) {
-      // Handle errors if the request fails
       console.error("Error adding card:", error);
     }
     setIsSubmitting(false);
   };
+  ;
   
   return (
     <Dialog open={open} onClose={handleClosePopup} fullWidth maxWidth="sm">
