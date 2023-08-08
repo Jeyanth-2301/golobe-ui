@@ -62,11 +62,11 @@ function formatDate(date) {
 
     <footer style={{ backgroundColor: '#8DD3BB', color: 'white', padding: '20px 0px', bottom: 0, left: 0, right: 0, height: '370px', maxWidth: '1440' }}>
 
-      < Container maxWidth="100%"style={{ marginTop: '-180px', position: 'relative', top: '50%', left: '40%', transform: 'translate(-42%, -35%)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1, maxWidth: '1300px', maxHeight: '500px' }}>
+      < Container maxWidth="md" style={{ marginTop: '-180px', position: 'relative', top: '50%', left: '40%', transform: 'translate(-40%, -35%)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1, maxWidth: '1500px', maxHeight: '500px' }}>
         <Card style={{ maxWidth: '1500px', maxHeight: '200px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'row', marginBottom: '80px', width: '100%', borderRadius: '16px', backgroundColor: "#CDEAE1" }}>
           <Box display='flex'  style={{width: '120rem'}}>
-          <Grid container xs={6} md={6} direction="row" alignItems="center" justifyContent="center" spacing="{2}" >
-            <Grid item xs={6} sm={6}  >
+          <Grid container xs={6} sm={6} direction="row" alignItems="center" justifyContent="center" spacing="{2}" >
+            <Grid item xs={6} sm={6} style={{}} >
               <Typography variant='foot'>
                 Subscribe Newsletter
               </Typography>
@@ -94,13 +94,15 @@ function formatDate(date) {
               />
               
             </Grid>
-            <Grid item xs={4} style={{marginTop:'6rem', marginLeft: '8rem' }}>
-              <Button variant="contained" color="primary" onClick={handleSubscribe} fullWidth>
+            </Grid>
+            <Grid container></Grid>
+            <Grid item  style={{marginTop:'6.5rem',marginRight: '2.8rem',  }}>
+              <Button variant="contained" size="large" style={{ backgroundColor: '#112211', color:'#FFFFFF'}} onClick={handleSubscribe} fullWidth>
                 Subscribe
               </Button>
             </Grid>
             
-          </Grid>
+          
           </Box>
           <Grid container  display='flex'alignItems='flex-end' justifyContent= 'flex-end' style={{marginBottom: '2rem', height: '20rem'}}>
           <Box  display= 'flex' direction='row' style={{width:'16rem', height: '12rem', marginBottom: '20rem'}}>

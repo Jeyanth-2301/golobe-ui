@@ -36,6 +36,18 @@ const Login = () => {
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+  const handleLoginSuccess = (message) => {
+    setSnackbarSeverity("success");
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+    navigate("/");
+  };
+
+  const handleLoginFailure = (message) => {
+    setSnackbarSeverity("error");
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -185,7 +197,7 @@ const Login = () => {
                 >
                   <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
-                      sx={{ 
+                      sx={{
                         width: "150px",
                         height: "56px",
                         border: "1px solid #8DD3BB",
@@ -193,7 +205,7 @@ const Login = () => {
                         justifyContent: "flex-start",
                         display: "flex",
                       }}
-                      
+
                     >
                       <Box
                         sx={{

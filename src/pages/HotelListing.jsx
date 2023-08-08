@@ -35,6 +35,7 @@ const HotelListing = () => {
   
   const handleChangePrice = (e, newValue) => {
     setSelectedPrice(newValue);
+    console.log("price",selectedPrice);
 
   }
   
@@ -87,21 +88,18 @@ const HotelListing = () => {
         JSON.stringify(selectedPrice)
       )}&rating=${encodeURIComponent(selectedRating)}`;
 
-      console.log("url", url);
-
-    // const response = await fetch(url,{mode: "no-cors"}).then(response => response.json())
-    const response = await fetch(url).then(response => response.json())
-
-    // console.log(response)
-    // const data = await response.json();
-
-      setSearchResults(response);
-      console.log('After displaying data', response);
-      // console.log("url", url);
-    } catch (error) {
-      console.error('Error occurred during fetch:', error);
-    }
-  };
+      console.log(url);
+   
+        const response = await  fetch(url);
+        const data =  await  response.json();
+        console.log(data);
+        setSearchResults(data);
+     
+        }
+        catch (error) {
+              console.error("Error occurred during fetch:", error);
+            }
+          }
 
 
   useEffect(() => {
