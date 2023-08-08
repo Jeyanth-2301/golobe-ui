@@ -75,7 +75,7 @@ const askLoggedInStatus = async () => {
 
   const fetchData = async () =>{
     try{
-    const url="http://localhost:3200/auth/users/recent";// i have to call the endpoint without the userid 
+    const url="http://localhost:3200/auth/users/recent";
     const response = await fetch(url,{
       
         method: "GET",
