@@ -9,7 +9,7 @@ function ViewButton({ hotelIds }) {
     const navigate = useNavigate();
    
     const handleIconClick = () => {
-          console.log("hotel",hotelIds);
+          // console.log("hotel",hotelIds);
           const queryString = `?q=${encodeURIComponent(hotelIds)}`;
           
           // const userId ="64cb50827767115059b3eaa7";
@@ -67,12 +67,15 @@ fetch(url, fetchOptions)
       variant="outlined"
       disabledRipple
       sx={{
-        width: '600px',
+        width: '420px',
         height: '38px',
         backgroundColor: '#8DD3BB',
         marginRight: '28px',
         marginLeft: '50px',
         marginTop: -0.3,
+        '&:hover' :{
+          backgroundColor :'#8DD3BB'
+        }
       }}
     >
       <Typography

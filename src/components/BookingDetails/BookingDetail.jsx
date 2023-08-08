@@ -60,16 +60,16 @@ useEffect(() => {
       console.log('Hotel Response:', hotelResponse.data,"  ","RoomId",index);
 
       // Fetch room details
-      // const roomUrl = `http://localhost:3200/rooms/${roomId}`;
-      const roomResponse = await axios.get(roomUrl);
-      const roomData = roomResponse.data;
+      //  const roomUrl = `http://localhost:3200/rooms/${roomId}`;
+      // const roomResponse = await axios.get(roomUrl);
+      // // const roomData = roomResponse.data;
       
-      setRoom(roomData.roomType);
-      setCheckin(roomData.checkInDate);
-      setCheckout(roomData.checkOutDate);
-      setRatePerNight(roomData.ratePerNight);
+      // setRoom(roomData.roomType);
+      // setCheckin(roomData.checkInDate);
+      // setCheckout(roomData.checkOutDate);
+      // setRatePerNight(roomData.ratePerNight);
     
-console.log('Room Response:', roomResponse.data);
+// console.log('Room Response:', roomResponse.data);
     } catch (error) {
       console.error('Error in fetching:', error);
     }
@@ -165,6 +165,12 @@ const handleButtonClick = async () => {
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
   const [showPayNowButton, setShowPayNowButton] = useState(true); // Initialize to true or false as needed
 
+
+  const handleView=(roomId,index,event)=>{
+    event.stopPropagation(); 
+    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
+    navigate(`/payment-page${query}`);
+    }
   return (
     <div>
       <Box sx={{ height: "100vh" }}>
@@ -386,7 +392,7 @@ const handleButtonClick = async () => {
 {!showConfetti && showNewButton && (
   
     <Link to="/payment-page">
-      <Button variant="contained" fullWidth style={{marginBottom:'-178px', marginTop: '15px', marginLeft: '27px', width: '580px'}} onClick={handleView} >
+      <Button variant="contained" fullWidth style={{marginBottom:'-178px', marginTop: '15px', marginLeft: '27px', width: '580px'}} onClick={(event)=>handleView(roomRates[index]?._id,index,event)} >
         View Booking
       </Button>
     </Link>
