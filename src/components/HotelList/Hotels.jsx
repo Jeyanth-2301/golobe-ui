@@ -18,9 +18,9 @@ function Hotels({data}) {
     return (
         <>
             <Box sx={{ marginTop: '' }}>
-                <Container sx={{ width: '899px', height: '1508px', marginTop: '-810px', marginRight: '100px' }}>
-                    <Box sx={{ height: '150px' }}>
-                        <BasicButtons />
+                <Container sx={{ width: '970px', height: '1508px', marginTop: '-810px', marginRight: '100px' }}>
+                    <Box sx={{ height: '30px' }}>
+                        <BasicButtons items = {data} />
                     </Box>
                    
                     <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels}  />
