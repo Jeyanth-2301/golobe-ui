@@ -92,11 +92,11 @@ const HotelListing = () => {
     // const response = await fetch(url,{mode: "no-cors"}).then(response => response.json())
     const response = await fetch(url).then(response => response.json())
 
-    console.log(response)
+    // console.log(response)
     // const data = await response.json();
 
-      setSearchResults(data);
-      console.log('After displaying data', data);
+      setSearchResults(response);
+      console.log('After displaying data', response);
       // console.log("url", url);
     } catch (error) {
       console.error('Error occurred during fetch:', error);
