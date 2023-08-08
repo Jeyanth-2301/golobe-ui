@@ -6,7 +6,6 @@ import { Container, Box, Button } from "@mui/material";
 function Hotels({data}) {
     // console.log(data)
     const [showAllHotels ,  setShowAllHotels] = useState(false);
-
     const getHotelsToShow =()=>{
         if(showAllHotels){
             return data;
@@ -26,7 +25,7 @@ function Hotels({data}) {
                     <Box sx={{ marginTop: 3 }}>
                         <Button  onClick={()=> setShowAllHotels(!showAllHotels)}  
                               disableRipple disableElevation 
-                            sx={{ width: 890, marginLeft: 3,height: '48px', backgroundColor: "#112211",
+                            sx={{ width: 895, marginLeft: 1,height: '48px', backgroundColor: "#112211",
                             '&:hover': {
                                 backgroundColor: '#112211'
                             }
