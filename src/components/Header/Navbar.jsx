@@ -63,25 +63,42 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
+
     useEffect(() => {
         const askLoggedInStatus = async () => {
-            const storedLoggedInStatus = localStorage.getItem('loggedInStatus');
+            try {
+                const response = await fetch(
+                    "http://localhost:3200/auth/users/user/islogined",
+                    {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                    }
+                );
 
-            if (storedLoggedInStatus) {
-                // Use the stored value from localStorage if available
-                setLoggedIn(storedLoggedInStatus === 'true');
-            } else {
-                // Prompt the user and set the value in localStorage
-                const response = window.prompt("Are you logged in? (yes/no)");
-                if (response && response.toLowerCase() === 'yes') {
-                    setLoggedIn(true);
-                    localStorage.setItem('loggedInStatus', 'true');
+                if (response.ok) {
+                    const responseData = await response.json();
+
+                    if (responseData.success) {
+                        setLoggedIn(true);
+                        console.log("User is logged in.");
+                        if (responseData.info) {
+                            console.log("User data:", responseData.info);
+                        } else {
+                            console.log("No user data available.");
+                        }
+                    } else {
+                        setLoggedIn(false);
+                        console.log("User is not logged in.");
+                    }
                 } else {
-                    setLoggedIn(false);
-                    localStorage.setItem('loggedInStatus', 'false');
+                    console.log("Request failed with status:", response.status);
                 }
+            } catch (error) {
+                console.error("An error occurred:", error.message);
             }
         };
+
         askLoggedInStatus();
     }, []);
 

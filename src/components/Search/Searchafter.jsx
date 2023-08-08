@@ -10,9 +10,9 @@ import RoomIcon from '@mui/icons-material/Room';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
-// import search from '../../assets/icons/search-icons/search.svg';
-// import car from '../../assets/icons/search-icons/car.svg';
-// import location from '../../assets/icons/search-icons/location.svg';
+import build from '../../assets/icons/search-icons/build.svg';
+import car from '../../assets/icons/search-icons/car.svg';
+import location from '../../assets/icons/search-icons/location.svg';
 import { Link , useNavigate} from 'react-router-dom';
 
 const StyledTextField = styled(TextField)({
@@ -127,17 +127,6 @@ const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,set
 
             >
             </StyledTextField>
-            </Grid>
-            <Grid item >
-
-              <Box sx={{height:'53px',width:'53px',backgroundColor:'#8DD3BB',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'3px'}}>
-                  <IconButton  onClick={handleClick} >
-                   {/* <img src={search} ></img> */}
-                  </IconButton>
-              
-              </Box>
-
-
             </Grid>
           </Grid>
         </FormControl>

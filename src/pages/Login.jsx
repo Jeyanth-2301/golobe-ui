@@ -1,96 +1,98 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import axios from 'axios';
-import url from '../assets/login/image1.png'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import { CircularProgress } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
+import url from "../assets/login/image1.png";
 
 const theme = createTheme();
 
-export default function LoginSide() {
+const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-  const handleClick= () =>{
-navigate('/')
-  }
-    
-  
   const handleSubmit = async (event) => {
+    setLoading(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-
     if (!email.trim()) {
-      alert("Please enter your Email Address.");
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a valid Email Address.");
+      setSnackbarOpen(true);
+      setLoading(false);
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      alert("Please enter a valid Email Address.");
+      // alert("Please enter a valid Email Address.");
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a valid Email Address.");
+      setSnackbarOpen(true);
+      setLoading(false);
       return;
     }
 
     if (!password.trim()) {
-      alert("Please enter a Password.");
-      return;
+      setSnackbarSeverity("error");
+      setSnackbarMessage("Please enter a password");
+      setSnackbarOpen(true);
+      setLoading(false);
     }
 
-    const apiUrl = 'http://localhost:3200/auth/login?by=local';
+    const apiUrl = "http://localhost:3200/auth/login?by=local";
     const requestData = {
       email,
       password,
     };
+
     try {
       const response = await axios.post(apiUrl, requestData);
-      console.log('API response:', response.data);
-
-      setSnackbarSeverity('success');
-      setSnackbarMessage(response.data.message);
-      setSnackbarOpen(true);
-
-      navigate('/');
+      handleLoginSuccess(response.data.message);
     } catch (error) {
-      console.error('API error:', error);
-      if (error.response && error.response.data && error.response.data.message) {
-
-        setSnackbarSeverity('error');
-        setSnackbarMessage('Login failed: ' + error.response.data.message);
+      console.error("API error:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        handleLoginFailure("Login failed: " + error.response.data.message);
       } else {
-        setSnackbarSeverity('error');
-        setSnackbarMessage('Login failed. Please check your credentials.');
-
+        handleLoginFailure("Login failed. Please check your credentials.");
       }
-      setSnackbarOpen(true);
+    } finally {
+      setLoading(false);
     }
-
   };
 
   return (
@@ -104,19 +106,22 @@ navigate('/')
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              padding: "80px"
-
+              padding: "70px",
             }}
           >
             <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
               LOGIN
             </Typography>
-            <Typography sx={{ mb: 4 }}>
+            <Typography sx={{ mb: 2 }}>
               Login to access your Golobe Account
             </Typography>
-
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
+            >
+              <Grid container spacing={1.5}>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -133,7 +138,7 @@ navigate('/')
                     fullWidth
                     name="password"
                     label="Password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     autoComplete="new-password"
                     InputProps={{
@@ -149,36 +154,36 @@ navigate('/')
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
-                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                    control={
+                      <Checkbox value="allowExtraEmails" color="primary" />
+                    }
                     label="Remember me"
                   />
                 </Grid>
               </Grid>
-              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}></Box>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, bgcolor: "#8DD3BB" }}
+                disabled={loading}
               >
-                Login
+                {loading ? <CircularProgress size={26} /> : "Login"}
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  Dont have an account?
-                  <Link href="#" variant="body2">
+                  Don't have an account?{" "}
+                  <Link href="/signup" variant="body2">
                     Signup
                   </Link>
                 </Grid>
-
-
                 <Grid
                   container
                   direction="row"
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer" onClick={handleClick ()}>
+                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
                       sx={{ 
                         width: "150px",
@@ -240,11 +245,11 @@ navigate('/')
           sm={8}
           md={5}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-            padding: '70px',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            padding: "110px",
           }}
         >
           <Carousel
@@ -253,31 +258,40 @@ navigate('/')
             showStatus={false}
             showThumbs={false}
             showArrows={false}
-            style={{ height: '100%', width: '100%' }}
-
+            style={{ height: "100%", width: "100%" }}
           >
             <div>
-              <img src={url}
+              <img
+                src={url}
                 alt="Slider 1"
-                style={{ height: '100%', width: '100%', objectFit: 'cover', borderRadius: '10%' }} />
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "10%",
+                }}
+              />
             </div>
             <div>
-              <img src={url}
+              <img
+                src={url}
                 alt="Slider 2"
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+                style={{ height: "100%", width: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
-              <img src={url}
+              <img
+                src={url}
                 alt="Slider 3"
-                style={{ height: '100%', width: '100%', objectFit: 'cover' }} />
+                style={{ height: "100%", width: "100%", objectFit: "cover" }}
+              />
             </div>
           </Carousel>
         </Grid>
-
       </Grid>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={handleSnackbarClose}
       >
         <MuiAlert
@@ -291,4 +305,9 @@ navigate('/')
       </Snackbar>
     </ThemeProvider>
   );
-}
+};
+
+export default Login;
+
+
+
