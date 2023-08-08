@@ -237,7 +237,7 @@ const themeTypography = {
     },
     price: {
         fontFamily: 'Montserrat',
-        fontSize: '13px',
+        fontSize: '12px',
         lineHeight: 'normal',
         fontWeight: '500',
         fontStyle: 'normal'
@@ -245,6 +245,12 @@ const themeTypography = {
     subheading: {
         fontFamily: 'Montserrat',
         fontSize: '16px',
+        fontWeight: '700',
+        color: '#FF8682'
+    },
+    nightprice: {
+        fontFamily: 'Montserrat',
+        fontSize: '18px',
         fontWeight: '700',
         color: '#FF8682'
     },
@@ -256,9 +262,17 @@ const themeTypography = {
     },
     address: {
         fontFamily: 'Montserrat',
-        fontSize: '14px',
+        fontSize: '12px',
         lineHeight: 'normal',
         fontWeight: 500,
+        fontStyle: 'normal',
+        color: '#112211'
+    },
+    review: {
+        fontFamily: 'Montserrat',
+        fontSize: '12px',
+        lineHeight: 'normal',
+        fontWeight: 700,
         fontStyle: 'normal',
         color: '#112211'
     },
@@ -272,9 +286,16 @@ const themeTypography = {
     },
     amenities: {
         fontFamily: 'Montserrat',
-        fontSize: '15px',
+        fontSize: '12px',
         lineHeight: 'normal',
         fontWeight: 500,
+        fontStyle: 'normal'
+    },
+    ament: {
+        fontFamily: 'Montserrat',
+        fontSize: '12px',
+        lineHeight: 'normal',
+        fontWeight: 700,
         fontStyle: 'normal'
     },
     tax: {
