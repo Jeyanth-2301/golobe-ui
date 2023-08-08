@@ -62,7 +62,7 @@ function formatDate(date) {
 
     <footer style={{ backgroundColor: '#8DD3BB', color: 'white', padding: '20px 0px', bottom: 0, left: 0, right: 0, height: '370px', maxWidth: '1440' }}>
 
-      < Container maxWidth="100%"style={{ marginTop: '-180px', position: 'relative', top: '50%', left: '40%', transform: 'translate(-42%, -35%)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1, maxWidth: '1300px', maxHeight: '500px' }}>
+      < Container maxWidth="md"style={{ marginTop: '-180px', position: 'relative', top: '50%', left: '40%', transform: 'translate(-42%, -35%)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1, maxWidth: '1300px', maxHeight: '500px' }}>
         <Card style={{ maxWidth: '1500px', maxHeight: '200px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'row', marginBottom: '80px', width: '100%', borderRadius: '16px', backgroundColor: "#CDEAE1" }}>
           <Box display='flex'  style={{width: '120rem'}}>
           <Grid container xs={6} md={6} direction="row" alignItems="center" justifyContent="center" spacing="{2}" >
