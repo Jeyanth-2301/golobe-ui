@@ -19,24 +19,32 @@ const Booking = () => {
   const [checkOut, setCheckOut] = useState(''); 
   const [type , setType] = useState('');
   const [room , setRoom] = useState('');
+  const [image , setImage] = useState('');
 
-  useEffect(()=> {
+ 
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get('http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c');
+        
         const data = response.data;
         const value = data[0];
         setCheckIn(value.reservation.checkInDate);
         setCheckOut(value.reservation.checkOutDate);
         setType(value.reservation.roomType);
         setRoom(value.reservation.numberOfRooms);
+      
+        const res = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
+        const img = res.data;
+        const himage = img.images
+        setImage(himage[0]);
       }
       catch(error){
         console.error('Error fetching booking details:' , error);
       }
     };
-    fetchBookingDetails();
-  }, []);
+    useEffect(() => {
+      fetchBookingDetails();
+    }, []);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -146,10 +154,10 @@ const Booking = () => {
        </Grid>
         
       </Box>
-      <Box style={{ border: '1px solid #EAEAEA',width:isMobile ?'100%' : '23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
-       <Box style={{  width: '10.5rem'}}>
-        <img style={{width: '10rem', height: '10rem',borderRadius: '16px' }} src='https://s3-alpha-sig.figma.com/img/a8f8/a3bd/0fbb63b80b094364944041f8aa0cad46?Expires=1691971200&Signature=WY~42XaIAYkATC9RuIRqxivjxU0hBAAMVG70ai3YugMW638ysWkQDGxYy4~os0BUPvMYF~Ykb6UFxWZoXd3E8iT2WB13FRTtTqTLxHp4a2wLYld6TcVj2o2PHzsw~i9Xtg5E4cs-H5NZT8sFkZF3c10eKS0-Wo8Q7VcfqdycQ8xmSLE4F1bCNU2u~hX7i3pE8H~ZkJ8jpfKB3l3ovLrYAMOnpSNiaylyEq1SDQtUJhiyMy6A49HXfSEy9jxdLTiWWstpYXnbOPGrynNoo7VanqTYc~7vgBhF1Q1zVR1Fc~c4BoDWdTBL~ts5K0glQP3HHznwJ1gsRAEVP8YwsDpdRw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4' />
-       </Box>
+      <Box display= 'flex' justifyContent='center' alignItems='center' style={{ border: '1px solid #EAEAEA',width:isMobile ?'100%' : '23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
+       
+        <img style={{width: '23rem', height: '16.3rem',borderRadius: '16px'}} src={image} alt="hotel image"    />
+       
       </Box>
     </Box>
   );
