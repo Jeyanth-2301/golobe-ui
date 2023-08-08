@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button, Grid, Link, Card } from '@mui/material';
+import { Container, Typography, TextField, Button, Grid, Link, Card, Box } from '@mui/material';
 import instagram from '../../assets/icons/footer-icons/instagram.svg';
 import facebook from '../../assets/icons/footer-icons/facebook.svg';
 import twitter from '../../assets/icons/footer-icons/twitter.svg';
 import logo from '../../assets/icons/footer-icons/logo.svg';
-
+import img from '../../assets/icons/footer-icons/image.svg';
 const Foot = () => {
 
   const [email, setEmail] = useState('');
@@ -60,38 +60,56 @@ function formatDate(date) {
 
   return (
 
-    <footer style={{ backgroundColor: '#8DD3BB', color: 'white', padding: '20px 0px', bottom: 0, left: 0, right: 0, height: '350px', maxWidth: '1440' }}>
+    <footer style={{ backgroundColor: '#8DD3BB', color: 'white', padding: '20px 0px', bottom: 0, left: 0, right: 0, height: '370px', maxWidth: '1440' }}>
 
       < Container maxWidth="md" style={{ marginTop: '-180px', position: 'relative', top: '50%', left: '40%', transform: 'translate(-40%, -35%)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1, maxWidth: '1500px', maxHeight: '500px' }}>
-        <Card style={{ maxWidth: '1500px', maxHeight: '200px', padding: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginBottom: '80px', width: '100%', borderRadius: '16px', backgroundColor: "#CDEAE1" }}>
-          <Grid container direction="row" alignItems="center" justifyContent="center" spacing="{2}" >
-            <Grid item xs={6} sm={6}  >
-              <Typography variant='h4'>
-                Subscribe to our newsletter
+        <Card style={{ maxWidth: '1500px', maxHeight: '200px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'flex-start', flexDirection: 'row', marginBottom: '80px', width: '100%', borderRadius: '16px', backgroundColor: "#CDEAE1" }}>
+          <Box display='flex'  style={{width: '120rem'}}>
+          <Grid container xs={6} sm={6} direction="row" alignItems="center" justifyContent="center" spacing="{2}" >
+            <Grid item xs={6} sm={6} style={{}} >
+              <Typography variant='foot'>
+                Subscribe Newsletter
               </Typography>
 
               <TextField
                 label="Email"
                 variant="filled"
+                size="small"
                 value={email}
                 onChange={handleEmailChange}
                 fullWidth
                 style={{
+                  display: 'flex',
+                  flex: '1 0 0',
                   backgroundColor: 'white',
-                  margin: '10px ',
-                  marginRight: '10px'
+                  marginTop: '10px ',
+                  width: '30rem',
+                  alignItems: 'flex-start',
+                  
+                 
 
                 }}
                 error={!validEmail}
                 helperText={!validEmail ? 'Invalid email format ' : ''}
               />
+              
             </Grid>
-            <Grid item style={{ marginTop: '40px', marginLeft: '30px' }}>
-              <Button variant="contained" color="primary" onClick={handleSubscribe} fullWidth>
+            </Grid>
+            <Grid container></Grid>
+            <Grid item  style={{marginTop:'6.5rem',marginRight: '2.8rem',  }}>
+              <Button variant="contained" size="large" style={{ backgroundColor: '#112211', color:'#FFFFFF'}} onClick={handleSubscribe} fullWidth>
                 Subscribe
               </Button>
             </Grid>
+            
+          
+          </Box>
+          <Grid container  display='flex'alignItems='flex-end' justifyContent= 'flex-end' style={{marginBottom: '2rem', height: '20rem'}}>
+          <Box  display= 'flex' direction='row' style={{width:'16rem', height: '12rem', marginBottom: '20rem'}}>
+           <img src ={img} alt='image'/>
+          </Box>
           </Grid>
+          
         </Card>
       </Container>
 
@@ -139,7 +157,7 @@ function formatDate(date) {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} sm={4} >
+          <Grid item xs={6} sm={4} >
             <Typography variant="body1" gutterBottom style={{ color: 'black' }}>
              <b> Follow Us</b>
             </Typography>
@@ -156,7 +174,7 @@ function formatDate(date) {
             <Link href="https://www.twitter.com/" color="#000000">
               <img src={twitter} />
             </Link>
-            <Grid style={{ marginLeft: '280px' }}>
+            <Grid xs={4} sm={4} style={{ marginLeft: '280px' }}>
               <img src={logo} />
             </Grid>
           </Grid>

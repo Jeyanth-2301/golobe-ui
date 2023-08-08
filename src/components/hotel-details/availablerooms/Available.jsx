@@ -28,9 +28,9 @@ import { Link ,useNavigate} from 'react-router-dom';
       console.error('Error fetching data:', error);
     }
   };
-  const handleBooking=(roomId,event)=>{
+  const handleBooking=(roomId,index,event)=>{
   event.stopPropagation(); 
-  const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}`;
+  const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
   navigate(`/booking-details${query}`);
   }
   const minImageLength = Math.min(images.length, roomRates.length);
@@ -49,7 +49,7 @@ import { Link ,useNavigate} from 'react-router-dom';
                   <img src={image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px', objectFit: 'cover' }} />
                   <div style={{ flex: 1, padding: '0 16px' }}>
                    <Typography variant="B">
-                    {roomRates[index]?.roomType} - {roomRates[index]?.roomSpecification} ({roomRates[index]?.roomCount})
+                    {roomRates[index]?.roomType} - {roomRates[index]?.roomSpecification} ({roomRates[index]?.roomCount}){index}
                   </Typography>
                   </div>
                 </Paper>
@@ -62,7 +62,7 @@ import { Link ,useNavigate} from 'react-router-dom';
                  <Typography variant="D">
                    /night
                  </Typography>
-                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB' }}onClick={(event)=>handleBooking(roomRates[index]?._id,event)}>
+                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB' }}onClick={(event)=>handleBooking(roomRates[index]?._id,index,event)}>
                    <Typography variant="E">
                      Book now
                     </Typography>
