@@ -1,5 +1,5 @@
 //import React from 'react';
-import { Box, Typography, Avatar, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, Avatar, Grid, } from '@mui/material';
 import Building from '../../assets/icons/Payment-icons/building.svg';
 import Room from '../../assets/icons/Payment-icons/room.svg'
 import {useState, useEffect} from 'react'
@@ -13,41 +13,40 @@ const formatDate = (dateString) => {
 
 
 
-const Booking = () => {
- 
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState(''); 
-  const [type , setType] = useState('');
-  const [room , setRoom] = useState('');
-  const [image , setImage] = useState('');
 
- 
+const Booking = () => {
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [type, setType] = useState('');
+  const [room, setRoom] = useState('');
+  const [image, setImage] = useState('');
+
+  useEffect(() => {
     const fetchBookingDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c');
-        
+        const response = await axios.get(
+          'http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c'
+        );
+
         const data = response.data;
         const value = data[0];
         setCheckIn(value.reservation.checkInDate);
         setCheckOut(value.reservation.checkOutDate);
         setType(value.reservation.roomType);
         setRoom(value.reservation.numberOfRooms);
-      
+
         const res = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
         const img = res.data;
-        const himage = img.images
-        setImage(himage[0]);
-      }
-      catch(error){
-        console.error('Error fetching booking details:' , error);
+        const himage = img.images[0]; 
+        setImage(himage);
+      } catch (error) {
+        console.error('Error fetching booking details:', error);
       }
     };
-    useEffect(() => {
-      fetchBookingDetails();
-    }, []);
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    fetchBookingDetails();
+  }, []);
+ 
 
   const boxStyle = {
     display: 'flex',
@@ -66,7 +65,7 @@ const Booking = () => {
       <Box
         style={{
           display: 'flex',
-          width: isMobile ? '100%' : '13.4rem',
+          width:  '13.4rem',
           height: '16.3rem',
           padding: '1.5rem',
           flexDirection: 'column',
@@ -104,7 +103,7 @@ const Booking = () => {
         </Grid>
       </Box>
 
-      <Box style={{  width: isMobile ? '100% ' : '38.1rem', height: '16.3rem', marginBottom: 16,flexDirection: 'column' , borderEndEndRadius: '16px'}}>
+      <Box style={{  width:  '38.1rem', height: '16.3rem', marginBottom: 16,flexDirection: 'column' , borderEndEndRadius: '16px'}}>
         <Grid container
           alignItems="center" 
           style={{
@@ -124,8 +123,8 @@ const Booking = () => {
           
         </Grid>
           
-        <Grid container direction="row" display='flex'  spacing={isMobile ? 0 : 3} style={{ padding: '1.5rem' , }}>
-        <Grid item sx={{marginTop:isMobile ? 0 : 1, marginLeft: '3rem', }}>
+        <Grid container direction="row" display='flex'  spacing={3} style={{ padding: '1.5rem' , }}>
+        <Grid item sx={{marginTop: 1, marginLeft: '3rem', }}>
         <img src={Room} />
         </Grid>
         
@@ -138,7 +137,7 @@ const Booking = () => {
         </Typography>
         </Grid>
       
-        <Grid item sx={{marginTop:isMobile ? 0 : 1}}>
+        <Grid item sx={{marginTop: 1}}>
         <img src={Room} />
         </Grid>
         
@@ -154,7 +153,7 @@ const Booking = () => {
        </Grid>
         
       </Box>
-      <Box display= 'flex' justifyContent='center' alignItems='center' style={{ border: '1px solid #EAEAEA',width:isMobile ?'100%' : '23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
+      <Box display= 'flex' justifyContent='center' alignItems='center' style={{ border: '1px solid #EAEAEA',width: '23rem', height: '16.3rem', marginBottom : 16, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF', borderRadius: '16px'}}>
        
         <img style={{width: '23rem', height: '16.3rem',borderRadius: '16px'}} src={image} alt="hotel image"    />
        

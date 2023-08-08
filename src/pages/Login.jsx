@@ -40,20 +40,6 @@ const Login = () => {
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
   };
-
-  const handleLoginSuccess = (message) => {
-    setSnackbarSeverity("success");
-    setSnackbarMessage(message);
-    setSnackbarOpen(true);
-    navigate("/");
-  };
-
-  const handleLoginFailure = (message) => {
-    setSnackbarSeverity("error");
-    setSnackbarMessage(message);
-    setSnackbarOpen(true);
-  };
-
   const handleSubmit = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -197,9 +183,9 @@ const Login = () => {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                     <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
                     <Box
-                      sx={{
+                      sx={{ 
                         width: "150px",
                         height: "56px",
                         border: "1px solid #8DD3BB",
@@ -207,6 +193,7 @@ const Login = () => {
                         justifyContent: "flex-start",
                         display: "flex",
                       }}
+                      
                     >
                       <Box
                         sx={{
@@ -321,6 +308,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
