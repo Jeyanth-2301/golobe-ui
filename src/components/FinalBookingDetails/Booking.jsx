@@ -20,6 +20,7 @@ const Booking = () => {
   const [type, setType] = useState('');
   const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
+  
 
   useEffect(() => {
     const fetchBookingDetails = async () => {
