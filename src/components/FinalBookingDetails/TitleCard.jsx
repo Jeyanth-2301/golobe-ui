@@ -49,20 +49,25 @@ const [isDownloaded, setIsDownloaded] = useState(false);
 const handleDownloadClick = () =>{
   const content = document.getElementById('pageContent');
   const originalStyles =  content.getAttribute('style');
-  content.style.fontSize = '10px';
+  content.style.fontSize = '5px';
+
+  content.style.width = '100%';
+  content.style.height = '100vh';
+  content.style.pageBreakAfter = 'always';
+  content.style.pageOrientation = 'landscape';
 
   const opt = {
     margin:10,
     filename: 'Confirmation.pdf',
     image: {type: 'jpeg', quality: 0.98},
     html2canvas: {scale: 2},
-    jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
+    jsPDF: {unit: 'mm', format: 'a4', orientation: 'landscape'},
     pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
   };
     // content.style.fontSize = '5px';
     html2pdf().from(content).set(opt).save();
     content.setAttribute('style', originalStyles);
-//     setIsDownloaded(true);
+     setIsDownloaded(true);
 };
 
 useEffect(() => {
@@ -155,7 +160,7 @@ const handleShareClick = () => {
     <Box style={{padding: '8px', paddingBottom: '32px',}}>
     <Box  style={{height:'auto',width:'100%', marginTop:'32px',paddingLeft:'0px'}}>
       <Grid container spacing={2} alignItems="center">
-        <Grid item xs={12} sm={12} md={9} container direction="column" sx={{width:'804px',height:'104px'}}>
+        <Grid item xs={6} sm={12} md={9} container direction="column" sx={{width:'804px',height:'104px'}}>
           <Grid item sx={{height:'30px',width:'100%'}}>
              <Typography variant="h1" sx={{fontSize: isMobile ? '16px' :'24px'}}>{hotelName}&nbsp;
                   
