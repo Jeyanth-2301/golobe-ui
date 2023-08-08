@@ -1,6 +1,6 @@
 import React from 'react'
 import theme from '../../utils/theme/theme.jsx';
-import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button, IconButton } from '@mui/material';
+import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button, IconButton ,Snackbar,Alert} from '@mui/material';
 import DirectionsCarSharpIcon from '@mui/icons-material/DirectionsCarSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -58,8 +58,10 @@ const Search = () => {
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [numberOfRooms, setNumberOfRooms] = useState(1);
+  const [formComplete, setFormComplete] = useState(true);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const [searchresults, setSearchResults] = useState([]);
+  
 
   const handleDest = (e) => {
     setDestination(e.target.value);
@@ -78,14 +80,28 @@ const Search = () => {
   
 
 
-const handleSearch=()=>{
+  const handleClick=()=>{
 
-    const queryString = `?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
+
+    if (destination && checkInDate && checkOutDate && numberOfRooms){
+    const queryString =`?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
+    setFormComplete(true);
     navigate(`/hotel-listing${queryString}`);
-
-
+    }
+    else{
+      setSnackbarOpen(true);
+    }
 
   }
+   
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
    
 
   
@@ -95,7 +111,7 @@ const handleSearch=()=>{
   return (
     <ThemeProvider theme={theme}>
 
-      <Paper elevation={3} sx={{ width: "75vw", height: '35vh', borderRadius: '16px' }} >
+      <Paper elevation={3} sx={{ width: "75vw", height: '32vh', borderRadius: '16px' }} >
         <Box sx={{ paddingTop: '20px', marginLeft: 4 }}>
           <Typography variant="sideheading">Where are you staying?</Typography>
         </Box>
@@ -108,7 +124,7 @@ const handleSearch=()=>{
                 sx={{ width: '340px' }}
                 value={destination}
                 onChange={handleDest}
-                autoComplete='on'
+                autoComplete='off'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -151,6 +167,11 @@ const handleSearch=()=>{
 
             >
             </StyledTextField>
+            <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
+            <Alert elevation={6} variant="filled" severity="error" onClose={handleSnackbarClose}>
+              Please fill in all the required fields.
+            </Alert>
+          </Snackbar>
             </Grid>
           </Grid>
         </FormControl>
@@ -170,7 +191,7 @@ const handleSearch=()=>{
               disableElevation
               disableRipple
               startIcon={<img src={build} alt="Build Icon" />}
-              onClick={handleSearch}
+              onClick={handleClick}
             >
               Show Places
             </StyledButton>

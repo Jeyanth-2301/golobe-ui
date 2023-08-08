@@ -3,18 +3,18 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
+import NoDataCard from '../components/HotelList/Container/Nodata';
 //13
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const destination = queryParameters.get('q');
   const checkInDate = queryParameters.get('checkIn');
   const checkOutDate = queryParameters.get('checkOut');
-  const numberOfRooms = queryParameters.get('rooms');
+
   const [searchresults, setSearchResults] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState([899, 17375]);
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-  const[selectExtraAment, setSelectExtraAment] = useState([]);
+
   const [amenties, setAmenties] = useState([
     { id: 1, label: 'Airport shuttle', checked: false },
     // ... other amenities
@@ -32,6 +32,7 @@ const HotelListing = () => {
     { id: 10, label: 'Facilities for disabled guests', checked: false }
     
   ]);
+  
   const handleChangePrice = (e, newValue) => {
     setSelectedPrice(newValue);
 
@@ -72,7 +73,19 @@ const HotelListing = () => {
         .filter((amenity) => amenity.checked)
         .map((amenity) => amenity.label);
 
-      const url=`http://localhost:3200/hotels/search?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}&amenities=${encodeURIComponent(selectedAmenitiesIds.join(','))}&priceRanges=${encodeURIComponent(JSON.stringify(selectedPrice))}&rating=${encodeURIComponent(selectedRating)}`;
+      const url = `http://localhost:3200/hotels/search?q=${encodeURIComponent(
+        destination
+      )}&checkIn=${encodeURIComponent(
+        checkInDate
+      )}&checkOut=${encodeURIComponent(
+        checkOutDate
+      )}&rooms=${encodeURIComponent(
+        numberOfRooms
+      )}&amenities=${encodeURIComponent(
+        selectedAmenitiesIds.join(',')
+      )}&priceRanges=${encodeURIComponent(
+        JSON.stringify(selectedPrice)
+      )}&rating=${encodeURIComponent(selectedRating)}`;
 
       console.log("url", url);
 
@@ -82,9 +95,9 @@ const HotelListing = () => {
     console.log(response)
     // const data = await response.json();
 
-      // console.log(data)
-       setSearchResults(response);
-       console.log(searchresults.length)
+      setSearchResults(data);
+      console.log('After displaying data', data);
+      // console.log("url", url);
     } catch (error) {
       console.error('Error occurred during fetch:', error);
     }
@@ -94,10 +107,10 @@ const HotelListing = () => {
   useEffect(() => {
     handleSearch();
   }, [
-    destination,
-    checkInDate,
-    checkOutDate,
-    numberOfRooms,
+    dest,
+    In,
+    out,
+    room,
     selectedPrice,
     selectedRating,
     amenties,
@@ -107,10 +120,15 @@ const HotelListing = () => {
   return (
     <div>
       <Searchafter
-        dest={destination}
-        checkin={checkInDate}
-        checkout={checkOutDate} 
-        rooms={numberOfRooms}
+        dest={dest}
+        checkin={In}
+        checkout={out} 
+        rooms={room}
+        setIn={setIn}
+        setOut={setOut}
+        setDest={setDest}
+        setRoom={setRoom}
+        handleSearch={handleSearch}
       />
       <Filter
         handleChangePrice={handleChangePrice}
@@ -122,9 +140,7 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-      {/* {searchresults.length >=1 ?( */}
       <Hotels data={searchresults} />
-      {/* : (<NoDataCard />)} */}
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );
