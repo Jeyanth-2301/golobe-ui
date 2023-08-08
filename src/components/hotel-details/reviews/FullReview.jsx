@@ -31,10 +31,10 @@ function FullReview() {
   }, []);
 
   // fetching of review data
+  const params = new URLSearchParams(window.location.search);
+      const hotelId = params.get('q'); 
   const fetchReviewsData = async () => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const hotelId = params.get('q'); 
       const response = await fetch(
         `http://localhost:3200/hotels/${hotelId}/guest-reviews`
       );
