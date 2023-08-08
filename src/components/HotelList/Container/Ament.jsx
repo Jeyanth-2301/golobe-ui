@@ -53,7 +53,7 @@ return(
                         <div>
                         <Box sx={{ ml: -1, mb: 1 }}>
                                     {!showCheckboxes  &&  (
-                                    <TextButton onClick={handleTextButtonClick} >+6 more</TextButton>    )} 
+                                    <TextButton onClick={handleTextButtonClick} >+7 more</TextButton>    )} 
                          </Box>
 
       
