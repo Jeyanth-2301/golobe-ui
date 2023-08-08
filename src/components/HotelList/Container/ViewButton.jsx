@@ -67,7 +67,7 @@ fetch(url, fetchOptions)
       variant="outlined"
       disabledRipple
       sx={{
-        width: '600px',
+        width: '420px',
         height: '38px',
         backgroundColor: '#8DD3BB',
         marginRight: '28px',
