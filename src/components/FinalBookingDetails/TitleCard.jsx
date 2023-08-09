@@ -1,6 +1,5 @@
-
 //import React from 'react'
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import html2pdf from 'html2pdf.js'
 import {Grid,Typography, Box, useTheme, useMediaQuery } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share';
@@ -28,6 +27,7 @@ const Detail = () => {
       try {
         
         const response = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
+        //const response = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
         const data = response.data;
         
         setHotelId(data._id);
@@ -55,7 +55,9 @@ const Detail = () => {
     };
     
 const [isDownloaded, setIsDownloaded] = useState(false);
+
 const handleDownloadClick = () =>{
+  const pdfRef = useRef();
   const content = document.getElementById('pageContent');
   const originalStyles =  content.getAttribute('style');
   content.style.fontSize = '5px';
@@ -65,18 +67,23 @@ const handleDownloadClick = () =>{
   content.style.pageBreakAfter = 'always';
   content.style.pageOrientation = 'landscape';
 
-  const opt = {
-    margin:10,
-    filename: 'Confirmation.pdf',
-    image: {type: 'jpeg', quality: 0.98},
-    html2canvas: {scale: 2},
-    jsPDF: {unit: 'mm', format: 'a4', orientation: 'landscape'},
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
-  };
-    // content.style.fontSize = '5px';
-    html2pdf().from(content).set(opt).save();
-    content.setAttribute('style', originalStyles);
-     setIsDownloaded(true);
+  
+    const element = pdfRef.current;
+
+    if(element){
+      const opt = {
+        margin:10,
+        filename: 'Confirmation.pdf',
+        image: {type: 'jpeg', quality: 0.98},
+        html2canvas: {scale: 2},
+        jsPDF: {unit: 'mm', format: 'a4', orientation: 'landscape'},
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy']},
+      };
+       // content.style.fontSize = '5px';
+      html2pdf().from(content).set(opt).save();
+      content.setAttribute('style', originalStyles);
+       setIsDownloaded(true);
+    }   
 };
 
 useEffect(() => {
@@ -234,7 +241,7 @@ const handleShareClick = () => {
 </div>
                     </Grid>
                     
-                   <Grid item >
+                   <Grid item ref={pdfRef}>
                     {isDownloaded ? (
                         <Button variant='contained' color='secondary' disabled>Downloaded</Button>
                     ):(
