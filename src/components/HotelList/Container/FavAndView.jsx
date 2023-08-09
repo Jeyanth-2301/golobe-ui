@@ -2,11 +2,8 @@ import React from "react";
 import { Box} from "@mui/material";
 import ViewButton from "./ViewButton";
 import FavIcon from "./FavIcon";
-import Divider from "@mui/material/Divider";
 
 function FavAndView( {hotelId }){
-    console.log(hotelId )
-
     return( 
         <>
         <Box>

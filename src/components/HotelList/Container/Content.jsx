@@ -5,12 +5,7 @@ import Rating from '@mui/material/Rating';
 import {React, useState} from "react";
 import Divider from '@mui/material/Divider';
 
-function Content({items}){
-    console.log(items)
-    const address = items.location.address.lastIndexOf(",", items.location.address.lastIndexOf(",") - 1);
-    const addLine1 = items.location.address.slice(0, address).trim();
-    const addLine2 = items.location.address.slice(address + 1).trim();
-  
+function Content({items}){  
     const hotelTypes = items.hotelType;
 
     const hotelStarRating = parseFloat(items.rating.toFixed(1));
@@ -25,39 +20,35 @@ function Content({items}){
                     </Typography></Grid>                                  
                     <Grid item sx ={{marginLeft: '23px'}}>
                     <Typography variant = "nightprice">
-                        ${items.ratePerNight}
-        
+                        ${items.ratePerNight} 
                     </Typography>
-                
                     <Typography variant = "night" sx={{ marginLeft: '3px', marginTop: '2px' }}>
                             /night
                         </Typography>
                     </Grid>
-                    
-                    <Typography
-                        sx={{ fontFamily: 'Montserrat', fontSize: '13px', marginLeft: '68px', marginTop: '-2px' }}>
-                        excl. tax
-                    </Typography>                           
+                    <Grid sx = {{marginLeft: '65.4px', marginTop: '-2.8px',paddingLeft: '1px'}}>
+                        <Typography
+                            sx={{ fontFamily: 'Montserrat, sans-serif', fontSize: '13px'}}>
+                            excl. tax
+                        </Typography> 
+                    </Grid>                          
                 </Grid>    
 
-                <Grid item sx = {{textAlign : 'left',marginTop:-6.5,marginBottom: 3.9 }}>
+                <Grid item sx = {{textAlign : 'left',marginTop:-6.5,marginBottom:3.5}}>
                     <Typography variant = "heading">{items.hotelName}</Typography>
                 </Grid>
                 <Grid container direction="row" alignItems="center">   
                 <Grid item sx={{ textAlign: 'left', display: 'flex', alignItems: 'center',marginBottom:1.5 }}>
-                            <Grid item sx = {{marginTop: -0.125}}>
-                            <LocationOnIcon size = "small" /></Grid>
+                            <Grid item sx = {{marginTop: 1}}>
+                            <LocationOnIcon /></Grid>
                             <div style={{ marginLeft: 2, display: "flex", flexDirection: "column" }}>
                                 <Typography variant="address">
                                     {items.location.address}
                                 </Typography>
-                                {/* <Typography variant="address">
-                                    {addLine2}
-                                </Typography> */}
                             </div>
                         </Grid> 
                              <Grid container direction = "row">  
-                                <Grid item sx = {{marginBottom: 1.5}}>
+                                <Grid item sx = {{marginBottom: 1.8}}>
                                     <Rating sx ={{color: "#FF8682"}}
                                         name="simple-controlled"
                                         value = {hotelTypes}
@@ -65,13 +56,13 @@ function Content({items}){
                                          />
                                 </Grid>    
                                 <Grid item sx = {{flexDirection : 'row',marginTop: 0.3}}>
-                                    <Typography variant = "price">{items.hotelType} Star Hotel</Typography>         
+                                    <Typography variant = "price"> <b>{items.hotelType} </b>Star Hotel</Typography>         
                                 </Grid>
                                 <Grid item sx = {{textAlign :  'left',marginLeft: 10,fontSize: 14}}>
                                     <CoffeeIcon size = "small"/>
-                                    <Grid sx = {{marginLeft: 4,marginTop: -3}}>
+                                    <Grid sx = {{marginLeft: 4,marginTop: -3.5}}>
                                           <Typography variant = "amenities">
-                                            {items.amenities.length}+Aminities
+                                            <Typography variant = "ament">{items.amenities.length}</Typography>+Aminities
                                           </Typography>
                                     </Grid> 
                                 </Grid>  
@@ -80,7 +71,9 @@ function Content({items}){
                             <Grid item sx={{ marginTop: -1, pl: 1 }}>
                                 <Typography variant="review">
                                     {items.overallReview} {items.numReviews}{""} 
-                                    <span style={{ marginRight: '5px' }}><Typography variant = "address"> reviews</Typography></span> 
+                                    <span style={{ marginRight: '5px' }}>
+                                        <Typography variant = "address"> reviews</Typography>
+                                    </span> 
                                 </Typography>
                             </Grid>
        

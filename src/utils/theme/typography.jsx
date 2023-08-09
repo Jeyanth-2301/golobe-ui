@@ -187,18 +187,8 @@ const themeTypography = {
         fontSize: "30px",
         ml: "10px"
     },
-    bot:
-    {
-        fontSize: "0.9rem",
-        fontWeight: 10,
-
-    },
-    bot1:
-    {
-        fontSize: "0.9rem",
-        fontWeight: 10,
-    },
-    fil:
+    
+    fill:
     {
 
         fontSize: "1.3rem",
@@ -221,7 +211,7 @@ const themeTypography = {
         lineHeight: 1.2
 
     },
-    val:
+    value:
     {
         fontSize: '1.2 rem',
         fontWeight: 500,
@@ -229,7 +219,6 @@ const themeTypography = {
 
     },
     heading: {
-        fontFamily: 'TradeGothic LT Extended',
         fontSize: '20px',
         lineHeight: 'normal',
         fontWeight: 700,
@@ -243,33 +232,28 @@ const themeTypography = {
         fontStyle: 'normal'
     },
     subheading: {
-        fontFamily: 'Montserrat',
         fontSize: '16px',
         fontWeight: '700',
         color: '#FF8682'
     },
     nightprice: {
-        fontFamily: 'Montserrat',
         fontSize: '18px',
         fontWeight: '700',
         color: '#FF8682'
     },
     night: {
-        fontFamily: 'Montserrat',
         fontSize: '12px',
         fontWeight: '500',
         color: '#FF8682'
     },
     address: {
-        fontFamily: 'Montserrat',
-        fontSize: '12px',
+        fontSize: '13px',
         lineHeight: 'normal',
         fontWeight: 500,
         fontStyle: 'normal',
         color: '#112211'
     },
     review: {
-        fontFamily: 'Montserrat',
         fontSize: '12px',
         lineHeight: 'normal',
         fontWeight: 700,
@@ -277,7 +261,6 @@ const themeTypography = {
         color: '#112211'
     },
     rating: {
-        fontFamily: 'Montserrat',
         fontSize: '16px',
         lineHeight: 'normal',
         fontWeight: 500,
@@ -285,14 +268,18 @@ const themeTypography = {
         color: '#112211'
     },
     amenities: {
-        fontFamily: 'Montserrat',
         fontSize: '12px',
         lineHeight: 'normal',
         fontWeight: 500,
         fontStyle: 'normal'
     },
+    ament: {
+        fontSize: '16px',
+        lineHeight: 'normal',
+        fontWeight: 700,
+        fontStyle: 'normal'
+    },
     tax: {
-        fontFamily: 'Montserrat',
         fontSize: '13px',
     },
     viewbutton: {
@@ -301,9 +288,7 @@ const themeTypography = {
     sort: {
         fontSize: "0.7rem",
         fontWeight: 500,
-        lineHeight: 1.2
-
-
+        lineHeight: 1.2,
     },
     review1: {
         fontSize: '0.875rem',

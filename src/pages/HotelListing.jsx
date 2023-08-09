@@ -3,8 +3,8 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
+import DataNotFound from '../components/HotelList/Container/NoResult';
 
-//13
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const destination = queryParameters.get('q');
@@ -17,14 +17,12 @@ const HotelListing = () => {
 
   const [amenties, setAmenties] = useState([
     { id: 1, label: 'Airport shuttle', checked: false },
-    // ... other amenities
     { id: 2, label: 'Restaurant', checked: false },
     { id: 3, label: 'Family rooms', checked: false },
     { id: 4, label: 'Good breakfast', checked: false }
   ]);
   const [extraAment, setExtraAment] = useState([
     { id: 5, label: 'Free Wi-Fi', checked: false },
-    // ... other amenities
     { id: 6, label: 'Room service', checked: false },
     { id: 7, label:' Free-parking ', checked: false },
     { id: 8, label: 'Spa and wellness centre', checked: false },
@@ -48,21 +46,13 @@ const HotelListing = () => {
       amenty.id === id ? { ...amenty, checked: event.target.checked } : amenty
     );
     setAmenties(updatedAmenties);
-  
-    // Filter checked amenities and get the selected ones
-    const selectedAmenities = updatedAmenties.filter((amenty) => amenty.checked);
-    // setSelectedAmenities(selectedAmenities);
-    // console.log("selectedAmenties", selectedAmenities);
   };
   const handleCheckboxChanges = (id) => (event) => {
     const updatedAment = extraAment.map((amenty) =>
       amenty.id === id ? { ...amenty, checked: event.target.checked } : amenty
     );
     setExtraAment(updatedAment);
-  
-    // Filter checked amenities and get the selected ones
-    // const selectedAmenities = updatedAment.filter((amenty) => amenty.checked);
-    // setSelectExtraAment(selectedAmenities);
+
   };
   
 
@@ -103,6 +93,8 @@ const HotelListing = () => {
 
 
   useEffect(() => {
+    window.location.hash = 'upperPart';
+    window.scrollTo(0, 0);
     handleSearch();
   }, [
     destination,
@@ -133,7 +125,10 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-      <Hotels data={searchresults} />
+      {searchresults.length < 0 ? (
+        <DataNotFound />
+      ) : (
+      <Hotels data={searchresults} />)}
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );
