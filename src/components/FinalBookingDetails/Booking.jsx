@@ -24,11 +24,11 @@ const Booking = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const hotelId = params.get('hid');
+    //const hotelId = params.get('hid');
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3200/bookings/booking/${hotelId}`
+          'http://localhost:3200/bookings/booking/64c7a67362874d48eb6d3ed2'
         );
 
         const data = response.data;
