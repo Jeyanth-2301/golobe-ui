@@ -1,9 +1,9 @@
-import {Button,IconButton } from "@mui/material";
+import { Button,IconButton } from "@mui/material";
 import React from "react";
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { useState,useEffect } from "react";
-import { Snackbar } from "@mui/material";
+import { Snackbar,Alert } from "@mui/material";
 
 
 function FavIcon({hotelIds}){
@@ -133,19 +133,18 @@ function FavIcon({hotelIds}){
          
         <IconButton  onClick = {handleIconClick} variant = "outlined" sx ={{maxHeight: '33px',width: 25,ml:4}} >
             <Button variant="outlined">
-                {isFilled ? <FavoriteOutlinedIcon style={{ color: 'black' ,fontSize: 24}}/> : 
+                {isFilled ? <FavoriteOutlinedIcon style={{ color: '#FF8682' ,fontSize: 24}}/> : 
                  <FavoriteBorderOutlinedIcon  />
                 }
 
             </Button>
         </IconButton>
-        <Snackbar
-            open={snackbarOpen}
-            autoHideDuration={4000}
-            onClose={handleSnackbarClose}
-            message="Please log in to add a favorite icon"
-        
-        />
+        <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
+            <Alert elevation={6} variant="filled" severity="error" onClose={handleSnackbarClose}>
+              {
+            'Please login to add favourite'}
+            </Alert>
+          </Snackbar>
     
        </>
     );
