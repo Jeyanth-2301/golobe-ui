@@ -1,19 +1,23 @@
 import React from 'react'
 import { useState,useEffect} from 'react';
-import { Grid, Typography } from '@mui/material'
+import {Snackbar,Alert,Grid, Typography } from '@mui/material'
+
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import location from '../../../assets/icons/location-icon/location.svg'
 import { Close } from '@mui/icons-material';
 import { Dialog, DialogContent, DialogTitle, DialogActions, InputAdornment, TextField } from '@mui/material';
 import { EmailIcon, FacebookIcon, WhatsappIcon, TelegramIcon, TwitterIcon, LinkedinIcon } from "react-share";
-import axios from 'axios'
+
 const Detail = ({data}) => {
   
   const [name,setName]=useState(null)
+  const [userName,setUserName] =  useState('');
+  
+
   const [hotelTypeStars, setHotelTypeStars] = useState([]);
   const [hotelType,setHotelType]=useState(null)
   const [loc,setLoc]=useState(null);
@@ -22,7 +26,9 @@ const Detail = ({data}) => {
   const [number,setNumber]=useState(null)
   const [rate,setRate]=useState(null)
   const [review, setReview] = useState(null);
- 
+  const [loggedIn, setLoggedIn] = useState(false);
+    const [isFilled, setIsFilled] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   useEffect(() => {
     if (data) {
       
@@ -30,6 +36,7 @@ const Detail = ({data}) => {
         setName(name)
         const id=data._id;
         setId(id)
+         
         console.log(id)
         const hotelRating = data.hotelType;
         setHotelType(hotelRating)
@@ -45,8 +52,86 @@ const Detail = ({data}) => {
         setRate(rpn)
         const allreview=data.overallReview;
         setReview(allreview)
+       
+    
+        
       }
-  }, [data]);
+    }, [data, id]);
+
+    useEffect(()=>{
+      if(loggedIn){
+      favouriteHotels();
+      }
+  },[loggedIn]);
+
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:3200/auth/users/user/islogined",
+                {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                }
+            );
+
+            if (response.ok) {
+                const responseData = await response.json();
+
+                if (responseData.success) {
+                    setLoggedIn(true);
+                    console.log("User is logged in.");
+                    if (responseData.info) {
+                        // console.log("User data:", responseData.info);
+                        // setProfilepic(responseData.info.profilePicture);
+                        setUserName(responseData.info.userName);
+                    } else {
+                        console.log("No user data available.");
+                    }
+                } else {
+                    setLoggedIn(false);
+                    console.log("User is not logged in.");
+                }
+            } else {
+                console.log("Request failed with status:", response.status);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error.message);
+        }
+    };
+
+    checkLoggedInStatus();
+}, []);
+
+const favouriteHotels = async () => {
+  const url = "http://localhost:3200/auth/users/favourites";
+  try {
+      const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          const valueToCheck = data.some((item) => item._id === id);
+          setIsFilled(valueToCheck); // Set the isFilled state based on the check
+      } else {
+          console.log("Request failed with status:", response.status);
+      }
+  } catch (error) {
+      console.error("An error occurred:", error.message);
+  }
+};
+
+const handleSnackbarClose = () => {
+  setSnackbarOpen(false);
+};
+
+
+      
+  
 
 
   const commonIconButtonStyle = {
@@ -67,29 +152,39 @@ const Detail = ({data}) => {
     }
     return stars;
   };
-  const [isFavorite, setIsFavorite] = useState(false);
+  
   const handleFavoriteClick = () => {
-    const newIsFavorite = !isFavorite;
-    setIsFavorite(newIsFavorite);
-
-    const url = `http://localhost:3200/auth/users/64cb50827767115059b3eaa7/favourites/${id}`;
-    const method = newIsFavorite ? 'POST' : 'DELETE';
-
-    axios({
-      
-      method,
-      url,
-    })
+    if (!loggedIn) {
+      // Display a snackbar or a message indicating the need to log in
+      setSnackbarOpen(true); 
+      console.log("Login please to add a favorite icon");
+      return;
+  }
+  const newFav =  !isFilled;
+ 
+  setIsFilled(newFav);
+  const url = `http://localhost:3200/auth/users/favourites/${id}`;
+  // console.log(url)
+  const method = newFav ? 'POST' : 'DELETE';
+  const fetchOptions = {
+      method: method,
+      headers: {"Content-Type":"application/json"},
+      credentials: "include",
+    };
+    fetch(url, fetchOptions)
       .then(response => {
-        
-        console.log('Request successful:', response);
+          if (!response.ok) {
+          throw new Error('Network response was not ok');
+          }
+          return response.json(); 
+      })
+      .then(data => {
+          console.log('PUT request succeeded with response:', data);
       })
       .catch(error => {
-        
-        console.error('Error making request:', error);
-       
-        setIsFavorite(isFavorite);
+          console.error('There was a problem with the PUT request:', error);
       });
+
   };
   const handleShareClick = () => {
     setOpen(true);
@@ -201,7 +296,7 @@ const Detail = ({data}) => {
           <Grid item style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <Grid item >
               <IconButton sx={commonIconButtonStyle} onClick={handleFavoriteClick}>
-                {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
+                {isFilled  ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
             </Grid>
             <Grid item>
               <IconButton sx={commonIconButtonStyle} onClick={handleShareClick}><ShareIcon /></IconButton>
@@ -246,6 +341,12 @@ const Detail = ({data}) => {
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={4000}
+            onClose={handleSnackbarClose}
+            message="Please log in to add a favorite icon"
+        />
     </div>
   )
 }

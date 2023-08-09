@@ -7,7 +7,7 @@ const BookingDetailsPage = () => {
   return (
     <div>
       <Detail />
-      <Box sx={{ width: '20vh', height: '30vh' }}>
+      <Box sx={{ width: '20vh', height: '60vh' }}>
       </Box>
     </div>
   )

@@ -23,7 +23,7 @@ const Detail = () => {
   
   useEffect(()=> {
     const params = new URLSearchParams(window.location.search);
-        const hotelId = params.get('hid');
+    const hotelId = params.get('hid');
     const fetchHotelDetails = async () => {
       try {
         
