@@ -20,80 +20,35 @@ const Booking = () => {
   const [type, setType] = useState('');
   const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
-  const [hotelId,setHotelId] = useState('');
-
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [Profilepic, setProfilepic] = useState('https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4')
-  const [userName, setUserName] = useState('')
-  const [hasProfilePicture, setHasProfilePicture] = useState(true); 
-  
-  
+  const [hotelId, setHotelId] = useState('');
 
   useEffect(() => {
-    const askLoggedInStatus = async () => {
-      try {
-          const response = await fetch(
-              "http://localhost:3200/auth/users/user/islogined",
-              {
-                  method: "GET",
-                  headers: { "Content-Type": "application/json" },
-                  credentials: "include",
-              }
-          );
-
-          if (response.ok) {
-              const responseData = await response.json();
-
-              if (responseData.success) {
-                  setLoggedIn(true);
-                  console.log("User is logged in.");
-                  if (responseData.info) {
-                      console.log("User data:", responseData.info);
-                      setProfilepic(responseData.info.profilePicture);
-                      setUserName(responseData.info.userName);
-                  } else {
-                      console.log("No user data available.");
-                  }
-              } else {
-                  setLoggedIn(false);
-                  console.log("User is not logged in.");
-              }
-          } else {
-              console.log("Request failed with status:", response.status);
-          }
-      } catch (error) {
-          console.error("An error occurred:", error.message);
-      }
-  };
-
-  askLoggedInStatus();
-
-  
-
+    const params = new URLSearchParams(window.location.search);
+    //const hotelId = params.get('hid');
     const fetchBookingDetails = async () => {
-      const params = new URLSearchParams(window.location.search);
-      const hotelId = params.get('hid')
       try {
         const response = await axios.get(
-          `http://localhost:3200/bookings/booking/${hotelId}`
+          'http://localhost:3200/bookings/booking/64c7a67362874d48eb6d3ed2'
         );
         // const response = await axios.get(
         //   'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
         // );
 
         const data = response.data;
-        setHotelId(data._id);
-        
         const value = data[0];
+        setHotelId(data._id);
         setCheckIn(value.reservation.checkInDate);
         setCheckOut(value.reservation.checkOutDate);
         setType(value.reservation.roomType);
         setRoom(value.reservation.numberOfRooms);
 
+<<<<<<< HEAD
         const res = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
         //const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
+=======
+        const res = await axios.get('http://localhost:3200/hotels/64c7a67362874d48eb6d3ed2');
+>>>>>>> 781b30d3fda164270053c01da67785f503146b93
         const img = res.data;
-        setHotelId(data._id);
         const himage = img.images[0]; 
         setImage(himage);
       } catch (error) {
@@ -169,20 +124,10 @@ const Booking = () => {
             borderStartEndRadius: '16px',
           }}
         >
-          {loggedIn ? (
-            <>
-            {hasProfilePicture ? (
-              <Avatar style={{ width:'3rem', height: '3rem'}} src={Profilepic} alt="image" />
-            ):(
-              <Avatar style={{ width:'3rem', height: '3rem'}} src="//" alt="J" />
-            )}
-            <Typography variant="body1" style={{ marginLeft: '1rem' }}>
-            <b>{userName}</b>
+          <Avatar style={{ width:'3rem', height: '3rem'}}src='https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'alt="image" />
+          <Typography variant="body1" style={{ marginLeft: '1rem' }}>
+            <b>John</b>
           </Typography>
-          </>
-          ): null}
-          
-          
 
           <Grid item xs={true} style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Typography variant="body2"><b>{type}</b></Typography>

@@ -26,7 +26,7 @@ function Content({items}){
                             /night
                         </Typography>
                     </Grid>
-                    <Grid sx = {{marginLeft: '78px', marginTop: '-2.8px',paddingLeft: '1px'}}>
+                    <Grid sx = {{marginLeft: '67px', marginTop: '-2.8px',paddingLeft: '1px'}}>
                         <Typography
                             sx={{ fontFamily: 'Montserrat, sans-serif', fontSize: '13px'}}>
                             excl. tax
