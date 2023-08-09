@@ -1,4 +1,4 @@
-import { Typography, Paper, Grid, Box, Button } from '@mui/material';
+import { Typography, Paper, Grid, Box, Button,Snackbar } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,7 +6,8 @@ const Available = () => {
   const [images, setImages] = useState([]);
   const [roomRates, setRoomRates] = useState([]);
   const [totalRooms, setTotalRooms] = useState(0);
-  
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const navigate = useNavigate();
   const params = new URLSearchParams(window.location.search);
       const hotelId = params.get('q');
@@ -35,7 +36,7 @@ const Available = () => {
           const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&checkin=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}`;
           navigate(`/booking-details${query}`);
         } else {
-          // setLoggedIn(false);
+          setSnackbarOpen(true);
           console.log("User is not logged in.");
         }
       } else {
@@ -57,18 +58,15 @@ const Available = () => {
         setImages(data.images.slice(1, 8));
         setRoomRates(data.rooms);
         setTotalRooms(data.totalRooms);
-        // setHotelid(data._id);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  // const handleBooking = (roomId, index,checkin,checkout,event) => {
-  //   event.stopPropagation();
-  //   const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&=${encodeURIComponent(checkin)}&=${encodeURIComponent(checkout)}`;
-  //   navigate(`/booking-details${query}`);
-  // }
+ 
   const minImageLength = Math.min(images.length, roomRates.length);
+  const handleCloseSnackbar = () => {
+  setSnackbarOpen(false);}
   return (
     <div>
       <Box sx={{ height: '50vh', width: '90vw', marginTop: "11vh" }}>
@@ -84,7 +82,7 @@ const Available = () => {
                     <img src={image} alt={`Room ${index + 1}`} style={{ width: '48px', height: '48px', objectFit: 'cover' }} />
                     <div style={{ flex: 1, padding: '0 16px' }}>
                       <Typography variant="B">
-                        {roomRates[index]?.roomType} - {roomRates[index]?.roomSpecification} ({roomRates[index]?.roomCount}){index}
+                        {roomRates[index]?.roomType} - {roomRates[index]?.roomSpecification} ({roomRates[index]?.roomCount})
                       </Typography>
                     </div>
                   </Paper>
@@ -109,6 +107,12 @@ const Available = () => {
           </Grid>
         </div>
       </Box>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackbar}
+        message="You need to be logged in to book a room."
+      />
     </div>
   );
 };

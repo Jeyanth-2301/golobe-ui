@@ -38,7 +38,7 @@ const BookingDetail = () => {
   const checkoutDate = new Date(checkout);
   const roomId = qparams.get('rid');
   const index = qparams.get('rii');
-
+ const [roomamt,setRoomamt]=useState('');
  
 
 
@@ -210,7 +210,7 @@ const BookingDetail = () => {
 
   const handleView=()=>{
     
-    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&rupees=${encodeURIComponent(totalPrice)}&ckeckIn=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}`;
+    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&rupees=${encodeURIComponent(totalPrice)}&ckeckIn=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}&roomamt=${encodeURIComponent(totalAmount)}`;
     navigate(`/payment-page${query}`);
     }
   return (
