@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -18,73 +18,98 @@ import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper'
 
 const BookingDetail = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [cards, setCards] = useState([]);
   const [location, setLocation] = useState('');
-  const[hotelData,setHotelData]=useState('');
   const [hotelName, setHotelName] = useState('');
-  const [hotelImage,setHotelImage]= useState('');
-  const [room , setRoom] = useState('');
+  const [hotelImage, setHotelImage] = useState('');
+  const [room, setRoom] = useState('');
   const [ratePerNight, setRatePerNight] = useState('');
-  const [checkInDate, setCheckInDate]=useState('');
-  const [checkOutDate, setCheckOutDate]=useState('');
-  const[hotelId,setHotelId]=useState('');
-  //  const[roomId,setRoomId]=useState('');
-   const [roomRates, setRoomRates] = useState([]);
-  const cinDate = new Date(checkInDate);
-const coutDate = new Date(checkOutDate);
+  const [checkin, setCheckin] = useState('');
+  const [checkout, setCheckout] = useState('');
+  const [hotelId, setHotelId] = useState('');
+  const [roomId, setRoomId] = useState('');
+  const checkinDate = new Date(checkin);
+  const checkoutDate = new Date(checkout);
 
-const timeDiff = coutDate.getTime() - cinDate.getTime();
-const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+  const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+  const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-const formatDate = (dateString)=>{
-  const options = {weekday:'short',month:'short',day:'numeric'};
-  return new Date(dateString).toLocaleDateString('en-US',options);
-}
-useEffect(() => {
-  const fetchData = async () => {
+  const formatDate = (dateString) => {
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const hotelId = params.get('hid');
+        const roomId = params.get('rid');
+        const index = params.get('rii');
+
+        // Fetch hotel details
+        const hotelUrl = `http://localhost:3200/hotels/${hotelId}`;
+        const hotelResponse = await axios.get(hotelUrl);
+        const hotelData = hotelResponse.data;
+
+        setHotelId(hotelData._id);
+        setLocation(hotelData.location.address);
+        setHotelName(hotelData.hotelName);
+        setHotelImage(hotelData.images[0]);
+        setRoom(hotelData.rooms[index].roomType)
+        setRatePerNight(hotelData.rooms[index].roomRate);
+        // console.log('Hotel Response:', hotelResponse.data, "  ", "RoomId", index);
+      } catch (error) {
+        console.error('Error in fetching:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const totalAmount = numberOfDays * ratePerNight;
+
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  const fetchCards = async () => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const hotelId = params.get('hid');
-      const roomId = params.get('rid');
-      const index=params.get('rii');
-      // const checkInDate=params.get('checkIn');
-      // const checkOutDate=params.get('checkOut');
-
-      // Fetch hotel details
-      const hotelUrl = `http://localhost:3200/hotels/${hotelId}`;
-      const hotelResponse = await axios.get(hotelUrl);
-      const hotelData = hotelResponse.data;
-      
-      setHotelId(hotelData._id);
-      setLocation(hotelData.location.address);
-      setHotelName(hotelData.hotelName);
-      setHotelImage(hotelData.images[0]);
-      setRoom(hotelData.rooms[index].roomType)
-      setRatePerNight(hotelData.rooms[index].roomRate);
-      // setCheckInDate(checkInDate);
-      // setCheckOutDate(checkOutDate);
-      console.log('Hotel Response:', hotelResponse.data,"  ","RoomId",index, "CheckinDate",checkInDate,"CheckoutDate",checkOutDate);
-
-      // Fetch room details
-      //   const roomUrl = `http://localhost:3200/rooms/${roomId}`;
-      //  const roomResponse = await axios.get(roomUrl);
-      //  const roomData = roomResponse.data;
-      
-      // setRoom(roomData.roomType);
-      // setCheckin(roomData.checkInDate);
-      // setCheckout(roomData.checkOutDate);
-      // setRatePerNight(roomData.ratePerNight);
-    
-//console.log('Room Response:', roomResponse.data);
+      console.log('first')
+      const response = await axios.get('http://localhost:3200/auth/users/user/cards', { withCredentials: true });
+      const cardsData = response.data;
+      console.log(cardsData);
+      setCards(cardsData);
     } catch (error) {
-      console.error('Error in fetching:', error);
+      console.error('Error fetching data:', error.message);
     }
   };
 
-  fetchData();
-}, []);
 
-const totalAmount = numberOfDays * ratePerNight;
+
+  const handleaddCards = () => {
+    const url = `http://localhost:3200/auth/users/user/cards/saveCard`;
+    const fetchOptions = {
+      method: method,
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    };
+    fetch(url, fetchOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('PUT request succeeded with response:', data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the PUT request:', error);
+      });
+
+  }
 
   const items = [
     { name: "Base Fare", price: ratePerNight * numberOfDays },
@@ -92,8 +117,8 @@ const totalAmount = numberOfDays * ratePerNight;
     { name: "Taxes", price: 20 },
     { name: "Service Fee", price: 5 }
   ];
- 
-  const totalPrice = items.reduce((total, item) => total + parseFloat( item.price), 0);
+
+  const totalPrice = items.reduce((total, item) => total + parseFloat(item.price), 0);
   const [showRadioButton, setShowRadioButton] = useState(false);
   const [selectedOption, setSelectedOption] = useState('');
   const handleContinueClick = () => {
@@ -110,7 +135,7 @@ const totalAmount = numberOfDays * ratePerNight;
   const handleClosePopup = () => {
     setShowPopup(false);
   };
-  const [selectedCards, setSelectedCards] = useState([]);  
+  const [selectedCards, setSelectedCards] = useState([]);
   const getLast8Digits = (cardNumber) => {
     return " **** " + cardNumber.slice(-4);
   };
@@ -118,7 +143,7 @@ const totalAmount = numberOfDays * ratePerNight;
   const [saveCardInfo, setSaveCardInfo] = useState(
     JSON.parse(localStorage.getItem('saveCardInfo')) || false
   );
- const handleCardSelection = (cardNumber, expDate) => {
+  const handleCardSelection = (cardNumber, expDate) => {
     const formattedCardNumber = getLast8Digits(cardNumber);
     const newCard = { cardNumber: formattedCardNumber, expDate };
     setSelectedCards((prevCards) => [...prevCards, newCard]); // Add the new card to the array
@@ -130,49 +155,31 @@ const totalAmount = numberOfDays * ratePerNight;
       const storedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
       setSelectedCards(storedCards);
     }
-  }, [saveCardInfo]);  
+  }, [saveCardInfo]);
   const [isRadioButtonClicked, setIsRadioButtonClicked] = useState(false);
   const [showNewButton, setShowNewButton] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
-const handleButtonClick = async () => {
+  const handleButtonClick = async () => {
     setShowNewButton(false);
-      setShowPaymentPopup(true);
-        setShowConfetti(true);
-        setTimeout(() => {
-          setShowPaymentPopup(false);
-          setShowConfetti(false);
-          setTimeout(() => {
-             // Hide the "Pay Now" button
-            setShowNewButton(true);  // Show the "View Booking" button
-          }, 500);
-        }, 4000);
-        try {
-          const response = await fetch(`http://localhost:3200/payment/${hotelId}`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            credentials: "include",
-            body: JSON.stringify({
-              hotelId:hotelId
-
-            })
-          });          
-          const data = await response.json();
-           // Parse the response JSON          
-          console.log(data);          
-        } catch (error) {
-          // Handle errors if the request fails
-          console.error("Error in payment:", error);
-        }
+    setShowPaymentPopup(true);
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowPaymentPopup(false);
+      setShowConfetti(false);
+      setTimeout(() => {
+        // Hide the "Pay Now" button
+        setShowNewButton(true);  // Show the "View Booking" button
+      }, 500);
+    }, 4000);
   };
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
 
 
-  const handleView=(roomId,index)=>{
-    const query=`?hid=${encodeURIComponent(hotelId)}`;
+  const handleView = (roomId, index, event) => {
+    event.stopPropagation();
+    const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
     navigate(`/payment-page${query}`);
-    }
+  }
   return (
     <div>
       <Box sx={{ height: "100vh" }}>
@@ -197,12 +204,12 @@ const handleButtonClick = async () => {
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '135px' }}>
               <LocationOnIcon fontSize='small' />
               <Typography variant="d">
-               {location}
+                {location}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', justifyContent: 'space-between' }}>
               <Typography variant='e'><strong>
-               {formatDate (checkInDate)}</strong>
+                {formatDate(checkin)}</strong>
               </Typography>
               <Box
                 sx={{
@@ -221,46 +228,53 @@ const handleButtonClick = async () => {
                 />
               </Box>
               <Typography variant='f'><strong>
-                {formatDate (checkOutDate)}</strong>
+                {formatDate(checkout)}</strong>
               </Typography>
             </Box>
           </Paper>
           <Box sx={{ marginTop: '20px', marginLeft: '30px', padding: '2vh', height: 'wrap', width: '105.2vh', alignItems: 'left' }}>
+            {/* {cards.map((card, index) => ( */}
             {!showRadioButton ? (
-              <React.Fragment>
+              <React.Fragment >
                 <Button variant="contained" style={{ zIndex: 1 }} fullWidth onClick={handleContinueClick}>
-                  Proceed With Payment
+                  Proceed with Payment
                 </Button>
               </React.Fragment>
             ) : (
               <React.Fragment>
-<RadioGroup value={selectedOption} onChange={handleRadioChange}>
-  {selectedCards.map((card, index) => (
-    <Box
-      key={index}
-      sx={{
-        borderRadius: '10px',
-        bgcolor: '#8dd3bb',
-        marginTop: '5px',
-        padding: '2vh',
-        width: '101.1vh',
-        alignItems: 'left',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-<Typography style={{ marginLeft: '1px' }}>{card.cardNumber} {card.expDate}</Typography>
-      <FormControl>
-                      <FormControlLabel
-                        key={index}
-                        value={`${card.cardNumber} ${card.expDate}`}
-                        control={<Radio color='secondary' />}                 
-                        labelPlacement="start"
-                        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
-                      />
-                  </FormControl>
-                  </Box>
+                <RadioGroup value={selectedOption} onChange={handleRadioChange}>
+                  {cards.message === "No saved cards." ? (
+                    <React.Fragment >
+                      <Button variant="contained" style={{ zIndex: 1 }} fullWidth onClick={handleContinueClick}>
+                        No Cards added yet !
+                      </Button>
+                    </React.Fragment>
+                  ) : (cards.map((card, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        borderRadius: '10px',
+                        bgcolor: '#8dd3bb',
+                        marginTop: '5px',
+                        padding: '2vh',
+                        width: '101.1vh',
+                        alignItems: 'left',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Typography style={{ marginLeft: '1px' }}>Card Number - {card.cardNumber} / Expiry Date - {card.expirationDate}</Typography>
+                      <FormControl>
+                        <FormControlLabel
+                          key={index}
+                          value={`${index}`}
+                          control={<Radio color='secondary' />}
+                          labelPlacement="start"
+                          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
+                        />
+                      </FormControl>
+                    </Box>)
                   ))}
                 </RadioGroup>
                 <Box
@@ -288,9 +302,15 @@ const handleButtonClick = async () => {
                     </Typography>
                   </Box>
                 </Box>
-                <PopupForm open={showPopup} handleClosePopup={handleClosePopup} handleCardSelection={handleCardSelection} />
+                <PopupForm open={showPopup} handleClosePopup={handleClosePopup} handleCardSelection={handleCardSelection} fetchCards={fetchCards} />
               </React.Fragment>
             )}
+            {/* <React.Fragment >
+              <Button variant="contained" style={{ zIndex: 1 }} fullWidth onClick={handleContinueClick}>
+                Proceed with Payment
+              </Button>
+            </React.Fragment> */}
+            {/* ))} */}
           </Box>
         </Grid>
         <Grid
@@ -313,8 +333,8 @@ const handleButtonClick = async () => {
                   border: '1px solid #ccc',
                   borderRadius: 4,
                   overflow: 'hidden',
-                  flexShrink: 0, // Prevent the image container from shrinking
-                  marginRight: 5 // Ensure image stays within the box
+                  flexShrink: 0,
+                  marginRight: 5
                 }}
               >
                 <img
@@ -382,79 +402,80 @@ const handleButtonClick = async () => {
               </Grid>
             </Grid>
           </Paper>
-          {isRadioButtonClicked && !showConfetti && !showNewButton&& (
-  <Button
-    variant="contained"
-    style={{ zIndex: 1, width: '578px', marginLeft: '28px', marginBottom:'-180px'}}
-    onClick={handleButtonClick}
-  >
-    Pay Now
-  </Button>
-)}
-{!showConfetti && showNewButton && (
-  
-  
-      <Button variant="contained" fullWidth style={{marginBottom:'-178px', marginTop: '15px', marginLeft: '27px', width: '580px'}}onClick={()=>handleView()}>
-        View Booking
-      </Button>
-    
-)}
-      {showPaymentPopup && (
-  <Box
-    sx={{
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      padding: '100px',
-      backgroundColor: 'rgba(141, 211, 187, 0.5)', // Use rgba for semi-transparent background color
-      borderRadius: '10px',
-      color: 'black',
-      textAlign: 'center',
-      zIndex: 1000,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}
-  >
-    {showConfetti && (
-      <Confetti
-        width={Box.width}
-        height={Box.innerHeight}
-        recycle={false}
-        numberOfPieces={1000}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          pointerEvents: 'none',
-        }}
-        onComplete={() => setShowConfetti(false)}
-      />
-    )}
-    <Box
-      sx={{
-        width: '40px',
-        height: '40px',
-        overflow: 'hidden',
-        flexShrink: 0,
-        marginRight: 5,
-        marginLeft: 4,
-        marginBottom: 2,
-      }}
-    >
-      <img
-        src={tick}
-        alt="tick img"
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-      />
-    </Box>
-    <Typography variant="h4" sx={{ opacity: 1 }}>
-      <strong>Payment Successful !!!</strong>
-    </Typography>
-  </Box>
-)}
+          {isRadioButtonClicked && !showConfetti && !showNewButton && (
+            <Button
+              variant="contained"
+              style={{ zIndex: 1, width: '578px', marginLeft: '28px', marginBottom: '-180px' }}
+              onClick={handleButtonClick}
+            >
+              Pay Now
+            </Button>
+          )}
+          {!showConfetti && showNewButton && (
+
+            <Link to="/payment-page">
+              <Button variant="contained" fullWidth style={{ marginBottom: '-178px', marginTop: '15px', marginLeft: '27px', width: '580px' }} onClick={(event) => handleView(roomRates[index]?._id, index, event)} >
+                View Booking
+              </Button>
+            </Link>
+
+          )}
+          {showPaymentPopup && (
+            <Box
+              sx={{
+                position: 'fixed',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                padding: '100px',
+                backgroundColor: 'rgba(141, 211, 187, 0.5)', // Use rgba for semi-transparent background color
+                borderRadius: '10px',
+                color: 'black',
+                textAlign: 'center',
+                zIndex: 1000,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              {showConfetti && (
+                <Confetti
+                  width={Box.width}
+                  height={Box.innerHeight}
+                  recycle={false}
+                  numberOfPieces={1000}
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    pointerEvents: 'none',
+                  }}
+                  onComplete={() => setShowConfetti(false)}
+                />
+              )}
+              <Box
+                sx={{
+                  width: '40px',
+                  height: '40px',
+                  overflow: 'hidden',
+                  flexShrink: 0,
+                  marginRight: 5,
+                  marginLeft: 4,
+                  marginBottom: 2,
+                }}
+              >
+                <img
+                  src={tick}
+                  alt="tick img"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </Box>
+              <Typography variant="h4" sx={{ opacity: 1 }}>
+                <strong>Payment Successful !!!</strong>
+              </Typography>
+            </Box>
+          )}
 
         </Grid>
       </Box>
