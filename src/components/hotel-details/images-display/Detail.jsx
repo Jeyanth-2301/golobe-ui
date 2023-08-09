@@ -136,13 +136,20 @@ const handleSnackbarClose = () => {
 
   const commonIconButtonStyle = {
     height: '32px',
-    color: '#112211',
+    color: 'red',
     padding: '5px',
     border: '1px solid #8DD3BB',
     borderRadius: '0',
     marginRight: '12px',
   };
-
+  const commonIconButtonStyle1 = {
+    height: '32px',
+    color: 'black',
+    padding: '5px',
+    border: '1px solid #8DD3BB',
+    borderRadius: '0',
+    marginRight: '12px',
+  };
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -299,7 +306,7 @@ const handleSnackbarClose = () => {
                 {isFilled  ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
             </Grid>
             <Grid item>
-              <IconButton sx={commonIconButtonStyle} onClick={handleShareClick}><ShareIcon /></IconButton>
+              <IconButton sx={commonIconButtonStyle1}  onClick={handleShareClick}><ShareIcon /></IconButton>
               <div>
                 <Dialog open={open} onClose={handleClose} maxWidth="sm">
                   <DialogTitle>Share</DialogTitle>
