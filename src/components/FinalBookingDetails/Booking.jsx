@@ -20,7 +20,7 @@ const Booking = () => {
   const [type, setType] = useState('');
   const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
-  //const [hotelId,setHotelId] = useState('');
+  const [hotelId,setHotelId] = useState('');
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [Profilepic, setProfilepic] = useState('https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4')
@@ -73,32 +73,36 @@ const Booking = () => {
     const fetchBookingDetails = async () => {
       const params = new URLSearchParams(window.location.search);
       const hotelId = params.get('hid')
+      const roomId = params.get('rid');
+      const index = params.get('rii');
+
       try {
-        // const response = await axios.get(
-        //   `http://localhost:3200/bookings/booking/${hotelId}`
-        // );
         const response = await axios.get(
-          'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
+          `http://localhost:3200/hotels/${hotelId}`
         );
+        
         // const response = await axios.get(
         //   'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
         // );
 
         const data = response.data;
-        //setHotelId(data._id);
+        setHotelId(data._id);
+        setImage(data.images[0]);
+        setType(data.rooms[index].roomType);
         
-        const value = data[0];
-        setCheckIn(value.reservation.checkInDate);
-        setCheckOut(value.reservation.checkOutDate);
-        setType(value.reservation.roomType);
-        setRoom(value.reservation.numberOfRooms);
+        // const value = data[0];
+        // setCheckIn(value.reservation.checkInDate);
+        // setCheckOut(value.reservation.checkOutDate);
+        // setType(value.reservation.roomType);
+        // setRoom(value.reservation.numberOfRooms);
 
         //const res = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
-        const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
-        const img = res.data;
+        // const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
+        // const img = res.data;
         //setHotelId(data._id);
-        const himage = img.images[0]; 
-        setImage(himage);
+        /*const himage = img.images[0]; 
+        setImage(himage);*/
+
       } catch (error) {
         console.error('Error fetching booking details:', error);
       }
