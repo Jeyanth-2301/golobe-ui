@@ -23,6 +23,12 @@ const StyledTextField = styled(TextField)({
     fontSize: '19px', fontFamily: "Montserrat, sans-serif", color: '#1C1B1F'
 
   },
+  "&.Mui-focused": {
+    backgroundColor: "white", // Change this to the desired background color
+  },
+  "&::placeholder": {
+    color: "white", // Change this to the desired color
+  },
 
   width: "220px",
   "& .MuiOutlinedInput-root": {
@@ -58,9 +64,8 @@ const Search = () => {
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
   const [numberOfRooms, setNumberOfRooms] = useState(1);
-  const [formComplete, setFormComplete] = useState(true);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-
+  const[date,setDate]=useState(true)
   
 
   const handleDest = (e) => {
@@ -84,8 +89,13 @@ const Search = () => {
 
 
     if (destination && checkInDate && checkOutDate && numberOfRooms){
+       if (new Date(checkInDate) > new Date(checkOutDate)) {
+        setDate(false);
+        setSnackbarOpen(true);
+        return;
+      }
     const queryString =`?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
-    setFormComplete(true);
+    setDate(true);
     navigate(`/hotel-listing${queryString}`);
     }
     else{
@@ -124,7 +134,7 @@ const Search = () => {
                 sx={{ width: '340px' }}
                 value={destination}
                 onChange={handleDest}
-                autoComplete='off'
+                autoComplete="off"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -169,7 +179,10 @@ const Search = () => {
             </StyledTextField>
             <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose}>
             <Alert elevation={6} variant="filled" severity="error" onClose={handleSnackbarClose}>
-              Please fill in all the required fields.
+              {
+                date ? 'Please fill in all the required fields' 
+              
+             : 'Please enter the date correctly'}
             </Alert>
           </Snackbar>
             </Grid>

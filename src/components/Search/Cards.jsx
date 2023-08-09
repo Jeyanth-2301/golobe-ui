@@ -5,13 +5,12 @@ import { ThemeProvider } from '@emotion/react';
 import { Button, Card, CardContent, Typography, Grid,CardMedia,CardActionArea,Box} from '@mui/material';
 import {useState} from 'react'
 import { useNavigate } from 'react-router';
+
 const Cards = () => {
-       
-  const[imgdata,setData]=useState([]);
   const navigate=useNavigate();
   const [displayedImages, setDisplayedImages] = useState(4);
   const [containerHeight, setContainerHeight] = useState('90vh');
-  const [gridSpacing, setGridSpacing] = useState('');
+  
 
 
   const imageList = [
@@ -53,29 +52,23 @@ const Cards = () => {
       description: 'Piece of Paradise',
     },
     {
-      id: 5,
+      id: 6,
       imageUrl: "https://media.istockphoto.com/id/470913348/photo/lighthouse-mamallapuram.jpg?s=612x612&w=0&k=20&c=KnPAZiRI4-iCnQhpNash9J7n1qliud-HN-OkaUkbXOw=" ,
       title: 'Pondicherry',
       
       description: 'Enchanting Journey',
     },
     {
-       id: 6,
-    
+       id: 7,
       imageUrl: "https://media.istockphoto.com/id/1094387460/photo/night-beach-party-in-goa.jpg?s=612x612&w=0&k=20&c=90oHFh3klXfMASU5t0za7OyFde5FMLA9i_kB3mi37sM=" ,
       title: 'Goa',
-      
       description: 'Happiness in waves'
      
     },
     {
-      id: 7,
-    
-    
+      id: 8,
       imageUrl: "https://c1.wallpaperflare.com/preview/904/465/140/1913-architecture-building-chennai.jpg" ,
-      
       title: 'Chennai',
-      
       description: 'Gateway South'
      
 
@@ -86,7 +79,7 @@ const Cards = () => {
   const handleSeeAll = () => {
     setDisplayedImages(imageList.length); 
     setContainerHeight('auto');
-    setGridSpacing(1) 
+    
   };
 
 
@@ -146,7 +139,7 @@ const handleBook=(title)=>{
 
          
             <CardContent >
-            < Grid container spacing={7} sx={{marginTop:'85%',color:'white'}} >
+            < Grid container spacing={7} sx={{marginTop:'87%',color:'white'}} >
             <Grid item xs={8} >
               <Typography gutterBottom variant="h6" component="div" sx={{ whiteSpace: 'nowrap',marginLeft:0.5 }}>
                 {image.title}

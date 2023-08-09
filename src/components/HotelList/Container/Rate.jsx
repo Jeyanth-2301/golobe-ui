@@ -56,7 +56,7 @@ return(
                                           onClick={() => selectRating(value)}
                                           onMouseEnter={handleBoxMouseEnter}
                                           onMouseLeave={handleBoxMouseLeave}  >
-                                          <Typography variant="val">{`${value }+`}</Typography>
+                                          <Typography variant="value">{`${value }+`}</Typography>
                                     </ButtonStyle>
                               ))}
                   </div> )}

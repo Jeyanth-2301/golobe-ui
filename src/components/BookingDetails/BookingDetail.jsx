@@ -14,9 +14,9 @@ import check from '../../assets/icons/Booking-icons/checking.png';
 import tick from '../../assets/icons/Booking-icons/tick.png';
 import axios from 'axios';
 import Confetti from 'react-confetti';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper'
+
 const BookingDetail = () => {
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
@@ -173,7 +173,6 @@ const BookingDetail = () => {
     }, 4000);
   };
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
-  const [showPayNowButton, setShowPayNowButton] = useState(true); // Initialize to true or false as needed
 
 
   const handleView = (roomId, index, event) => {
@@ -340,7 +339,7 @@ const BookingDetail = () => {
               >
                 <img
                   src={hotelImage}
-                  alt="Superior Room with double bed or twin beds"
+                  alt="Hotel Image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }} // Make the image cover the entire box
                 />
               </Box>

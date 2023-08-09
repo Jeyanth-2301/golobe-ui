@@ -25,7 +25,8 @@ export default function Ament({handleCheck, amenties, extraAment, handleExtraChe
       }))
       const [showCheckboxes, setShowCheckboxes] = useState(false);
       const handleTextButtonClick = () => {
-             setShowCheckboxes(!showCheckboxes);  }
+             setShowCheckboxes(!showCheckboxes); 
+             }
       const iconStyle = {
             cursor: 'pointer',
             // Add hover effect styles
