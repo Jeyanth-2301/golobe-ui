@@ -91,7 +91,6 @@ const Booking = () => {
         }}
       >
         <Grid container direction='column' spacing= {3}>
-
           <Grid item>
         <Typography variant="h6">
           <b>{formatDate(checkIn)}</b>
