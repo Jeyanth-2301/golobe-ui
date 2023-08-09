@@ -14,8 +14,12 @@ const Detail = () => {
   
   const [address, setAddress] = useState('');
   const [hotelName, setHotelName] = useState('');
-  const [rate, setRate] = useState('');
+  //const [rate, setRate] = useState('');
   const [hotelId,setHotelId] = useState('');
+
+
+  const qparams = new URLSearchParams(window.location.search);
+  const rate=qparams.get("rupees");
   // fetching
   
   useEffect(()=> {
@@ -31,7 +35,7 @@ const Detail = () => {
         setHotelId(data._id);
         setAddress(data.location.address);
         setHotelName(data.hotelName);
-        setRate(data.ratePerNight);
+        
         
       }
       catch(error){
@@ -189,7 +193,7 @@ const handleShareClick = () => {
             <Grid item xs={12} sm={3} md={3} container direction="column" sx={{marginLeft:isMobile ? '0px' : '-3px'}}>
               <Grid item sx={{color:'#FF8682',marginBottom:'10px'}}>
                     <Typography variant="h4" align="right">${rate}
-                        <Typography variant="body1" style={{display:'inline'}}>/night
+                        <Typography variant="body1" style={{display:'inline'}}>
                         </Typography>
                     </Typography>
                 </Grid>

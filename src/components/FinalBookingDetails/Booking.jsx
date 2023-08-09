@@ -207,12 +207,12 @@ const Booking = () => {
         </Grid>
         
         <Grid item style={{marginRight: '3rem'}}  >
-        {/* <Typography variant="caption">Number of Rooms
+        <Typography variant="caption">Number of Rooms
         </Typography>
         
         <Typography variant="body2" >
-          <b>{room}</b>
-        </Typography> */}
+          <b>1</b>
+        </Typography>
         </Grid>
       
         <Grid item sx={{marginTop: 1}}>
