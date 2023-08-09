@@ -39,7 +39,7 @@ function Hotels({ data,In,out })
                     
                 <BasicButtons items={data} buttonStatus ={showAllHotels} />
                 </Box > )}
-                <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels} />
+                <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels} In={In} out={out} />
                 {showBut && display && (
                     <Box sx={{ marginTop: 3 }}>
                         <Button

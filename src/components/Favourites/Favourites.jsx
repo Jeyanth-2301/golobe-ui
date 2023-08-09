@@ -37,7 +37,8 @@ const Favourites = () => {
 
     axios({
       method,
-      url: `http://localhost:3200/auth/users/favourites/${hotelId}`,withCredentials:true
+      url: `http://localhost:3200/auth/users/favourites/${hotelId}`,
+      withCredentials:true
     })
       .then((response) => {
         console.log('Request successful:', response);
@@ -136,7 +137,7 @@ const Favourites = () => {
                    
             <Grid item >
             <Button
-                  sx={{ color: 'black' }}
+                  sx={{ color: 'red' }}
                   onClick={() => handleFavoriteClick(feature._id)} // Pass the hotelId as a parameter
                 >
                   {favourites.some((fav) => fav._id === feature._id) ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
