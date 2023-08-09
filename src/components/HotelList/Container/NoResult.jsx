@@ -33,7 +33,7 @@ const DataNotFound = () => {
       <Typography variant="body1" align="center">
         The requested data could not be found. Please try again later.
       </Typography>
-      <Button variant="contained" color="primary" size="large" sx={{ marginTop: 2 }} onClick={() =>{navigate(`/`)}} >
+      <Button  sx={{marginTop: 2,'&:hover' :{backgroundColor :'#8DD3BB'}}}  variant="contained" color="primary" size="large"  onClick={() =>{navigate(`/`)}} >
         Go Back To Search
       </Button>
     </Container>
