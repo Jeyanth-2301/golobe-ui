@@ -20,7 +20,6 @@ const Booking = () => {
   const [type, setType] = useState('');
   const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
-<<<<<<< HEAD
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [Profilepic, setProfilepic] = useState('https://s3-alpha-sig.figma.com/img/de42/3158/13dc5b2e20dc60002c5ebc10bec549e3?Expires=1691971200&Signature=ZHzAq5Bk5EtbGxurRfqS~zdOjE-gM~MqPhIhiy4~0oZeKBZuXxWQ5wO7oSi~GlRdCULMNOa3~PbJVxvkGF4uWBht40SUWPLZBpZGSdDV-BPFdE-Dm-isnLYdlFQDoRT~3w-ZAlKnAwkI6P93dDJiQhap2ud5nDX5utE5xFfx9Rn03Pub8acxrz7Tvc0kUjTdMzQujBNeSQ6xIMQzfd~bNipy04UMDozckMvKQg4GWJUWWXOYL6WSPubSADq0jvNXSEh5uYDCeXacb0cYslL1LtgbLPScjtJ2Cjyql~0hHZS2YBG4d6fly77Fit~d7k~zouNqX-G4CvfhN4PFkA8h-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4')
@@ -71,22 +70,10 @@ const Booking = () => {
       try {
         const response = await axios.get(
           'http://localhost:3200/bookings/booking/64c38a1ff770801377a0cf9c'
-=======
-  const [hotelId, setHotelId] = useState('');
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const hotelId = params.get('hid');
-    const fetchBookingDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3200/bookings/booking/${hotelId}`
->>>>>>> 0c9275f3bade7b340d149e55650f2272ee9c557b
         );
 
         const data = response.data;
         const value = data[0];
-        setHotelId(data._id);
         setCheckIn(value.reservation.checkInDate);
         setCheckOut(value.reservation.checkOutDate);
         setType(value.reservation.roomType);
