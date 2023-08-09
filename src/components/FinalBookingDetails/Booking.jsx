@@ -20,23 +20,26 @@ const Booking = () => {
   const [type, setType] = useState('');
   const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
-  
+  const [hotelId, setHotelId] = useState('');
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hotelId = params.get('hid');
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3000/bookings/booking/64c38a1ff770801377a0cf9c'
+          `http://localhost:3200/bookings/booking/${hotelId}`
         );
 
         const data = response.data;
         const value = data[0];
+        setHotelId(data._id);
         setCheckIn(value.reservation.checkInDate);
         setCheckOut(value.reservation.checkOutDate);
         setType(value.reservation.roomType);
         setRoom(value.reservation.numberOfRooms);
 
-        const res = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
+        const res = await axios.get('http://localhost:3200/hotels/64c7a67362874d48eb6d3ed2');
         const img = res.data;
         const himage = img.images[0]; 
         setImage(himage);

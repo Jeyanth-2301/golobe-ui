@@ -16,7 +16,9 @@ const Detail = () => {
   const [address, setAddress] = useState('');
   const [hotelName, setHotelName] = useState('');
   const [rate, setRate] = useState('');
-  const [hotelId, setHotelId] = useState('');
+
+  
+  const [hotelId,setHotelId] = useState('');
   // fetching
   
   useEffect(()=> {
@@ -27,6 +29,7 @@ const Detail = () => {
         
         const response = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
         const data = response.data;
+        
         setHotelId(data._id);
         setAddress(data.location.address);
         setHotelName(data.hotelName);
