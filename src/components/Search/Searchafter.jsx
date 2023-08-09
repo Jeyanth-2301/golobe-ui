@@ -1,6 +1,6 @@
 import React from 'react'
 import theme from '../../utils/theme/theme.jsx';
-import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button, IconButton } from '@mui/material';
+import { Box, Paper, TextField, InputAdornment, Grid, FormControl, Typography, Button, IconButton} from '@mui/material';
 import DirectionsCarSharpIcon from '@mui/icons-material/DirectionsCarSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -10,7 +10,7 @@ import RoomIcon from '@mui/icons-material/Room';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
-import build from '../../assets/icons/search-icons/build.svg';
+import search from '../../assets/icons/search-icons/search.svg';
 import car from '../../assets/icons/search-icons/car.svg';
 import location from '../../assets/icons/search-icons/location.svg';
 import { Link , useNavigate} from 'react-router-dom';
@@ -51,16 +51,35 @@ const StyledButton = styled(Button)({
 const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,setOut,setRoom}) => {
 
    const navigate = useNavigate();
-
   
-   const handleClick=()=>{
-
+  
+  
+   const handleClick=()=>{ 
     const queryString =`?q=${encodeURIComponent(dest)}&checkIn=${encodeURIComponent(checkin)}&checkOut=${encodeURIComponent(checkout)}&rooms=${encodeURIComponent(rooms)}`;
     navigate(`/hotel-listing${queryString}`);
     handleSearch();
-
-
   }
+   
+   
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   
 
@@ -72,7 +91,7 @@ const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,set
   return (
     <ThemeProvider theme={theme}>
 
-      <Paper elevation={3} sx={{ width: "78vw", height: '15vh', borderRadius: '16px',marginTop:'8%' ,marginLeft:'8%'}} >
+      <Paper elevation={2} sx={{ width: "80vw", height: '16vh', borderRadius: '16px',marginTop:'8%' ,marginLeft:'8%'}} >
       
         <FormControl >
           < Grid container direction="row" spacing={2} sx={{ marginTop: '10px', marginLeft: 2,marginTop:'1%' }} >
@@ -80,14 +99,14 @@ const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,set
               <StyledTextField
                 variant='outlined'
                 label="Enter Destination" id="destination"
-                sx={{ width: '340px' }}
+                sx={{ width: '360px' }}
                 value={dest}
                 onChange={(e)=>setDest(e.target.value)}
                 autoComplete='off'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      {/* <img src={location} /> */}
+                      <img src={location} />
                     </InputAdornment>
                   ),
                 }} ></StyledTextField></Grid>
@@ -113,7 +132,7 @@ const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,set
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    {/* <img src={car} /> */}
+                    <img src={car} />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -128,6 +147,18 @@ const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,set
             >
             </StyledTextField>
             </Grid>
+            <Grid item >
+
+              <Box sx={{height:'55px',width:'55px',backgroundColor:'#8DD3BB',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'3px'}}>
+                  <IconButton  onClick={handleClick} >
+                   <img src={search} ></img>
+                  </IconButton>
+              
+              </Box>
+
+          
+            </Grid>
+            
           </Grid>
         </FormControl>
         
