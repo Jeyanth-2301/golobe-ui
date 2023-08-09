@@ -7,8 +7,9 @@ import Divider from '@mui/material/Divider';
 // import { Scrollbar } from 'react-scrollbars-custom';
 
 
-function MainCard({hotelData, showAllHotels}){
+function MainCard({hotelData, showAllHotels ,In,out}){
     console.log(hotelData)
+    console.log(In)
     // Create a styled scrollbar component using styled-components
     return(
     
@@ -23,7 +24,7 @@ function MainCard({hotelData, showAllHotels}){
             <Grid item xs ={12}>
             <Content items = {hotel}/> </Grid>
             <Divider variant = "middle"/>
-            <FavAndView  hotelId = {hotel._id}/>
+            <FavAndView  hotelId = {hotel._id} In={In} out={out}/>
         </Grid>
     </Card>  
     ))}
@@ -38,7 +39,7 @@ function MainCard({hotelData, showAllHotels}){
                 <Grid item xs ={12}>
                 <Content items = {hotel}/> </Grid>
                 <Divider variant = "middle"/>
-                <FavAndView hotelId ={hotel._id}/>
+                <FavAndView hotelId ={hotel._id} In={In} out={out} />
             </Grid>
         </Card>  
   

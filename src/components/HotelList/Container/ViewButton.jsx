@@ -3,14 +3,14 @@ import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function ViewButton({ hotelIds }) {
+function ViewButton({ hotelIds,In,out }) {
     // console.log("id",hotelId)
     console.log("item", hotelIds);
     const navigate = useNavigate();
    
     const handleIconClick = () => {
           // console.log("hotel",hotelIds);
-          const queryString = `?q=${encodeURIComponent(hotelIds)}`;
+          const queryString = `?q=${encodeURIComponent(hotelIds)}&checkIn=${encodeURIComponent(In)}&checkOut=${encodeURIComponent(out)}`;
           
           // const userId ="64cb50827767115059b3eaa7";
           // const url =`http://localhost:3200/auth/users/${userId}/recent/${hotelIds}`;

@@ -3,7 +3,7 @@ import BasicButtons from "./Container/BasicButtons";
 import MainCard from "./Container/MainCard";
 import { Container, Box, Button } from "@mui/material";
 
-function Hotels({data}) {
+function Hotels({data ,In,out}) {
     // console.log(data)
     const [showAllHotels ,  setShowAllHotels] = useState(false);
     const getHotelsToShow =()=>{
@@ -21,7 +21,7 @@ function Hotels({data}) {
                     <Box sx={{ height: '30px' }}>
                         <BasicButtons items = {data} />
                     </Box>       
-                    <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels}  />       
+                    <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels} In={In} out={out}/>       
                     <Box sx={{ marginTop: 3 }}>
                         <Button  onClick={()=> setShowAllHotels(!showAllHotels)}  
                               disableRipple disableElevation 
