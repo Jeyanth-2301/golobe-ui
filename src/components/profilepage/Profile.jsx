@@ -523,6 +523,7 @@ const Profilepage = () => {
                         lable="phoneNumber"
                         name="phoneNumber"
                         value={phoneNumber}
+      
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     ) : (
