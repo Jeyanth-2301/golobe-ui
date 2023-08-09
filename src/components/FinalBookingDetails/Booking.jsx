@@ -15,10 +15,10 @@ const formatDate = (dateString) => {
 
 
 const Booking = () => {
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
+  //const [checkIn, setCheckIn] = useState('');
+  //const [checkOut, setCheckOut] = useState('');
   const [type, setType] = useState('');
-  const [room, setRoom] = useState('');
+ // const [room, setRoom] = useState('');
   const [image, setImage] = useState('');
   const [hotelId,setHotelId] = useState('');
 
