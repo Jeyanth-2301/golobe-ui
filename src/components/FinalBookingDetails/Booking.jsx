@@ -77,6 +77,9 @@ const Booking = () => {
         const response = await axios.get(
           `http://localhost:3200/bookings/booking/${hotelId}`
         );
+        // const response = await axios.get(
+        //   'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
+        // );
 
         const data = response.data;
         setHotelId(data._id);
@@ -88,6 +91,7 @@ const Booking = () => {
         setRoom(value.reservation.numberOfRooms);
 
         const res = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
+        //const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
         const img = res.data;
         setHotelId(data._id);
         const himage = img.images[0]; 
