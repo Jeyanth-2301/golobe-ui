@@ -16,12 +16,18 @@ const Detail = () => {
   const [address, setAddress] = useState('');
   const [hotelName, setHotelName] = useState('');
   const [rate, setRate] = useState('');
+  const [hotelId, setHotelId] = useState('');
+  // fetching
   
   useEffect(()=> {
-    const fetchlocation = async () => {
+    const params = new URLSearchParams(window.location.search);
+        const hotelId = params.get('hid');
+    const fetchHotelDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/hotels/64c7a67362874d48eb6d3ed2');
+        
+        const response = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
         const data = response.data;
+        setHotelId(data._id);
         setAddress(data.location.address);
         setHotelName(data.hotelName);
         setRate(data.ratePerNight);
@@ -31,7 +37,7 @@ const Detail = () => {
         console.error('Error fetching booking details:' , error);
       }
     };
-    fetchlocation();
+    fetchHotelDetails();
   }, []);
 
   const theme = useTheme();
