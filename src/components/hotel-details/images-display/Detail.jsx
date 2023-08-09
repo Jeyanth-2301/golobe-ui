@@ -21,23 +21,23 @@ const Detail = ({data}) => {
   const [hotelTypeStars, setHotelTypeStars] = useState([]);
   const [hotelType,setHotelType]=useState(null)
   const [loc,setLoc]=useState(null);
-  const [id,setId]=useState(null);
+  const [selectedid,setSelectedid]=useState(null);
   const [hotelRating, setHotelRating] = useState(null);
   const [number,setNumber]=useState(null)
   const [rate,setRate]=useState(null)
   const [review, setReview] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
-    const [isFilled, setIsFilled] = useState(false);
+  const [isFav, setIsFav] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   useEffect(() => {
     if (data) {
       
         const name=data.hotelName;
         setName(name)
-        const id=data._id;
-        setId(id)
+        const hid=data._id;
+        setSelectedid(hid)
          
-        console.log(id)
+        
         const hotelRating = data.hotelType;
         setHotelType(hotelRating)
         setHotelTypeStars(renderStars(hotelRating));
@@ -56,13 +56,13 @@ const Detail = ({data}) => {
     
         
       }
-    }, [data, id]);
+    }, [data,selectedid]);
 
     useEffect(()=>{
-      if(loggedIn){
-      favouriteHotels();
+      if(loggedIn && selectedid !== null){
+        favouriteHotels().then(valueToCheck => setIsFav(valueToCheck));
       }
-  },[loggedIn]);
+  },[loggedIn,selectedid]);
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -83,8 +83,7 @@ const Detail = ({data}) => {
                     setLoggedIn(true);
                     console.log("User is logged in.");
                     if (responseData.info) {
-                        // console.log("User data:", responseData.info);
-                        // setProfilepic(responseData.info.profilePicture);
+                        
                         setUserName(responseData.info.userName);
                     } else {
                         console.log("No user data available.");
@@ -114,9 +113,9 @@ const favouriteHotels = async () => {
       });
 
       if (response.ok) {
-          const data = await response.json();
-          const valueToCheck = data.some((item) => item._id === id);
-          setIsFilled(valueToCheck); // Set the isFilled state based on the check
+          const res = await response.json();
+          return res.some((fav) => fav._id===selectedid);
+          
       } else {
           console.log("Request failed with status:", response.status);
       }
@@ -130,26 +129,7 @@ const handleSnackbarClose = () => {
 };
 
 
-      
   
-
-
-  const commonIconButtonStyle = {
-    height: '32px',
-    color: 'red',
-    padding: '5px',
-    border: '1px solid #8DD3BB',
-    borderRadius: '0',
-    marginRight: '12px',
-  };
-  const commonIconButtonStyle1 = {
-    height: '32px',
-    color: 'black',
-    padding: '5px',
-    border: '1px solid #8DD3BB',
-    borderRadius: '0',
-    marginRight: '12px',
-  };
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 0; i < rating; i++) {
@@ -162,15 +142,15 @@ const handleSnackbarClose = () => {
   
   const handleFavoriteClick = () => {
     if (!loggedIn) {
-      // Display a snackbar or a message indicating the need to log in
+     
       setSnackbarOpen(true); 
       console.log("Login please to add a favorite icon");
       return;
   }
-  const newFav =  !isFilled;
+  const newFav = !isFav;
  
-  setIsFilled(newFav);
-  const url = `http://localhost:3200/auth/users/favourites/${id}`;
+  setIsFav(newFav);
+  const url = `http://localhost:3200/auth/users/favourites/${selectedid}`;
   // console.log(url)
   const method = newFav ? 'POST' : 'DELETE';
   const fetchOptions = {
@@ -302,11 +282,21 @@ const handleSnackbarClose = () => {
 
           <Grid item style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
             <Grid item >
-              <IconButton sx={commonIconButtonStyle} onClick={handleFavoriteClick}>
-                {isFilled  ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
+              <IconButton sx={{height: '32px',
+    color: 'red',
+    padding: '5px',
+    border: '1px solid #8DD3BB',
+    borderRadius: '0',
+    marginRight: '12px'}} onClick={handleFavoriteClick}>
+                {isFav ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
             </Grid>
             <Grid item>
-              <IconButton sx={commonIconButtonStyle1}  onClick={handleShareClick}><ShareIcon /></IconButton>
+              <IconButton sx={{height: '32px',
+    color: '#112211',
+    padding: '5px',
+    border: '1px solid #8DD3BB',
+    borderRadius: '0',
+    marginRight: '12px'}} onClick={handleShareClick}><ShareIcon /></IconButton>
               <div>
                 <Dialog open={open} onClose={handleClose} maxWidth="sm">
                   <DialogTitle>Share</DialogTitle>
@@ -351,9 +341,16 @@ const handleSnackbarClose = () => {
       <Snackbar
             open={snackbarOpen}
             autoHideDuration={4000}
-            onClose={handleSnackbarClose}
-            message="Please log in to add a favorite icon"
-        />
+            onClose={handleSnackbarClose}>
+        <Alert
+    elevation={6}
+    variant="filled"
+    severity="error" // Change severity to 'warning' for a warning appearance
+    onClose={() => setSnackbarOpen(false)}
+  >
+    Please login to add Hotel to favourites
+  </Alert>
+</Snackbar>
     </div>
   )
 }

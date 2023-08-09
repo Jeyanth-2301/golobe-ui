@@ -26,12 +26,21 @@ const BookingDetail = () => {
   const [hotelImage, setHotelImage] = useState('');
   const [room, setRoom] = useState('');
   const [ratePerNight, setRatePerNight] = useState('');
-  const [checkin, setCheckin] = useState('');
-  const [checkout, setCheckout] = useState('');
+  // const[index, setIndex] = useState('');
+  // const [checkin, setCheckin] = useState('');
+  // const [checkout, setCheckout] = useState('');
   const [hotelId, setHotelId] = useState('');
-  const [roomId, setRoomId] = useState('');
+  // const [roomId, setRoomId] = useState('');
+  const qparams = new URLSearchParams(window.location.search);
+  const checkin=qparams.get("checkin");
+  const checkout=qparams.get("checkout")
   const checkinDate = new Date(checkin);
   const checkoutDate = new Date(checkout);
+  const roomId = qparams.get('rid');
+  const index = qparams.get('rii');
+
+ 
+
 
   const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
   const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
@@ -43,10 +52,8 @@ const BookingDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const params = new URLSearchParams(window.location.search);
-        const hotelId = params.get('hid');
-        const roomId = params.get('rid');
-        const index = params.get('rii');
+
+        const hotelId = qparams.get('hid');
 
         // Fetch hotel details
         const hotelUrl = `http://localhost:3200/hotels/${hotelId}`;
@@ -69,6 +76,11 @@ const BookingDetail = () => {
   }, []);
 
   const totalAmount = numberOfDays * ratePerNight;
+
+
+
+
+
 
 
   useEffect(() => {
@@ -172,15 +184,35 @@ const BookingDetail = () => {
         setShowNewButton(true);  // Show the "View Booking" button
       }, 500);
     }, 4000);
-  };
+  
+    try {
+      const response = await fetch(`http://localhost:3200/payment/${hotelId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          hotelId:hotelId
+
+        })
+      });          
+      const data = await response.json();
+       // Parse the response JSON          
+      console.log(data);          
+    } catch (error) {
+      // Handle errors if the request fails
+      console.error("Error in payment:", error);
+    }};
+  
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
 
 
-  const handleView = (roomId, index, event) => {
-    event.stopPropagation();
-    const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
+  const handleView=()=>{
+    
+    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&rupees=${encodeURIComponent(totalPrice)}&ckeckIn=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}`;
     navigate(`/payment-page${query}`);
-  }
+    }
   return (
     <div>
       <Box sx={{ height: "100vh" }}>
@@ -250,7 +282,8 @@ const BookingDetail = () => {
                         No Cards added yet !
                       </Button>
                     </React.Fragment>
-                  ) : (cards.map((card, index) => (
+                  ) : (
+                    cards.map((card, index) => (
                     <Box
                       key={index}
                       sx={{
@@ -320,7 +353,7 @@ const BookingDetail = () => {
           justifyContent="flex-start"
           alignItems="flex-end"
           position={'absolute'}
-          style={{ position: 'absolute', bottom: '18.5vh', right: '20px' }}
+          style={{ position: 'absolute', bottom: '18.7vh', right: '20px' }}
         >
           <Paper elevation={9} sx={{
             margin: '50px', marginLeft: '30px', padding: '2vh', height: 'wrap', width: '575px', alignItems: 'center',
@@ -414,11 +447,11 @@ const BookingDetail = () => {
           )}
           {!showConfetti && showNewButton && (
 
-            <Link to="/payment-page">
-              <Button variant="contained" fullWidth style={{ marginBottom: '-178px', marginTop: '15px', marginLeft: '27px', width: '580px' }} onClick={(event) => handleView(roomRates[index]?._id, index, event)} >
+         
+              <Button variant="contained" fullWidth style={{ marginBottom: '-178px', marginTop: '15px', marginLeft: '27px', width: '580px' }} onClick={() => handleView()} >
                 View Booking
               </Button>
-            </Link>
+           
 
           )}
           {showPaymentPopup && (
