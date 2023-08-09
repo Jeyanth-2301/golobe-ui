@@ -140,7 +140,7 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-      <Hotels data={searchresults} />
+      <Hotels data={searchresults}  In={In} out={out}/>
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );

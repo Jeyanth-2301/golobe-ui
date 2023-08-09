@@ -6,13 +6,17 @@ const Available = () => {
   const [images, setImages] = useState([]);
   const [roomRates, setRoomRates] = useState([]);
   const [totalRooms, setTotalRooms] = useState(0);
-  const [hotelId, setHotelid] = useState();
+  
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
+      const hotelId = params.get('q');
+      const checkin=params.get('checkIn');
+      const checkout=params.get('checkOut');
   useEffect(() => {
     fetchData();
   }, []);
 
-  const askLoggedInStatus = async (roomId, index, event) => {
+  const askLoggedInStatus = async (roomId, index,checkin,checkout,event) => {
     event.stopPropagation();
     try {
       const response = await fetch(
@@ -28,7 +32,7 @@ const Available = () => {
         const responseData = await response.json();
 
         if (responseData.success) {
-          const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
+          const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&checkin=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}`;
           navigate(`/booking-details${query}`);
         } else {
           // setLoggedIn(false);
@@ -45,8 +49,7 @@ const Available = () => {
 
   const fetchData = async () => {
     try {
-      const params = new URLSearchParams(window.location.search);
-      const hotelId = params.get('q');
+      
       const url = `http://localhost:3200/hotels/${hotelId}`;
       const response = await axios.get(url)
       const data = response.data;
@@ -54,17 +57,17 @@ const Available = () => {
         setImages(data.images.slice(1, 8));
         setRoomRates(data.rooms);
         setTotalRooms(data.totalRooms);
-        setHotelid(data._id);
+        // setHotelid(data._id);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-  const handleBooking = (roomId, index, event) => {
-    event.stopPropagation();
-    const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
-    navigate(`/booking-details${query}`);
-  }
+  // const handleBooking = (roomId, index,checkin,checkout,event) => {
+  //   event.stopPropagation();
+  //   const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&=${encodeURIComponent(checkin)}&=${encodeURIComponent(checkout)}`;
+  //   navigate(`/booking-details${query}`);
+  // }
   const minImageLength = Math.min(images.length, roomRates.length);
   return (
     <div>
@@ -94,7 +97,7 @@ const Available = () => {
                     <Typography variant="D">
                       /night
                     </Typography>
-                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB' }} onClick={(event) => askLoggedInStatus(roomRates[index]?._id, index, event)}>
+                    <Button variant="contained" color="primary" style={{ width: '150px', height: '48px', backgroundColor: '#8DD3BB' }} onClick={(event) => askLoggedInStatus(roomRates[index]?._id, index,checkin,checkout, event)}>
                       <Typography variant="E">
                         Book now
                       </Typography>
