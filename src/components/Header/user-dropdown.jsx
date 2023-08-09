@@ -28,9 +28,9 @@ const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
                     My Account
                 </Typography>
             </MenuItem>
-            <MenuItem sx={{ py: 2 }}>
+            {/* <MenuItem sx={{ py: 2 }}>
                 <Typography variant='body'>Payments</Typography>
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={onLogout} sx={{ py: 2 }}>
                 <Typography variant='body'>Logout</Typography>
             </MenuItem>

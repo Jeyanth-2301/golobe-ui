@@ -28,6 +28,7 @@ const Detail = () => {
       try {
         
         const response = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
+        //const response = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
         const data = response.data;
         
         setHotelId(data._id);
