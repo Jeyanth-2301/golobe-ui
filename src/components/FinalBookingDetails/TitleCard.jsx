@@ -15,8 +15,6 @@ const Detail = () => {
   const [address, setAddress] = useState('');
   const [hotelName, setHotelName] = useState('');
   const [rate, setRate] = useState('');
-
-  
   const [hotelId,setHotelId] = useState('');
   // fetching
   
