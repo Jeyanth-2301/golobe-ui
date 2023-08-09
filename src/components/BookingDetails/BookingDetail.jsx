@@ -16,6 +16,7 @@ import axios from 'axios';
 import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper'
+import { Link } from 'react-router-dom';
 
 const BookingDetail = () => {
   const navigate = useNavigate();

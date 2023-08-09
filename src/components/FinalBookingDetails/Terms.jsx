@@ -62,7 +62,7 @@ function Terms() {
                 Golobe Tower<br/>
                 P.O. Box: 22550<br/>
                 Doha, State of Qatar<br/>
-                Further contact details can be found at <Link href='#' style={{color:'black'}}>golobe.com/help</Link><br/>
+                Further contact details can be found at <Link href='https://golobe.com/help' style={{color:'black'}}>golobe.com/help</Link><br/>
 
             </Typography>
         </Box>

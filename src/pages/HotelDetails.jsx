@@ -1,7 +1,5 @@
 import React from 'react'
-import Detail from '../components/hotel-details/images-display/Detail'
-import Hotelimage from '../components/hotel-details/images-display/Hotelimage'
-import Top from '../components/hotel-details/images-display/Top'
+import {useEffect} from 'react'
 import Overview from '../components/hotel-details/overviewsection/Overview'
 import { Box } from '@mui/material'
 import Rooms from '../components/hotel-details/availablerooms/Rooms'
@@ -9,7 +7,8 @@ import FullReview from '../components/hotel-details/reviews/FullReview'
 import Detailsmain from '../components/hotel-details/images-display/Detailsmain'
 
 const Hoteldetail = () => {
-    return (
+    
+     return (
         <div >
             
             <Box sx={{ display: "flex", flexDirection: 'column', alignItems: 'center' }}>

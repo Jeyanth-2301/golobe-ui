@@ -80,6 +80,9 @@ const Booking = () => {
         const response = await axios.get(
           'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
         );
+        // const response = await axios.get(
+        //   'http://localhost:3200/bookings/booking/64c7d5a0f8ae1d32e0eb2cd6'
+        // );
 
         const data = response.data;
         //setHotelId(data._id);
@@ -90,8 +93,13 @@ const Booking = () => {
         setType(value.reservation.roomType);
         setRoom(value.reservation.numberOfRooms);
 
+<<<<<<< HEAD
         //const res = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
         const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
+=======
+        const res = await axios.get(`http://localhost:3200/hotels/${hotelId}`);
+        //const res = await axios.get('http://localhost:3200/hotels/64c7d5a0f8ae1d32e0eb2cd6');
+>>>>>>> fb55feced685ab1ddd3bfc03f561254935c01bd8
         const img = res.data;
         //setHotelId(data._id);
         const himage = img.images[0]; 
@@ -136,7 +144,6 @@ const Booking = () => {
         }}
       >
         <Grid container direction='column' spacing= {3}>
-
           <Grid item>
         <Typography variant="h6">
           <b>{formatDate(checkIn)}</b>
