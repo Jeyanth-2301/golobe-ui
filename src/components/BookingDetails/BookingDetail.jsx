@@ -14,24 +14,26 @@ import check from '../../assets/icons/Booking-icons/checking.png';
 import tick from '../../assets/icons/Booking-icons/tick.png';
 import axios from 'axios';
 import Confetti from 'react-confetti';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper'
+
 const BookingDetail = () => {
 const navigate = useNavigate();
   const [location, setLocation] = useState('');
+  const[hotelData,setHotelData]=useState('');
   const [hotelName, setHotelName] = useState('');
   const [hotelImage,setHotelImage]= useState('');
   const [room , setRoom] = useState('');
   const [ratePerNight, setRatePerNight] = useState('');
-  const [checkin, setCheckin]=useState('');
-  const [checkout, setCheckout]=useState('');
+  const [checkInDate, setCheckInDate]=useState('');
+  const [checkOutDate, setCheckOutDate]=useState('');
   const[hotelId,setHotelId]=useState('');
-   const[roomId,setRoomId]=useState('');
-  const checkinDate = new Date(checkin);
-const checkoutDate = new Date(checkout);
+  //  const[roomId,setRoomId]=useState('');
+   const [roomRates, setRoomRates] = useState([]);
+  const cinDate = new Date(checkInDate);
+const coutDate = new Date(checkOutDate);
 
-const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+const timeDiff = coutDate.getTime() - cinDate.getTime();
 const numberOfDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
 const formatDate = (dateString)=>{
@@ -45,7 +47,9 @@ useEffect(() => {
       const hotelId = params.get('hid');
       const roomId = params.get('rid');
       const index=params.get('rii');
-      
+      // const checkInDate=params.get('checkIn');
+      // const checkOutDate=params.get('checkOut');
+
       // Fetch hotel details
       const hotelUrl = `http://localhost:3200/hotels/${hotelId}`;
       const hotelResponse = await axios.get(hotelUrl);
@@ -57,19 +61,21 @@ useEffect(() => {
       setHotelImage(hotelData.images[0]);
       setRoom(hotelData.rooms[index].roomType)
       setRatePerNight(hotelData.rooms[index].roomRate);
-      console.log('Hotel Response:', hotelResponse.data,"  ","RoomId",index);
+      // setCheckInDate(checkInDate);
+      // setCheckOutDate(checkOutDate);
+      console.log('Hotel Response:', hotelResponse.data,"  ","RoomId",index, "CheckinDate",checkInDate,"CheckoutDate",checkOutDate);
 
       // Fetch room details
-      //  const roomUrl = `http://localhost:3200/rooms/${roomId}`;
-      // const roomResponse = await axios.get(roomUrl);
-      // // const roomData = roomResponse.data;
+      //   const roomUrl = `http://localhost:3200/rooms/${roomId}`;
+      //  const roomResponse = await axios.get(roomUrl);
+      //  const roomData = roomResponse.data;
       
       // setRoom(roomData.roomType);
       // setCheckin(roomData.checkInDate);
       // setCheckout(roomData.checkOutDate);
       // setRatePerNight(roomData.ratePerNight);
     
-// console.log('Room Response:', roomResponse.data);
+//console.log('Room Response:', roomResponse.data);
     } catch (error) {
       console.error('Error in fetching:', error);
     }
@@ -141,34 +147,30 @@ const handleButtonClick = async () => {
           }, 500);
         }, 4000);
         try {
-          // Make the HTTP POST request to your backend API endpoint
-          const response = await fetch("http://localhost:3200/payment/64c7a67362874d48eb6d3ed2", {
+          const response = await fetch(`http://localhost:3200/payment/${hotelId}`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             credentials: "include",
             body: JSON.stringify({
-              hotelId: '64c7a67362874d48eb6d3ed2',
-              // Add any other data you need to send in the request body
+              hotelId:hotelId
+
             })
           });          
-          const data = await response.json(); // Parse the response JSON          
-          console.log(data); // You can access the response data here         
-          // Handle the response from the backend (if needed)
-          // Close the popup after successful submission         
+          const data = await response.json();
+           // Parse the response JSON          
+          console.log(data);          
         } catch (error) {
           // Handle errors if the request fails
           console.error("Error in payment:", error);
         }
   };
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
-  const [showPayNowButton, setShowPayNowButton] = useState(true); // Initialize to true or false as needed
 
 
-  const handleView=(roomId,index,event)=>{
-    event.stopPropagation(); 
-    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}`;
+  const handleView=(roomId,index)=>{
+    const query=`?hid=${encodeURIComponent(hotelId)}`;
     navigate(`/payment-page${query}`);
     }
   return (
@@ -200,7 +202,7 @@ const handleButtonClick = async () => {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '10px', justifyContent: 'space-between' }}>
               <Typography variant='e'><strong>
-               {formatDate (checkin)}</strong>
+               {formatDate (checkInDate)}</strong>
               </Typography>
               <Box
                 sx={{
@@ -219,7 +221,7 @@ const handleButtonClick = async () => {
                 />
               </Box>
               <Typography variant='f'><strong>
-                {formatDate (checkout)}</strong>
+                {formatDate (checkOutDate)}</strong>
               </Typography>
             </Box>
           </Paper>
@@ -317,7 +319,7 @@ const handleButtonClick = async () => {
               >
                 <img
                   src={hotelImage}
-                  alt="Superior Room with double bed or twin beds"
+                  alt="Hotel Image"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }} // Make the image cover the entire box
                 />
               </Box>
@@ -391,12 +393,11 @@ const handleButtonClick = async () => {
 )}
 {!showConfetti && showNewButton && (
   
-    <Link to="/payment-page">
-      <Button variant="contained" fullWidth style={{marginBottom:'-178px', marginTop: '15px', marginLeft: '27px', width: '580px'}} onClick={(event)=>handleView(roomRates[index]?._id,index,event)} >
+  
+      <Button variant="contained" fullWidth style={{marginBottom:'-178px', marginTop: '15px', marginLeft: '27px', width: '580px'}}onClick={()=>handleView()}>
         View Booking
       </Button>
-    </Link>
-  
+    
 )}
       {showPaymentPopup && (
   <Box
