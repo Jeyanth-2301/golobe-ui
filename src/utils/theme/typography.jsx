@@ -237,7 +237,7 @@ const themeTypography = {
         color: '#FF8682'
     },
     nightprice: {
-        fontSize: '18px',
+        fontSize: '17px',
         fontWeight: '700',
         color: '#FF8682'
     },

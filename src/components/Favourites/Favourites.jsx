@@ -15,17 +15,13 @@ const Favourites = () => {
   const navigate=useNavigate();
 
   const [favourites, setFavourites] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
-  
-
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:3200/auth/users/64cb50827767115059b3eaa7/favourites');
+      const response = await axios.get('http://localhost:3200/auth/users/favourites',{withCredentials:true});
       const data = response.data;
       
       console.log(data);
@@ -41,7 +37,7 @@ const Favourites = () => {
 
     axios({
       method,
-      url: `http://localhost:3200/auth/users/64cb50827767115059b3eaa7/favourites/${hotelId}`,
+      url: `http://localhost:3200/auth/users/favourites/${hotelId}`,withCredentials:true
     })
       .then((response) => {
         console.log('Request successful:', response);
@@ -79,6 +75,17 @@ const Favourites = () => {
   return (
    
     <div>
+      {favourites.length === 0 ? (
+        <Box
+          sx={{display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', }} >
+          <Typography variant="top">See more hotels and add your favourite hotels</Typography><br/>
+          <Link to="/">
+            <Button variant="contained" color="primary">
+              Add Favorites
+            </Button>
+          </Link>
+        </Box>
+      ) : 
       <Box sx={{ display: "flex", flexDirection: 'column',overflow:'auto', marginLeft: '4.7%', marginTop: '20vh' ,marginBottom:'25vh'}}>
            <Typography variant='top'> Favourites</Typography><br/>
            {favourites.map((feature, index) => (
@@ -148,7 +155,7 @@ const Favourites = () => {
         </Paper>
            ))}
         </Box>
-   
+     }
     </div>
   );
 };

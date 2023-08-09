@@ -13,20 +13,20 @@ function Content({items}){
     return(                  
         <Box sx = {{height: 220}}>
             <CardContent>
-                <Grid item sx={{ flex: '1 0 auto',marginLeft: 54.5,marginTop: -1.5}} > 
+                <Grid item sx={{ flex: '1 0 auto',marginLeft: 53.5,marginTop: -1.5}} > 
                     <Grid item sx = {{marginLeft: '23px'}}>
                     <Typography variant = "price" component="span">
                         Starting from
                     </Typography></Grid>                                  
                     <Grid item sx ={{marginLeft: '23px'}}>
                     <Typography variant = "nightprice">
-                        ${items.ratePerNight} 
+                        Rs{items.ratePerNight} 
                     </Typography>
                     <Typography variant = "night" sx={{ marginLeft: '3px', marginTop: '2px' }}>
                             /night
                         </Typography>
                     </Grid>
-                    <Grid sx = {{marginLeft: '65.4px', marginTop: '-2.8px',paddingLeft: '1px'}}>
+                    <Grid sx = {{marginLeft: '78px', marginTop: '-2.8px',paddingLeft: '1px'}}>
                         <Typography
                             sx={{ fontFamily: 'Montserrat, sans-serif', fontSize: '13px'}}>
                             excl. tax

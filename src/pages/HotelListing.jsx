@@ -10,7 +10,12 @@ const HotelListing = () => {
   const destination = queryParameters.get('q');
   const checkInDate = queryParameters.get('checkIn');
   const checkOutDate = queryParameters.get('checkOut');
-  const numberOfRooms = queryParameters.get('rooms');
+  
+  const numberOfRooms=parseInt(queryParameters.get("rooms"));
+  const [dest,setDest]=useState(destination);
+  const[In,setIn]=useState(checkInDate);
+  const [out,setOut]=useState(checkOutDate);
+  const[room,setRoom]=useState(numberOfRooms);
   const [searchresults, setSearchResults] = useState([]);
   const [selectedPrice, setSelectedPrice] = useState([899, 10000]);
   const [selectedRating, setSelectedRating] = useState(null);
@@ -65,13 +70,13 @@ const HotelListing = () => {
         .map((amenity) => amenity.label);
 
       const url = `http://localhost:3200/hotels/search?q=${encodeURIComponent(
-        destination
+        dest
       )}&checkIn=${encodeURIComponent(
-        checkInDate
+        In
       )}&checkOut=${encodeURIComponent(
-        checkOutDate
+        out
       )}&rooms=${encodeURIComponent(
-        numberOfRooms
+        room
       )}&amenities=${encodeURIComponent(
         selectedAmenitiesIds.join(',')
       )}&priceRanges=${encodeURIComponent(
@@ -97,10 +102,6 @@ const HotelListing = () => {
     window.scrollTo(0, 0);
     handleSearch();
   }, [
-    destination,
-    checkInDate,
-    checkOutDate,
-    numberOfRooms,
     selectedPrice,
     selectedRating,
     amenties,
@@ -110,10 +111,16 @@ const HotelListing = () => {
   return (
     <div>
       <Searchafter
-        dest={destination}
-        checkin={checkInDate}
-        checkout={checkOutDate} 
-        rooms={numberOfRooms}
+        dest={dest}
+        checkin={In}
+        checkout={out} 
+        rooms={room}
+        setIn={setIn}
+        setOut={setOut}
+        setDest={setDest}
+        setRoom={setRoom}
+        handleSearch={handleSearch}
+
       />
       <Filter
         handleChangePrice={handleChangePrice}
@@ -128,7 +135,7 @@ const HotelListing = () => {
       {searchresults.length < 0 ? (
         <DataNotFound />
       ) : (
-      <Hotels data={searchresults} />)}
+      <Hotels data={searchresults}  In={In} out={out}/>)}
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );

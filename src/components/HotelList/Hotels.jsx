@@ -3,11 +3,18 @@ import MainCard from "./Container/MainCard";
 import { Container, Box, Button } from "@mui/material";
 import BasicButtons from './Container/BasicButtons'
 
-function Hotels({ data }) {
+function Hotels({ data,In,out }) 
+{
     const [showAllHotels, setShowAllHotels] = useState(false);
     const [showBut, setShowBut] = useState(true);
     const[display, setDisplay] = useState(true);
-
+   const getHotelsToShow = () => {
+        if (showAllHotels) {
+            return data; // Return all hotels when showAllHotels is true
+        } else {
+            return data.slice(0, 4); // Return the first 4 hotels
+        }
+         }
     useEffect(() => {
         if (!Array.isArray(data)) {
             setShowBut(false);
@@ -21,14 +28,6 @@ function Hotels({ data }) {
 
     const handleShowMoreLessClick = () => {
         setShowAllHotels(!showAllHotels);
-    };
-
-    const getHotelsToShow = () => {
-        if (showAllHotels) {
-            return data; // Return all hotels when showAllHotels is true
-        } else {
-            return data.slice(0, 4); // Return the first 4 hotels
-        }
     };
     // const containerHeight = showAllHotels ? data.length * 350 : 350;
 
@@ -64,6 +63,6 @@ function Hotels({ data }) {
             </Container>
         </Box>
     );
-}
+                        }
 
 export default Hotels;
