@@ -36,11 +36,6 @@ const Login = () => {
   const handlePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
   const handleLoginSuccess = (message) => {
     setSnackbarSeverity("success");
     setSnackbarMessage(message);
@@ -54,6 +49,9 @@ const Login = () => {
     setSnackbarOpen(true);
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
   const handleSubmit = async (event) => {
     setLoading(true);
     event.preventDefault();
@@ -120,13 +118,13 @@ const Login = () => {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              padding: "80px",
+              padding: "70px",
             }}
           >
             <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
               LOGIN
             </Typography>
-            <Typography sx={{ mb: 4 }}>
+            <Typography sx={{ mb: 2 }}>
               Login to access your Golobe Account
             </Typography>
             <Box
@@ -135,7 +133,7 @@ const Login = () => {
               onSubmit={handleSubmit}
               sx={{ mt: 3 }}
             >
-              <Grid container spacing={2}>
+              <Grid container spacing={1.5}>
                 <Grid item xs={12}>
                   <TextField
                     required
@@ -197,72 +195,57 @@ const Login = () => {
                   justifyContent="space-between"
                   sx={{ marginTop: "10px" }}
                 >
-                  <Button
-                      component="a"
-                      href="http://localhost:3200/auth/login?by=google"
-                      target="_self"
-                      rel="noopener noreferrer"
+                  <Button component="a" href="http://localhost:3200/auth/login?by=google" target="_self" rel="noopener noreferrer">
+                    <Box
+                      sx={{
+                        width: "150px",
+                        height: "56px",
+                        border: "1px solid #8DD3BB",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        display: "flex",
+                      }}
+
                     >
                       <Box
                         sx={{
-                          width: "150px",
-                          height: "56px",
-                          border: "1px solid #8DD3BB",
-                          alignItems: "center",
-                          justifyContent: "flex-start",
                           display: "flex",
+                          alignItems: "center",
+                          height: "30px",
+                          width: "30px",
+                          overflow: "hidden",
+                          marginLeft: "60px",
                         }}
                       >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            height: "30px",
-                            width: "30px",
-                            overflow: "hidden",
-                            marginLeft: "60px",
-                          }}
-                        >
-                          <img
-                            src="src/assets/signup/google.png"
-                            alt="google"
-                          />
-                        </Box>
+                        <img src="src/assets/login/google.png" alt="google" />
                       </Box>
-                    </Button>
-                    <Button
-                      component="a"
-                      href="http://localhost:3200/auth/login?by=facebook"
-                      target="_self"
-                      rel="noopener noreferrer"
+                    </Box>
+                  </Button>
+                  <Button component="a" href="http://localhost:3200/auth/login?by=facebook" target="_blank" rel="noopener noreferrer">
+                    <Box
+                      sx={{
+                        width: "150px",
+                        height: "56px",
+                        border: "1px solid #8DD3BB",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        display: "flex",
+                      }}
                     >
                       <Box
                         sx={{
-                          width: "150px",
-                          height: "56px",
-                          border: "1px solid #8DD3BB",
-                          alignItems: "center",
-                          justifyContent: "center",
                           display: "flex",
+                          alignItems: "center",
+                          height: "30px",
+                          width: "30px",
+                          overflow: "hidden",
+                          marginLeft: "10px",
                         }}
                       >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            height: "30px",
-                            width: "30px",
-                            overflow: "hidden",
-                            marginLeft: "10px",
-                          }}
-                        >
-                          <img
-                            src="src/assets/signup/facebook.png"
-                            alt="facebook"
-                          />
-                        </Box>
+                        <img src="src/assets/login/facebook.png" alt="facebook" />
                       </Box>
-                    </Button>
+                    </Box>
+                  </Button>
                 </Grid>
               </Grid>
             </Box>
@@ -278,7 +261,7 @@ const Login = () => {
             alignItems: "center",
             justifyContent: "center",
             height: "100%",
-            padding: "70px",
+            padding: "110px",
           }}
         >
           <Carousel
@@ -337,4 +320,3 @@ const Login = () => {
 };
 
 export default Login;
-

@@ -3,13 +3,16 @@ import {Container} from '@mui/material'
 import Detail from './TitleCard';
 import Booking from './Booking'
 import Terms from './Terms'
+import Top from '../hotel-details/images-display/Top'
 
 const Main = () => {
   
 
   return (
     <>
-      <Container id="pageContent" style={{paddingTop: '6rem'}}>
+      
+      <Container id="pageContent" style={{marginTop:'7rem', width:'100%'}}>
+      <Top />
       <Detail/>
       <Booking  />
       <Terms />
@@ -21,13 +24,3 @@ const Main = () => {
 
 export default Main;
 
-// const bookingDetails = {
-  //   name: 'John Doe',
-  //   email: 'john.doe@example.com',
-  //   checkInDate: '',
-  //   checkOutDate: '',
-  //   roomType: 'Deluxe Room',
-  //   checkInTime: '8.00am',
-  //   checkOutTime: '9.00pm',
-  //   roomNumber: 'onarrival',
-  // };

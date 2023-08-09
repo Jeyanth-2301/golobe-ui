@@ -1,17 +1,104 @@
-import { Box, Button, Card, CardMedia, Container, IconButton } from "@mui/material";
+import {Button,IconButton } from "@mui/material";
 import React from "react";
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { useState } from "react";
-import axios from "axios";
+import { useState,useEffect } from "react";
+import { Snackbar } from "@mui/material";
 
 
 function FavIcon({hotelIds}){
-    //  console.log(hotelId)
+   
+
+    const [loggedIn, setLoggedIn] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [userName, setUserName] = useState('')
+
+    const favouriteHotels = async () => {
+        const url = "http://localhost:3200/auth/users/favourites";
+        try {
+            const response = await fetch(url, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                const valueToCheck = data.some((item) => item._id === hotelIds);
+                setIsFilled(valueToCheck); // Set the isFilled state based on the check
+            } else {
+                console.log("Request failed with status:", response.status);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error.message);
+        }
+    };
+    
     
 
+    useEffect(()=>{
+        if(loggedIn){
+        favouriteHotels();
+        }
+    },[loggedIn]);
+
+
+
+
+    useEffect(() => {
+        const checkLoggedInStatus = async () => {
+            try {
+                const response = await fetch(
+                    "http://localhost:3200/auth/users/user/islogined",
+                    {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                    }
+                );
+
+                if (response.ok) {
+                    const responseData = await response.json();
+
+                    if (responseData.success) {
+                        setLoggedIn(true);
+                        console.log("User is logged in.");
+                        if (responseData.info) {
+                            // console.log("User data:", responseData.info);
+                            // setProfilepic(responseData.info.profilePicture);
+                            setUserName(responseData.info.userName);
+                        } else {
+                            console.log("No user data available.");
+                        }
+                    } else {
+                        setLoggedIn(false);
+                        console.log("User is not logged in.");
+                    }
+                } else {
+                    console.log("Request failed with status:", response.status);
+                }
+            } catch (error) {
+                console.error("An error occurred:", error.message);
+            }
+        };
+
+        checkLoggedInStatus();
+    }, []);
+
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
+    };
+    
     const handleIconClick =() =>{
+
+            if (!loggedIn) {
+                // Display a snackbar or a message indicating the need to log in
+                setSnackbarOpen(true); 
+                console.log("Login please to add a favorite icon");
+                return;
+            }
             const newFav =  !isFilled;
            
             setIsFilled(newFav);
@@ -28,7 +115,7 @@ function FavIcon({hotelIds}){
                     if (!response.ok) {
                     throw new Error('Network response was not ok');
                     }
-                    return response.json(); // You can use .text() or other methods depending on the response type
+                    return response.json(); 
                 })
                 .then(data => {
                     console.log('PUT request succeeded with response:', data);
@@ -41,13 +128,26 @@ function FavIcon({hotelIds}){
 
 
     return(
+       
+        <>
+         
         <IconButton  onClick = {handleIconClick} variant = "outlined" sx ={{maxHeight: '33px',width: 25,ml:4}} >
             <Button variant="outlined">
                 {isFilled ? <FavoriteOutlinedIcon style={{ color: 'black' ,fontSize: 24}}/> : 
                  <FavoriteBorderOutlinedIcon  />
                 }
+
             </Button>
         </IconButton>
+        <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={4000}
+            onClose={handleSnackbarClose}
+            message="Please log in to add a favorite icon"
+        
+        />
+    
+       </>
     );
 }
 export default FavIcon;

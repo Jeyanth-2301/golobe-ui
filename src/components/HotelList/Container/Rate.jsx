@@ -11,7 +11,7 @@ import { IconButton } from '@mui/material';
 
 export default function Rate({selectRating}){
   const { isExpanded, toggleDropdown } = useDropdown();
-  const ratingValues = [1, 2, 3, 4, 5];
+  const ratingValues = [ 2, 3, 4];
       const ButtonStyle = styled(Box) (({theme})=> ({
             width: 40,
             height:40,
@@ -56,7 +56,7 @@ return(
                                           onClick={() => selectRating(value)}
                                           onMouseEnter={handleBoxMouseEnter}
                                           onMouseLeave={handleBoxMouseLeave}  >
-                                          <Typography variant="val">{`${value - 1}+`}</Typography>
+                                          <Typography variant="value">{`${value }+`}</Typography>
                                     </ButtonStyle>
                               ))}
                   </div> )}

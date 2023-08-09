@@ -1,9 +1,9 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Formik, Form, Field} from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
@@ -16,7 +16,7 @@ const validationSchema = Yup.object().shape({
   cardNumber: Yup.string()
     .required("Card number is required")
     .matches(/^\d{16}$/, "Card number must be 16 digits"),
-    expirationDate: Yup.string()
+  expirationDate: Yup.string()
     .required("Expiration date is required")
     .matches(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid format (MM/YY)")
     .test(
@@ -46,34 +46,46 @@ const validationSchema = Yup.object().shape({
     .required("Name on card is required")
     .matches(/^[A-Za-z\s]+$/, "Only alphabets and spaces are allowed")
 });
-const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
+const PopupForm = ({ open, handleClosePopup, handleCardSelection, fetchCards }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [saveCardInfo, setSaveCardInfo] = useLocalStorage(
-    "saveCardInfo",
-    false
-  );
-  
-  
+  // const [newCard, setNewCard] = useState({
+  //   cardHolder: '',
+  //   cardNumber: '',
+  //   expirationDate: '',
+  //   cvv: ''
+  // });
+  const handlee = (values) => {
+    console.log(values)
+  }
+
   const handleSubmit = async (values) => {
     setIsSubmitting(true);
+    console.log(values)
     try {
-      // Make the HTTP POST request to your backend API endpoint
-      const response = await axios.post("http://localhost:3200/auth/users/user/cards/saveCard", {
-        cardNumber: values.cardNumber,
-        expirationDate: values.expirationDate,
-        cvv: values.cvv,
-        cardHolder: values.cardHolder,
+      const response = await fetch('http://localhost:3200/auth/users/user/cards/saveCard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cardHolder: values.cardHolder,
+          cardNumber: values.cardNumber,
+          expirationDate: values.expirationDate,
+          cvv: values.cvv
+        }),
+        credentials: "include",
       });
-      // Handle the response from the backend (if needed)
-      // Close the popup after successful submission
-      handleClosePopup();
+
+      const responseData = await response.json();
+      console.log('Card added successfully:', responseData);
     } catch (error) {
-      // Handle errors if the request fails
-      console.error("Error adding card:", error);
+      console.error('Error adding card:', error.message);
     }
+    fetchCards();
     setIsSubmitting(false);
   };
-  
+
+
   return (
     <Dialog open={open} onClose={handleClosePopup} fullWidth maxWidth="sm">
       <DialogContent>
@@ -84,22 +96,22 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
         </Typography>
         <Formik
           initialValues={{
+            cardHolder: "",
             cardNumber: "",
             expirationDate: "",
             cvv: "",
-            cardHolder: "",
-            saveCardInfo: false
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { setSubmitting }) => {
             console.log(values);
             // Your form submission logic here
             handleClosePopup();
-            handleCardSelection(values.cardNumber, values.expirationDate);
-            
-              setSubmitting(false); // Set isSubmitting to false after form submission
-              handleClosePopup();
-          
+            handleSubmit(values)
+            // handleCardSelection(values.cardNumber, values.expirationDate);
+            handlee(values);
+            setSubmitting(false); // Set isSubmitting to false after form submission
+            handleClosePopup();
+
           }}
         >
           {({ errors, touched, isValid }) => (
@@ -141,18 +153,18 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
                 error={touched.cardHolder && Boolean(errors.cardHolder)}
                 helperText={touched.cardHolder && errors.cardHolder}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 value="secure"
-                control={<Checkbox key="secureCheckbox" 
-                checked={saveCardInfo}
-                    onChange={(e) => setSaveCardInfo(e.target.checked)}
-                  />}
-                label="Securely save my information for 1-click checkout" 
+                control={<Checkbox key="secureCheckbox"
+                  // checked={saveCardInfo}
+                  onChange={(e) => setSaveCardInfo(e.target.checked)}
+                />}
+                label="Securely save my information for 1-click checkout"
                 labelPlacement="end"
-              />
+              /> */}
               <Button
                 variant="contained"
-                style={{ bgcolor: "#8dd3bb", marginTop: "15px", marginBottom:"25px" }}
+                style={{ bgcolor: "#8dd3bb", marginTop: "15px", marginBottom: "25px" }}
                 fullWidth
                 type="submit"
                 disabled={!isValid}
@@ -160,7 +172,7 @@ const PopupForm = ({ open, handleClosePopup, handleCardSelection }) => {
               >
                 Add Card
               </Button>
-              <Typography variant='d' lineHeight='1'> 
+              <Typography variant='d' lineHeight='1'>
                 By confirming your subscription, you allow The Outdoor Inn Crowd
                 Limited to charge your card for this payment and future payments
                 in accordance with their terms. You can always cancel your

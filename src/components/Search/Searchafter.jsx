@@ -1,6 +1,6 @@
 import React from 'react'
 import theme from '../../utils/theme/theme.jsx';
-import { Box, Paper, TextField, InputAdornment, Grid, MenuItem, FormControl, Typography, Button, IconButton } from '@mui/material';
+import { Box, Paper, TextField, InputAdornment, Grid, FormControl, Typography, Button, IconButton} from '@mui/material';
 import DirectionsCarSharpIcon from '@mui/icons-material/DirectionsCarSharp';
 import PersonIcon from '@mui/icons-material/Person';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -10,7 +10,7 @@ import RoomIcon from '@mui/icons-material/Room';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles'
 import { ThemeProvider } from '@emotion/react';
-import build from '../../assets/icons/search-icons/build.svg';
+import search from '../../assets/icons/search-icons/search.svg';
 import car from '../../assets/icons/search-icons/car.svg';
 import location from '../../assets/icons/search-icons/location.svg';
 import { Link , useNavigate} from 'react-router-dom';
@@ -48,45 +48,41 @@ const StyledButton = styled(Button)({
 
 
 
-const Searchafter = ({dest,checkin,checkout,rooms}) => {
+const Searchafter = ({dest,checkin,checkout,rooms,handleSearch,setDest,setIn,setOut,setRoom}) => {
+
+   const navigate = useNavigate();
+  
+  
+  
+   const handleClick=()=>{ 
+    const queryString =`?q=${encodeURIComponent(dest)}&checkIn=${encodeURIComponent(checkin)}&checkOut=${encodeURIComponent(checkout)}&rooms=${encodeURIComponent(rooms)}`;
+    navigate(`/hotel-listing${queryString}`);
+    handleSearch();
+  }
+   
+   
+
+ 
+  
 
 
 
-//   const navigate=useNavigate();
 
-//   const [destination, setDestination] = useState('');
-//   const [checkInDate, setCheckInDate] = useState('');
-//   const [checkOutDate, setCheckOutDate] = useState('');
-//   const [numberOfRooms, setNumberOfRooms] = useState(1);
 
-//   const [searchresults, setSearchResults] = useState([]);
 
-//   const handleDest = (e) => {
-//     setDestination(e.target.value);
-//   };
-//   const handleCheckIn = (e) => {
-//     setCheckInDate(e.target.value);
-//   };
-//   const handleCheckOut = (e) => {
-//     setCheckOutDate(e.target.value);
-//   };
-//   const handleRooms = () => {
-//     setNumberOfRooms(numberOfRooms + 1);
-//   };
+
+
+
+
+
+
+
 
 
   
 
+  
 
-// const handleSearch=()=>{
-
-//     const queryString = `?q=${encodeURIComponent(destination)}&checkIn=${encodeURIComponent(checkInDate)}&checkOut=${encodeURIComponent(checkOutDate)}&rooms=${encodeURIComponent(numberOfRooms)}`;
-//     navigate(`/hotel-listing${queryString}`);
-
-
-
-//   }
-   
 
   
 
@@ -95,18 +91,18 @@ const Searchafter = ({dest,checkin,checkout,rooms}) => {
   return (
     <ThemeProvider theme={theme}>
 
-      <Paper elevation={3} sx={{ width: "75vw", height: '20vh', borderRadius: '16px',marginTop:'9%' }} >
+      <Paper elevation={2} sx={{ width: "80vw", height: '16vh', borderRadius: '16px',marginTop:'8%' ,marginLeft:'8%'}} >
       
         <FormControl >
-          < Grid container direction="row" spacing={2} sx={{ marginTop: '10px', marginLeft: 2 }} >
+          < Grid container direction="row" spacing={2} sx={{ marginTop: '10px', marginLeft: 2,marginTop:'1%' }} >
             <Grid item>
               <StyledTextField
                 variant='outlined'
                 label="Enter Destination" id="destination"
-                sx={{ width: '340px' }}
+                sx={{ width: '360px' }}
                 value={dest}
-              
-                autoComplete='on'
+                onChange={(e)=>setDest(e.target.value)}
+                autoComplete='off'
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -120,56 +116,52 @@ const Searchafter = ({dest,checkin,checkout,rooms}) => {
                 id="checkin"
                 InputLabelProps={{ shrink: true }}
                 value={checkin}
-              
+                onChange={(e)=>setIn(e.target.value)}
               ></StyledTextField></Grid>
 
             <Grid item><StyledTextField type="date" label="Check Out" id="checkout"
               variant='outlined'
               value={checkout}
-           
+              onChange={(e)=>setOut(e.target.value)}
               InputLabelProps={{ shrink: true }}></StyledTextField></Grid>
 
 
             <Grid item ><StyledTextField label="Rooms" sx={{ width: '250px' }} id="rooms"
               value={rooms}
-
+              onChange={(e)=>setRoom(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <img src={car} />
                   </InputAdornment>
                 ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton >
+                      <AddCircleIcon onClick={(e)=>setRoom(rooms+1)} /></IconButton>
+                  </InputAdornment>
+                )
               
               }}
 
             >
             </StyledTextField>
             </Grid>
+            <Grid item >
+
+              <Box sx={{height:'55px',width:'55px',backgroundColor:'#8DD3BB',display:'flex',justifyContent:'center',alignItems:'center',borderRadius:'3px'}}>
+                  <IconButton  onClick={handleClick} >
+                   <img src={search} ></img>
+                  </IconButton>
+              
+              </Box>
+
+          
+            </Grid>
+            
           </Grid>
         </FormControl>
-        {/* <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '3%', padding: '0% 3.8%' }}>
-          <Button
-            variant="text"
-            disableRipple
-            disableElevation
-            sx={{ color: 'black', '&:hover': { backgroundColor: 'transparent' }, marginRight: 2 }}
-            startIcon={<AddIcon />}
-          >
-            Add Promo Code
-          </Button>
-          
-            <StyledButton
-              variant="outlined"
-              disableElevation
-              disableRipple
-              startIcon={<img src={build} alt="Build Icon" />}
-              onClick={handleSearch}
-            >
-              Show Places
-            </StyledButton>
-       
-        </Box> */}
-
+        
       </Paper>
     </ThemeProvider>
   )

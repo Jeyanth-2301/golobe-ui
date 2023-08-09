@@ -25,7 +25,8 @@ export default function Ament({handleCheck, amenties, extraAment, handleExtraChe
       }))
       const [showCheckboxes, setShowCheckboxes] = useState(false);
       const handleTextButtonClick = () => {
-             setShowCheckboxes(!showCheckboxes);  }
+             setShowCheckboxes(!showCheckboxes); 
+             }
       const iconStyle = {
             cursor: 'pointer',
             // Add hover effect styles
@@ -53,7 +54,7 @@ return(
                         <div>
                         <Box sx={{ ml: -1, mb: 1 }}>
                                     {!showCheckboxes  &&  (
-                                    <TextButton onClick={handleTextButtonClick} >+7 more</TextButton>    )} 
+                                    <TextButton onClick={handleTextButtonClick} >+6 more</TextButton>    )} 
                          </Box>
 
       

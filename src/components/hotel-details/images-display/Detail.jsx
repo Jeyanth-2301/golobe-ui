@@ -1,18 +1,139 @@
 import React from 'react'
-import { useState } from 'react';
-import { Grid, Typography } from '@mui/material'
+import { useState,useEffect} from 'react';
+import {Snackbar,Alert,Grid, Typography } from '@mui/material'
+
 import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
-import { Button, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import location from '../../../assets/icons/location-icon/location.svg'
 import { Close } from '@mui/icons-material';
 import { Dialog, DialogContent, DialogTitle, DialogActions, InputAdornment, TextField } from '@mui/material';
 import { EmailIcon, FacebookIcon, WhatsappIcon, TelegramIcon, TwitterIcon, LinkedinIcon } from "react-share";
-import { Link } from 'react-router-dom';
 
-const Detail = () => {
+const Detail = ({data}) => {
+  
+  const [name,setName]=useState(null)
+  const [userName,setUserName] =  useState('');
+  
+
+  const [hotelTypeStars, setHotelTypeStars] = useState([]);
+  const [hotelType,setHotelType]=useState(null)
+  const [loc,setLoc]=useState(null);
+  const [id,setId]=useState(null);
+  const [hotelRating, setHotelRating] = useState(null);
+  const [number,setNumber]=useState(null)
+  const [rate,setRate]=useState(null)
+  const [review, setReview] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+    const [isFilled, setIsFilled] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  useEffect(() => {
+    if (data) {
+      
+        const name=data.hotelName;
+        setName(name)
+        const id=data._id;
+        setId(id)
+         
+        console.log(id)
+        const hotelRating = data.hotelType;
+        setHotelType(hotelRating)
+        setHotelTypeStars(renderStars(hotelRating));
+        const loc=data.location.address;
+        setLoc(loc)
+        const rate=data.rating;
+        const show= rate % 1 === 0 ? rate.toFixed(0) : rate.toFixed(1);
+        setHotelRating(show)
+        const revno=data.numReviews;
+        setNumber(revno)
+        const rpn=data.ratePerNight;
+        setRate(rpn)
+        const allreview=data.overallReview;
+        setReview(allreview)
+       
+    
+        
+      }
+    }, [data, id]);
+
+    useEffect(()=>{
+      if(loggedIn){
+      favouriteHotels();
+      }
+  },[loggedIn]);
+
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+        try {
+            const response = await fetch(
+                "http://localhost:3200/auth/users/user/islogined",
+                {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                }
+            );
+
+            if (response.ok) {
+                const responseData = await response.json();
+
+                if (responseData.success) {
+                    setLoggedIn(true);
+                    console.log("User is logged in.");
+                    if (responseData.info) {
+                        // console.log("User data:", responseData.info);
+                        // setProfilepic(responseData.info.profilePicture);
+                        setUserName(responseData.info.userName);
+                    } else {
+                        console.log("No user data available.");
+                    }
+                } else {
+                    setLoggedIn(false);
+                    console.log("User is not logged in.");
+                }
+            } else {
+                console.log("Request failed with status:", response.status);
+            }
+        } catch (error) {
+            console.error("An error occurred:", error.message);
+        }
+    };
+
+    checkLoggedInStatus();
+}, []);
+
+const favouriteHotels = async () => {
+  const url = "http://localhost:3200/auth/users/favourites";
+  try {
+      const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          const valueToCheck = data.some((item) => item._id === id);
+          setIsFilled(valueToCheck); // Set the isFilled state based on the check
+      } else {
+          console.log("Request failed with status:", response.status);
+      }
+  } catch (error) {
+      console.error("An error occurred:", error.message);
+  }
+};
+
+const handleSnackbarClose = () => {
+  setSnackbarOpen(false);
+};
+
+
+      
+  
+
+
   const commonIconButtonStyle = {
     height: '32px',
     color: '#112211',
@@ -22,18 +143,48 @@ const Detail = () => {
     marginRight: '12px',
   };
 
-  const renderStars = (star) => {
+  const renderStars = (rating) => {
     const stars = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < rating; i++) {
       stars.push(
-        <StarOutlinedIcon key={i} fontSize="small" style={{ color: star }} />
+        <StarOutlinedIcon key={i} fontSize="small" style={{ color:'#FF8682' }} />
       );
     }
     return stars;
   };
-  const [isFavorite, setIsFavorite] = useState(false);
+  
   const handleFavoriteClick = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    if (!loggedIn) {
+      // Display a snackbar or a message indicating the need to log in
+      setSnackbarOpen(true); 
+      console.log("Login please to add a favorite icon");
+      return;
+  }
+  const newFav =  !isFilled;
+ 
+  setIsFilled(newFav);
+  const url = `http://localhost:3200/auth/users/favourites/${id}`;
+  // console.log(url)
+  const method = newFav ? 'POST' : 'DELETE';
+  const fetchOptions = {
+      method: method,
+      headers: {"Content-Type":"application/json"},
+      credentials: "include",
+    };
+    fetch(url, fetchOptions)
+      .then(response => {
+          if (!response.ok) {
+          throw new Error('Network response was not ok');
+          }
+          return response.json(); 
+      })
+      .then(data => {
+          console.log('PUT request succeeded with response:', data);
+      })
+      .catch(error => {
+          console.error('There was a problem with the PUT request:', error);
+      });
+
   };
   const handleShareClick = () => {
     setOpen(true);
@@ -110,43 +261,42 @@ const Detail = () => {
 
 
   return (
-    <div style={{ height: '18vh', width: '90vw', marginTop: '2vh' }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item xs={9} container direction="column" sx={{ width: '804px', height: '104px' }}>
-          <Grid item sx={{ height: '30px', width: '1000px' }}>
-            <Typography variant="h1" sx={{ fontSize: '24px' }}>CVK Park Bosphorus Hotel Istanbul&nbsp;
-              <Typography variant="pico" component="span" style={{ display: 'inline-flex', alignItems: 'center' }}>
-                {renderStars('#FF8682')} &nbsp;5 Star Hotel
+    <div >
+      <Grid container  style={{height:'15vh',width:'90vw',marginTop:'2vh'}}>
+        <Grid item xs={10} container direction="column">
+          <Grid item sx={{height:'5vh'}}>
+             <Typography variant="h1" sx={{fontSize:'24px'}}>{name}&nbsp;
+                  <Typography variant="pico" component="span" style={{display:'inline-flex',alignItems:'center'}}>
+                      {hotelTypeStars} 
+                      {hotelType} Star Hotel
+                  </Typography>
               </Typography>
-            </Typography>
-          </Grid>
-          <div style={{ width: '1000px', height: '35px', padding: '10px 0' }}>
-            <Grid item>
-              <Typography variant='pico' sx={{ width: '804px', height: '18px' }}>
-                <img src={location} alt="location" />Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437
+           </Grid>
+            <div >
+            <Grid item style={{height:'5vh',padding:'1vh 0'}}>
+              <Typography variant='pico'> 
+              <img src={location} alt="location"/>{loc}
               </Typography>
             </Grid>
-            <Grid item container alignItems="center" sx={{ width: '400px', height: '32px', marginTop: '8px' }}>
-              <Button variant="contained" color="primary" style={{
-                backgroundColor: 'white', color: 'black', width: '25px', height: '25px',
-                borderColor: 'blue', borderRadius: '4px', minWidth: '35px', maxWidth: '35px', padding: '10px', marginRight: '5px',
-              }}>4.2</Button>
-              <Typography variant="body1" sx={{ fontWeight: '700' }}>Very Good</Typography>&nbsp;
-              <Typography variant="pico">371 reviews</Typography>
+            <Grid item container alignItems="center" sx={{height:'5vh',padding:'1vh 0'}}>
+               <Typography variant='body1' sx={{fontWeight:'500',marginLeft:'0.2vw'}}>{hotelRating}</Typography>&nbsp;
+               <Typography variant="body1" sx={{fontWeight:'700'}}>{review}</Typography>&nbsp;
+               <Typography variant="pico">{number} reviews</Typography>
             </Grid>
-          </div>
-        </Grid>
-        <Grid item xs={3} container direction="column" sx={{ marginLeft: '-3px' }}>
-          <Grid item sx={{ color: '#FF8682', marginBottom: '10px' }}>
-            <Typography variant="h4" align="right" >$240
-              <Typography variant="body1" style={{ display: 'inline', marginTop: '4vh' }}>/night
-              </Typography>
-            </Typography>
-          </Grid>
+            </div>
+            </Grid>
+            <Grid item xs={2} container direction="column" sx={{height:'15vh',marginLeft:'-2px',width:'10vw'}}>
+              <Grid item sx={{color:'#FF8682',alignItems:'center',height:'7.5vh',marginTop:'0.5vh'}}>
+                    <Typography variant="h4" align="right">Rs {rate}
+                        <Typography variant="body1" style={{display:'inline'}}>/night
+                        </Typography>
+                    </Typography>
+                </Grid>
+
           <Grid item style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <Grid item>
+            <Grid item >
               <IconButton sx={commonIconButtonStyle} onClick={handleFavoriteClick}>
-                {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
+                {isFilled  ? <FavoriteIcon /> : <FavoriteBorderIcon />}</IconButton>
             </Grid>
             <Grid item>
               <IconButton sx={commonIconButtonStyle} onClick={handleShareClick}><ShareIcon /></IconButton>
@@ -187,17 +337,16 @@ const Detail = () => {
                 </Dialog>
               </div>
             </Grid>
-            <Grid item>
-              <Link to='/booking-details' >
-                <Button variant="contained" color="primary" sx={{
-                  color: '#112211', lineHeight: 'normal', border: '1px solid black',
-                  gap: '4px', borderRadius: '4px', padding: '7px', marginLeft: '5px', '&:hover': { backgroundColor: '#8DD3BB' },
-                }}>Book now</Button>
-              </Link>
-            </Grid>
+            
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar
+            open={snackbarOpen}
+            autoHideDuration={4000}
+            onClose={handleSnackbarClose}
+            message="Please log in to add a favorite icon"
+        />
     </div>
   )
 }

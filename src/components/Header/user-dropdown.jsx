@@ -1,9 +1,13 @@
 import React from 'react';
 import { MenuItem, Menu } from '@mui/material';
 import { Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
+    const navigate = useNavigate();
+    const handleNavigation = () => {
+        navigate('/profile');
+    }
     return (
         <Menu
             anchorEl={anchorEl}
@@ -17,12 +21,19 @@ const UserDropdown = ({ anchorEl, onClose, onLogout }) => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
+
         >
-            <Link to='/profile'><Button><MenuItem><Typography variant='body' >My Account</Typography></MenuItem></Button></Link>
-            <MenuItem><Typography variant='body2'>Payments</Typography></MenuItem>
-            <MenuItem><Typography variant='body2'>Settings</Typography></MenuItem>
-            <MenuItem><Typography variant='body2'>Support</Typography></MenuItem>
-            <MenuItem onClick={onLogout}><Typography variant='body2'>Logout</Typography></MenuItem>
+            <MenuItem onClick={handleNavigation} sx={{ py: 2 }}>
+                <Typography variant='body' sx={{ color: 'black' }}>
+                    My Account
+                </Typography>
+            </MenuItem>
+            {/* <MenuItem sx={{ py: 2 }}>
+                <Typography variant='body'>Payments</Typography>
+            </MenuItem> */}
+            <MenuItem onClick={onLogout} sx={{ py: 2 }}>
+                <Typography variant='body'>Logout</Typography>
+            </MenuItem>
         </Menu>
     );
 };

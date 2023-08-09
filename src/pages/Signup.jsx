@@ -161,13 +161,13 @@ export default function SignInSide() {
             item
             xs={false}
             sm={8}
-            md={6}
+            md={5}
             sx={{
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               height: "100%",
-              padding: "100px",
+              padding: "120px",
             }}
           >
             <Carousel
@@ -176,7 +176,7 @@ export default function SignInSide() {
               showStatus={false}
               showThumbs={false}
               showArrows={false}
-              style={{ height: "50vh", width: "100%" }}
+              style={{ height: "40vh", width: "100%" }}
             >
               <img
                 src={url}
@@ -199,7 +199,7 @@ export default function SignInSide() {
             item
             xs={12}
             sm={8}
-            md={6}
+            md={7}
             component={Paper}
             elevation={7}
             square
@@ -210,14 +210,14 @@ export default function SignInSide() {
                 mx: 4,
                 display: "flex",
                 flexDirection: "column",
-                padding: "50px",
+                padding: "5px",
               }}
             >
               <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
                 Sign up
               </Typography>
 
-              <Typography sx={{ mb: 4 }}>
+              <Typography sx={{ mb: 2 }}>
                 Let's get you all set up so that you can access your own account
               </Typography>
               <Box
@@ -226,7 +226,7 @@ export default function SignInSide() {
                 onSubmit={handleSubmit}
                 sx={{ mt: 3 }}
               >
-                <Grid container spacing={2}>
+                <Grid container spacing={1.4}>
                   <Grid item xs={12} sm={6}>
                     <TextField
                       autoComplete="given-name"
@@ -318,14 +318,14 @@ export default function SignInSide() {
                       }}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                   <Grid item xs={12}>
                     <FormControlLabel
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
                       label="I agree to all the terms and privacy policy."
                     />
-                  </Grid>
+                  </Grid> 
                 </Grid>
                 <Button
                   type="submit"

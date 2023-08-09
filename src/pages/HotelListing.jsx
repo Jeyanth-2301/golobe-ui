@@ -3,28 +3,31 @@ import Searchafter from '../components/Search/Searchafter';
 import Filter from '../components/HotelList/Filter';
 import Hotels from '../components/HotelList/Hotels';
 import { Box } from '@mui/material';
-//13
+import DataNotFound from '../components/HotelList/Container/NoResult';
+
 const HotelListing = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const destination = queryParameters.get('q');
   const checkInDate = queryParameters.get('checkIn');
   const checkOutDate = queryParameters.get('checkOut');
-  const numberOfRooms = queryParameters.get('rooms');
+  
+  const numberOfRooms=parseInt(queryParameters.get("rooms"));
+  const [dest,setDest]=useState(destination);
+  const[In,setIn]=useState(checkInDate);
+  const [out,setOut]=useState(checkOutDate);
+  const[room,setRoom]=useState(numberOfRooms);
   const [searchresults, setSearchResults] = useState([]);
-  const [selectedPrice, setSelectedPrice] = useState([899, 17375]);
+  const [selectedPrice, setSelectedPrice] = useState([899, 10000]);
   const [selectedRating, setSelectedRating] = useState(null);
-  const [selectedAmenities, setSelectedAmenities] = useState([]);
-  const[selectExtraAment, setSelectExtraAment] = useState([]);
+
   const [amenties, setAmenties] = useState([
     { id: 1, label: 'Airport shuttle', checked: false },
-    // ... other amenities
     { id: 2, label: 'Restaurant', checked: false },
     { id: 3, label: 'Family rooms', checked: false },
     { id: 4, label: 'Good breakfast', checked: false }
   ]);
   const [extraAment, setExtraAment] = useState([
     { id: 5, label: 'Free Wi-Fi', checked: false },
-    // ... other amenities
     { id: 6, label: 'Room service', checked: false },
     { id: 7, label:' Free-parking ', checked: false },
     { id: 8, label: 'Spa and wellness centre', checked: false },
@@ -32,8 +35,10 @@ const HotelListing = () => {
     { id: 10, label: 'Facilities for disabled guests', checked: false }
     
   ]);
+  
   const handleChangePrice = (e, newValue) => {
     setSelectedPrice(newValue);
+    console.log("price",selectedPrice);
 
   }
   
@@ -46,65 +51,57 @@ const HotelListing = () => {
       amenty.id === id ? { ...amenty, checked: event.target.checked } : amenty
     );
     setAmenties(updatedAmenties);
-  
-    // Filter checked amenities and get the selected ones
-    const selectedAmenities = updatedAmenties.filter((amenty) => amenty.checked);
-    // setSelectedAmenities(selectedAmenities);
-    // console.log("selectedAmenties", selectedAmenities);
   };
   const handleCheckboxChanges = (id) => (event) => {
     const updatedAment = extraAment.map((amenty) =>
       amenty.id === id ? { ...amenty, checked: event.target.checked } : amenty
     );
     setExtraAment(updatedAment);
-  
-    // Filter checked amenities and get the selected ones
-    // const selectedAmenities = updatedAment.filter((amenty) => amenty.checked);
-    // setSelectExtraAment(selectedAmenities);
+
   };
   
 
   // ... other functions and state
-
   const handleSearch = async () => {
+    console.log("Entered handleSearch")
     try {
       const selectedAmenitiesIds = [...amenties, ...extraAment]
         .filter((amenity) => amenity.checked)
         .map((amenity) => amenity.label);
 
       const url = `http://localhost:3200/hotels/search?q=${encodeURIComponent(
-        destination
+        dest
       )}&checkIn=${encodeURIComponent(
-        checkInDate
+        In
       )}&checkOut=${encodeURIComponent(
-        checkOutDate
+        out
       )}&rooms=${encodeURIComponent(
-        numberOfRooms
+        room
       )}&amenities=${encodeURIComponent(
         selectedAmenitiesIds.join(',')
       )}&priceRanges=${encodeURIComponent(
         JSON.stringify(selectedPrice)
       )}&rating=${encodeURIComponent(selectedRating)}`;
 
-      console.log("url", url);
-      const response = await fetch(url);
-      const data = await response.json();
+      console.log(url);
+   
+        const response = await  fetch(url);
+        const data =  await  response.json();
+        console.log(data);
+        setSearchResults(data);
+     
+        }
+        catch (error) {
+              console.error("Error occurred during fetch:", error);
+            }
+          }
 
-      setSearchResults(data);
-      console.log('After displaying data', data);
-      // console.log("url", url);
-    } catch (error) {
-      console.error('Error occurred during fetch:', error);
-    }
-  };
 
   useEffect(() => {
+    window.location.hash = 'upperPart';
+    window.scrollTo(0, 0);
     handleSearch();
   }, [
-    destination,
-    checkInDate,
-    checkOutDate,
-    numberOfRooms,
     selectedPrice,
     selectedRating,
     amenties,
@@ -114,10 +111,16 @@ const HotelListing = () => {
   return (
     <div>
       <Searchafter
-        dest={destination}
-        checkin={checkInDate}
-        checkout={checkOutDate} 
-        rooms={numberOfRooms}
+        dest={dest}
+        checkin={In}
+        checkout={out} 
+        rooms={room}
+        setIn={setIn}
+        setOut={setOut}
+        setDest={setDest}
+        setRoom={setRoom}
+        handleSearch={handleSearch}
+
       />
       <Filter
         handleChangePrice={handleChangePrice}
@@ -129,7 +132,10 @@ const HotelListing = () => {
         extraAment={extraAment}
         handleCheckboxChanges={handleCheckboxChanges}
       />
-      <Hotels data={searchresults} />
+      {searchresults.length < 0 ? (
+        <DataNotFound />
+      ) : (
+      <Hotels data={searchresults}  In={In} out={out}/>)}
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );

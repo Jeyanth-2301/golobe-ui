@@ -207,6 +207,7 @@ function FullReview() {
   const averageRating = calculateAverageRating();
 
   // Function to get the rating message based on averageRating
+<<<<<<< HEAD
   const getRatingMessage = (rating) => {
     if (rating >= 1 && rating < 2) return 'Very Bad';
     if (rating >= 2 && rating < 3) return 'Bad';
@@ -214,6 +215,68 @@ function FullReview() {
     if (rating >= 4 && rating < 5) return 'Very Good';
     if (rating === 5) return 'Amazing';
     return 'N/A';
+=======
+  const getRatingMessage = useCallback((rating) => {
+    if (rating >= 1 && rating < 2) return "Very Bad";
+    if (rating >= 2 && rating < 3) return "Bad";
+    if (rating >= 3 && rating < 4) return "Satisfactory";
+    if (rating >= 4 && rating < 5) return "Very Good";
+    if (rating === 5) return "Amazing";
+    return "N/A";
+  }, []);
+
+  // fetching of review data
+  const params = new URLSearchParams(window.location.search);
+      const hotelId = params.get('q'); 
+  const fetchReviewsData = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3200/hotels/${hotelId}/guest-reviews`
+      );
+      if (!response.ok) {
+        setErrorMessage("Failed to fetch reviews data");
+        setSnackbarOpen(true);
+        throw new Error("Failed to fetch reviews data");
+      }
+      const data = await response.json();
+      setReviews(data);
+    } catch (error) {
+      setErrorMessage(error);
+      setSnackbarOpen(true);
+      console.error("Error occurred while fetching reviews data:", error);
+    }
+  };
+  // Function to handle adding new review
+  const handleReviewSubmit = async (newReview) => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `http://localhost:3200/hotels/${hotelId}/reviews`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newReview),
+          credentials: "include",
+        }
+      );
+      const addedReview = await response.json();
+      if (!response.ok) {
+        handleReviewSubmitError(addedReview.message);
+        return;
+      }
+      // Handle review submission success
+      handleReviewSubmitSuccess(addedReview);
+    } catch (error) {
+      // Handle review submission error
+      handleReviewSubmitError(
+        error.message || "Failed to add review. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
+>>>>>>> 02558994dc752dbead708455f5f10fa97f972569
   };
 
   const ratingMessage = getRatingMessage(averageRating);
