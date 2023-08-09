@@ -23,7 +23,7 @@ const Booking = () => {
   const [hotelId,setHotelId] = useState('');
 
   const qparams = new URLSearchParams(window.location.search);
-  const checkIn=qparams.get("checkin");
+  const checkIn=qparams.get("checkin")
   const checkOut=qparams.get("checkout")
   
 
