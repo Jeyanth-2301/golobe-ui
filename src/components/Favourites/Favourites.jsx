@@ -15,6 +15,35 @@ const Favourites = () => {
   const navigate = useNavigate();
 
   const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const askLoggedInStatus = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3200/auth/users/user/islogined",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.json();
+
+          if (!responseData.success) {
+            // setLoggedIn(true);
+            navigate('/404-errror-no-login-status');
+          }
+        }
+      } catch (error) {
+        console.error("An error occurred:", error.message);
+      }
+    };
+
+    askLoggedInStatus();
+  }, []);
+
   useEffect(() => {
     fetchData();
   }, []);

@@ -32,15 +32,15 @@ const BookingDetail = () => {
   const [hotelId, setHotelId] = useState('');
   // const [roomId, setRoomId] = useState('');
   const qparams = new URLSearchParams(window.location.search);
-  const checkin=qparams.get("checkin");
-  const checkout=qparams.get("checkout");
-  const rooms=qparams.get("rooms");
+  const checkin = qparams.get("checkin");
+  const checkout = qparams.get("checkout");
+  const rooms = qparams.get("rooms");
   const checkinDate = new Date(checkin);
   const checkoutDate = new Date(checkout);
   const roomId = qparams.get('rid');
   const index = qparams.get('rii');
- const [roomamt,setRoomamt]=useState('');
- 
+  const [roomamt, setRoomamt] = useState('');
+
 
 
   const timeDiff = checkoutDate.getTime() - checkinDate.getTime();
@@ -50,6 +50,35 @@ const BookingDetail = () => {
     const options = { weekday: 'short', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   }
+
+  useEffect(() => {
+    const askLoggedInStatus = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:3200/auth/users/user/islogined",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.json();
+
+          if (!responseData.success) {
+            // setLoggedIn(true);
+            navigate('/*');
+          }
+        }
+      } catch (error) {
+        console.error("An error occurred:", error.message);
+      }
+    };
+
+    askLoggedInStatus();
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -185,7 +214,7 @@ const BookingDetail = () => {
         setShowNewButton(true);  // Show the "View Booking" button
       }, 500);
     }, 4000);
-  
+
     try {
       const response = await fetch(`http://localhost:3200/payment/${hotelId}`, {
         method: "POST",
@@ -194,26 +223,27 @@ const BookingDetail = () => {
         },
         credentials: "include",
         body: JSON.stringify({
-          hotelId:hotelId
+          hotelId: hotelId
 
         })
-      });          
+      });
       const data = await response.json();
-       // Parse the response JSON          
-      console.log(data);          
+      // Parse the response JSON          
+      console.log(data);
     } catch (error) {
       // Handle errors if the request fails
       console.error("Error in payment:", error);
-    }};
-  
+    }
+  };
+
   const [showPaymentPopup, setShowPaymentPopup] = useState(false);
 
 
-  const handleView=()=>{
-    
-    const query=`?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&rupees=${encodeURIComponent(totalPrice)}&ckeckIn=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}&roomamt=${encodeURIComponent(totalAmount)}&rooms=${encodeURIComponent(rooms)}`;
+  const handleView = () => {
+
+    const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&rupees=${encodeURIComponent(totalPrice)}&ckeckIn=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}&roomamt=${encodeURIComponent(totalAmount)}&rooms=${encodeURIComponent(rooms)}`;
     navigate(`/payment-page${query}`);
-    }
+  }
   return (
     <div>
       <Box sx={{ height: "100vh" }}>
@@ -285,32 +315,32 @@ const BookingDetail = () => {
                     </React.Fragment>
                   ) : (
                     cards.map((card, index) => (
-                    <Box
-                      key={index}
-                      sx={{
-                        borderRadius: '10px',
-                        bgcolor: '#8dd3bb',
-                        marginTop: '5px',
-                        padding: '2vh',
-                        width: '101.1vh',
-                        alignItems: 'left',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                      }}
-                    >
-                      <Typography style={{ marginLeft: '1px' }}>Card Number - {card.cardNumber} / Expiry Date - {card.expirationDate}</Typography>
-                      <FormControl>
-                        <FormControlLabel
-                          key={index}
-                          value={`${index}`}
-                          control={<Radio color='secondary' />}
-                          labelPlacement="start"
-                          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
-                        />
-                      </FormControl>
-                    </Box>)
-                  ))}
+                      <Box
+                        key={index}
+                        sx={{
+                          borderRadius: '10px',
+                          bgcolor: '#8dd3bb',
+                          marginTop: '5px',
+                          padding: '2vh',
+                          width: '101.1vh',
+                          alignItems: 'left',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <Typography style={{ marginLeft: '1px' }}>Card Number - {card.cardNumber} / Expiry Date - {card.expirationDate}</Typography>
+                        <FormControl>
+                          <FormControlLabel
+                            key={index}
+                            value={`${index}`}
+                            control={<Radio color='secondary' />}
+                            labelPlacement="start"
+                            sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginRight: '15px', marginLeft: '1px' }}
+                          />
+                        </FormControl>
+                      </Box>)
+                    ))}
                 </RadioGroup>
                 <Box
                   border="2px dashed #000"
@@ -448,11 +478,11 @@ const BookingDetail = () => {
           )}
           {!showConfetti && showNewButton && (
 
-         
-              <Button variant="contained" fullWidth style={{ marginBottom: '-178px', marginTop: '15px', marginLeft: '27px', width: '580px' }} onClick={() => handleView()} >
-                View Booking
-              </Button>
-           
+
+            <Button variant="contained" fullWidth style={{ marginBottom: '-178px', marginTop: '15px', marginLeft: '27px', width: '580px' }} onClick={() => handleView()} >
+              View Booking
+            </Button>
+
 
           )}
           {showPaymentPopup && (
