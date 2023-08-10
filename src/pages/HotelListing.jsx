@@ -135,7 +135,7 @@ const HotelListing = () => {
       {searchresults.length < 0 ? (
         <DataNotFound />
       ) : (
-      <Hotels data={searchresults}  In={In} out={out}/>)}
+      <Hotels data={searchresults}  In={In} out={out} room={room}/>)}
       <Box sx={{ width: '20vh', height: '40vh' }}></Box>
     </div>
   );

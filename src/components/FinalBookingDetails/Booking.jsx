@@ -6,10 +6,7 @@ import { useState, useEffect, } from 'react'
 import axios from 'axios'
 
 
-const formatDate = (dateString) => {
-  const options = { weekday: 'short', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
-};
+
 
 
 
@@ -23,8 +20,9 @@ const Booking = () => {
   const [hotelId, setHotelId] = useState('');
 
   const qparams = new URLSearchParams(window.location.search);
-  const checkIn = qparams.get("checkin");
+  const checkIn = qparams.get("ckeckIn")
   const checkOut = qparams.get("checkout")
+  const rooms = qparams.get("rooms");
 
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -32,7 +30,10 @@ const Booking = () => {
   const [userName, setUserName] = useState('')
   const [hasProfilePicture, setHasProfilePicture] = useState(true);
 
-
+  const formatDate = (dateString) => {
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
 
   useEffect(() => {
     const askLoggedInStatus = async () => {
@@ -211,7 +212,7 @@ const Booking = () => {
             </Typography>
 
             <Typography variant="body2" >
-              <b>1</b>
+              <b>{rooms}</b>
             </Typography>
           </Grid>
 

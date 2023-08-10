@@ -13,6 +13,7 @@ const Available = () => {
       const hotelId = params.get('q');
       const checkin=params.get('checkIn');
       const checkout=params.get('checkOut');
+      const Rooms=params.get('rooms')
   useEffect(() => {
     fetchData();
   }, []);
@@ -33,7 +34,7 @@ const Available = () => {
         const responseData = await response.json();
 
         if (responseData.success) {
-          const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&checkin=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}`;
+          const query = `?hid=${encodeURIComponent(hotelId)}&rid=${encodeURIComponent(roomId)}&rii=${encodeURIComponent(index)}&checkin=${encodeURIComponent(checkin)}&checkout=${encodeURIComponent(checkout)}&rooms=${encodeURIComponent(Rooms)}`;
           navigate(`/booking-details${query}`);
         } else {
           setSnackbarOpen(true);

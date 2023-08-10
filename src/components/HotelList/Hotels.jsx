@@ -3,7 +3,7 @@ import MainCard from "./Container/MainCard";
 import { Container, Box, Button } from "@mui/material";
 import BasicButtons from './Container/BasicButtons'
 
-function Hotels({ data,In,out }) 
+function Hotels({ data,In,out,room }) 
 {
     const [showAllHotels, setShowAllHotels] = useState(false);
     const [showBut, setShowBut] = useState(true);
@@ -39,7 +39,7 @@ function Hotels({ data,In,out })
                     
                 <BasicButtons items={data} buttonStatus ={showAllHotels} />
                 </Box > )}
-                <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels} In={In} out={out} />
+                <MainCard hotelData={getHotelsToShow()} showAllHotels={showAllHotels} In={In} out={out} room={room} />
                 {showBut && display && (
                     <Box sx={{ marginTop: 3 }}>
                         <Button

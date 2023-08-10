@@ -9,7 +9,7 @@ import { Close } from '@mui/icons-material';
 import { Dialog, DialogContent, DialogTitle, DialogActions, InputAdornment, TextField } from '@mui/material';
 import { EmailIcon, FacebookIcon, WhatsappIcon, TelegramIcon, TwitterIcon, LinkedinIcon } from "react-share";
 import axios from 'axios';
-
+// import html2canvas from 'html2canvas';
 const Detail = () => {
 
   const [address, setAddress] = useState('');
