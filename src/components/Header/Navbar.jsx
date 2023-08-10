@@ -56,8 +56,8 @@ const Navbar = () => {
     const processName = (name) => {
         if (name.includes(' ')) {
             return name.split(' ')[0];
-        } else if (name.length > 8) {
-            return name.substring(0, 7) + '...';
+        } else if (name.length > 9) {
+            return name.substring(0, 9) + '...';
         } else {
             return name;
         }
@@ -189,7 +189,7 @@ const Navbar = () => {
                                 ) : (
                                     <Avatar src="//" alt="J" sx={{ width: 40, height: 40 }} />)}
                                 <Typography variant="body1" sx={{ marginLeft: '8px', cursor: 'pointer' }} onClick={handleUserNameClick}>
-                                    {userName}
+                                    {processName(userName)}
                                 </Typography>
                             </Box>
                             {/* <Button onClick={() => setLoggedIn(false)} sx={{ color: theme.palette.text.primary, marginLeft: '16px' }}>
@@ -204,7 +204,7 @@ const Navbar = () => {
                             </Button> */}
                             <Link to='/signup' >
                                 <Button onClick={() => setLoggedIn(true)} sx={{ color: theme.palette.text.primary }}>
-                                    Signin
+                                    SignUp
                                 </Button></Link>
                             <Link to='/login' ><FancyButton>Login</FancyButton></Link>
                         </>

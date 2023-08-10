@@ -89,7 +89,7 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post(apiUrl, requestData);
+      const response = await axios.post(apiUrl, requestData, { withCredentials: true });
       handleLoginSuccess(response.data.message);
     } catch (error) {
       console.error("API error:", error);

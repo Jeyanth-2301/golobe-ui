@@ -385,17 +385,17 @@ const Profilepage = () => {
                   >
                     <div
                       style={{
-                        display: "inline-block",
+                        // display: "inline-block",
                         borderRadius: "50%",
                         backgroundColor: "#FF8682",
-                        padding: "2.5px", //pen in middle of the round
-                        height: "30px",
-                        width: "30px",
+                        padding: "8px", //pen in middle of the round
+                        height: "35px",
+                        width: "35px",
                         marginLeft: "15px",
                         marginBottom: "0px",
                       }}
                     >
-                      <img src={pen} alt="Pen" />
+                      <img src={pen} alt="Pen" style={{ width: '20px' }} />
                     </div>
                   </Button>
                 </div>
@@ -507,13 +507,13 @@ const Profilepage = () => {
                   </Grid>
                   <Grid item></Grid>
                 </Grid>
-                <Grid
+                {/* <Grid
                   item
                   container
                   justifyContent="space-between"
                   alignItems="center"
-                >
-                  <Grid item>
+                > */}
+                {/* <Grid item>
                     <Typography variant="p2">Phone Number:</Typography>
                     <br />
 
@@ -523,7 +523,7 @@ const Profilepage = () => {
                         lable="phoneNumber"
                         name="phoneNumber"
                         value={phoneNumber}
-      
+
                         onChange={(e) => setPhoneNumber(e.target.value)}
                       />
                     ) : (
@@ -540,15 +540,15 @@ const Profilepage = () => {
                         Change
                       </Typography>
                     </Button>
-                  </Grid>
-                </Grid>
-                <Grid
+                  </Grid> */}
+                {/* </Grid> */}
+                {/* <Grid
                   item
                   container
                   justifyContent="space-between"
                   alignItems="center"
-                >
-                  <Grid item>
+                > */}
+                {/* <Grid item>
                     <Typography variant="p2">Address:</Typography>
                     <br />
                     {isAddressEditing ? (
@@ -562,8 +562,8 @@ const Profilepage = () => {
                     ) : (
                       <Typography variant="p1">{address}</Typography>
                     )}
-                  </Grid>
-                  <Grid item>
+                  </Grid> */}
+                {/* <Grid item>
                     <Button
                       variant="outlined"
                       onClick={() => setIsAddressEditing(true)}
@@ -573,8 +573,8 @@ const Profilepage = () => {
                         Change
                       </Typography>
                     </Button>
-                  </Grid>
-                </Grid>
+                  </Grid> */}
+                {/* </Grid> */}
                 <Grid
                   item
                   container
@@ -617,9 +617,9 @@ const Profilepage = () => {
                 }}
               >
                 {isNameEditing ||
-                isPhoneNumberEditing ||
-                isAddressEditing ||
-                isDateOfBirthEditing ? (
+                  isPhoneNumberEditing ||
+                  isAddressEditing ||
+                  isDateOfBirthEditing ? (
                   <Grid item>
                     <Button
                       variant="outlined"

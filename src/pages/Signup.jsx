@@ -318,14 +318,14 @@ export default function SignInSide() {
                       }}
                     />
                   </Grid>
-                   <Grid item xs={12}>
+                  <Grid item xs={12}>
                     <FormControlLabel
                       control={
                         <Checkbox value="allowExtraEmails" color="primary" />
                       }
                       label="I agree to all the terms and privacy policy."
                     />
-                  </Grid> 
+                  </Grid>
                 </Grid>
                 <Button
                   type="submit"
