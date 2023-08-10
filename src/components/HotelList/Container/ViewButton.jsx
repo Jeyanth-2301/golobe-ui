@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function ViewButton({ hotelIds,In,out }) {
+function ViewButton({ hotelIds,In,out ,room}) {
     // console.log("id",hotelId)
     console.log("item", hotelIds);
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ function ViewButton({ hotelIds,In,out }) {
     const handleIconClick = () => {     
       
         // const queryString = `?q=${encodeURIComponent(hotelIds)}`;
-        const queryString = `?q=${encodeURIComponent(hotelIds)}&checkIn=${encodeURIComponent(In)}&checkOut=${encodeURIComponent(out)}`;
+        const queryString = `?q=${encodeURIComponent(hotelIds)}&checkIn=${encodeURIComponent(In)}&checkOut=${encodeURIComponent(out)}&rooms=${encodeURIComponent(room)}`;
         const url = `http://localhost:3200/auth/users/recent/${hotelIds}`;
         const fetchOptions = {
           method: 'PUT',

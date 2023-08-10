@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import DataNotFound from './NoResult';
 
 
-function MainCard({hotelData, showAllHotels,In,out}){
+function MainCard({hotelData, showAllHotels,In,out,room}){
     
     if (!Array.isArray(hotelData)) {
         return <DataNotFound />;
@@ -32,7 +32,7 @@ function MainCard({hotelData, showAllHotels,In,out}){
             <Grid item xs ={12}>
             <Content items = {hotel}/> </Grid>
             <Divider variant = "middle"/>
-            <FavAndView  hotelId = {hotel._id} In={In} out={out}/>
+            <FavAndView  hotelId = {hotel._id} In={In} out={out} room={room}/>
         </Grid>
     </Card>  
     ))}
@@ -48,7 +48,7 @@ function MainCard({hotelData, showAllHotels,In,out}){
                 <Grid item xs ={12}>
                 <Content items = {hotel}/> </Grid>
                 <Divider variant = "middle"/>
-                <FavAndView hotelId ={hotel._id} In={In} out={out} />
+                <FavAndView hotelId ={hotel._id} In={In} out={out} room={room}/>
             </Grid>
         </Card>  
   
